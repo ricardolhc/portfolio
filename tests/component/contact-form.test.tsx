@@ -33,6 +33,9 @@ describe('ContactForm', () => {
     expect(screen.getByLabelText('Nome')).toHaveAccessibleDescription(
       'Preencha este campo.',
     );
+    expect(screen.getByLabelText('Mensagem')).toHaveAccessibleDescription(
+      'Preencha este campo.',
+    );
     expect(deps.open).not.toHaveBeenCalled();
     await user.type(screen.getByLabelText('Nome'), 'A');
     await user.type(screen.getByLabelText('E-mail'), 'invalid');

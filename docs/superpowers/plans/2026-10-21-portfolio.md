@@ -27,9 +27,9 @@
 
 ## Tarefas
 
-- [ ] 1. Configuração e domínio. Criar configs; tests/unit/registry.test.ts e contact.test.ts. Ver falhar, implementar src/core/di/registry.ts e src/domain/contact.ts. Tokens tipados, singleton/factory, erros de registro/ciclo; validateContact retorna códigos de erros por campo.
-- [ ] 2. Serviços e adapters. Testar composeContact, ContactService, PreferenceService, detecção e BrowserPreferences. Implementar src/application, src/infrastructure, src/presentation/i18n/detect-language.ts e composition-root.ts. Testar unicode, limites, storage e erros de dependências.
-- [ ] 3. Provider e preferências. Testar inject/useInject/DependencyProvider e AppProvider. Implementar Context, alternância, persistência e atualização lang/tema. Executar suíte.
-- [ ] 4. Interface completa. Testar Header/menu, hero, projetos, tecnologias, experiência, certificações e formulário. Implementar conteúdo centralizado PT/EN, componentes semânticos e CSS responsivo. Validar envio mailto e alternativas de cópia.
-- [ ] 5. Qualidade. Executar lint, typecheck, testes/cobertura e Stryker. Inspecionar sobreviventes, adicionar testes para lacunas reais e repetir mutação. Revisar UI em 320/375/430/768/1024/1440, tema e teclado; medir Lighthouse quando disponível.
-- [ ] 6. Entrega. Criar workflows CI/Pages, README e relatório com evidências reais. Revisão final independente solicitada pela skill de execução; corrigir falhas materiais com regressões e verificar build.
+- [x] 1. Configuração e domínio. Criar configs; tests/unit/registry.test.ts e contact.test.ts. Ver falhar, implementar src/core/di/registry.ts e src/domain/contact.ts. Tokens tipados, singleton/factory, erros de registro/ciclo; validateContact retorna códigos de erros por campo.
+- [x] 2. Serviços e adapters. Testar composeContact, ContactService, PreferenceService, detecção e BrowserPreferences. Implementar src/application, src/infrastructure, src/application/detect-language.ts e composition-root.ts. Testar unicode, limites, storage e erros de dependências.
+- [x] 3. Provider e preferências. Testar inject/useInject/DependencyProvider e AppProvider. Implementar Context, alternância, persistência e atualização lang/tema. Executar suíte.
+- [x] 4. Interface completa. Testar Header/menu, hero, projetos, tecnologias, experiência, certificações e formulário. Implementar conteúdo centralizado PT/EN, componentes semânticos e CSS responsivo. Validar envio mailto e alternativas de cópia.
+- [x] 5. Qualidade. Executar lint, typecheck, testes/cobertura e Stryker. Inspecionar sobreviventes, adicionar testes para lacunas reais e repetir mutação. Revisar UI em 320/375/430/768/1024/1440, tema e teclado; medir Lighthouse quando disponível.
+- [x] 6. Entrega. Criar workflows CI/Pages, README e relatório com evidências reais. Revisão final independente solicitada pela skill de execução; corrigir falhas materiais com regressões e verificar build.

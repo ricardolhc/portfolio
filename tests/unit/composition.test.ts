@@ -16,17 +16,15 @@ describe('composition root and browser defaults', () => {
     );
     a.resolve(TOKENS.preferences).saveLanguage('en');
     expect(b.resolve(TOKENS.preferences).load().language).toBe('en');
-    const result = a
-      .resolve(TOKENS.contact)
-      .prepare(
-        {
-          name: 'Ana',
-          email: 'a@b.co',
-          subject: 'Hello',
-          message: 'A new project.',
-        },
-        { name: 'Name', email: 'Email', message: 'Message' },
-      );
+    const result = a.resolve(TOKENS.contact).prepare(
+      {
+        name: 'Ana',
+        email: 'a@b.co',
+        subject: 'Hello',
+        message: 'A new project.',
+      },
+      { name: 'Name', email: 'Email', message: 'Message' },
+    );
     expect(result.href).toContain(
       'mailto:contato.ricardolhc@gmail.com?subject=Hello&body=Name%3A%20Ana',
     );

@@ -176,6 +176,7 @@ Stryker **10.0.0** e `@stryker-mutator/vitest-runner` **10.0.0** estão instalad
 - **Survived:** os testes passaram apesar da alteração; investigar se há uma lacuna comportamental, alteração apenas visual ou equivalência.
 - **No coverage:** a mutação não foi exercitada.
 - **Timeout:** a alteração excedeu o limite; Stryker conta como detectada, mas isso não equivale a uma asserção explícita.
+- **RuntimeError:** a ferramenta não conseguiu avaliar o mutante por erro de execução do runner; ele não conta como detecção. A execução desta entrega apresentou um caso, detalhado no relatório de verificação.
 - **Mutation score:** proporção de mutações detectadas entre as válidas, conforme cálculo do Stryker. Não representa percentual de código coberto.
 
 Meta desejada **85%**. Thresholds: `high: 85`, `low: 70`, `break: 75`; abaixo de 75 o comando falha. Relatórios: `reports/mutation/mutation.html` e `mutation.json`. Execute a ferramenta antes de declarar resultados; a cobertura, sozinha, não demonstra sensibilidade dos testes.
