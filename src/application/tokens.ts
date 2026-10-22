@@ -4,6 +4,7 @@ import type {
   PreferenceStore,
   Environment,
   ClipboardPort,
+  ContactGateway,
 } from '../domain/contracts';
 
 export const TOKENS = {
@@ -11,4 +12,5 @@ export const TOKENS = {
   store: createToken<PreferenceStore>('preferenceStore'),
   environment: createToken<Environment>('environment'),
   clipboard: createToken<ClipboardPort>('clipboard'),
+  contactGateway: createToken<ContactGateway>('contactGateway'),
 };

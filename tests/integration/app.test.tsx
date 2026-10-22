@@ -4,6 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createRegistry } from '../../src/composition-root';
 import { App } from '../../src/presentation/App';
 import { renderWithProviders } from '../renderWithProviders';
+import { testDependencies } from '../renderWithProviders';
 
 const clipboardDescriptor = Object.getOwnPropertyDescriptor(
   navigator,
@@ -54,15 +55,14 @@ describe('real composition root, providers and browser adapters', () => {
     expect(
       screen.queryByText(/1 ano e 6 meses|1 year and 6 months/i),
     ).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Send email' })).toHaveAttribute(
-      'href',
-      'mailto:contato.ricardolhc@gmail.com?subject=Portfolio%20contact',
-    );
+    expect(screen.getByRole('button', { name: 'Send message' })).toBeEnabled();
     await user.click(screen.getByRole('button', { name: 'Copy email' }));
     expect(writeText).toHaveBeenCalledExactlyOnceWith(
       'contato.ricardolhc@gmail.com',
     );
-    expect(screen.getByRole('status')).toHaveTextContent('Email copied');
+    expect(
+      screen.getByRole('status', { name: 'Copy status' }),
+    ).toHaveTextContent('Email copied');
   });
   it.each(['unavailable', 'denied'])(
     'keeps contact usable when the browser clipboard is %s',
@@ -76,18 +76,118 @@ describe('real composition root, providers and browser adapters', () => {
       );
       renderWithProviders(<App />, createRegistry());
       await user.click(screen.getByRole('button', { name: 'Copiar e-mail' }));
-      expect(screen.getByRole('status')).toHaveTextContent(
-        'Selecione e copie o endereço abaixo.',
-      );
+      expect(
+        screen.getByRole('status', { name: 'Status da cópia' }),
+      ).toHaveTextContent('Selecione e copie o endereço abaixo.');
       expect(
         screen.getByRole('textbox', { name: 'E-mail para copiar manualmente' }),
       ).toHaveValue('contato.ricardolhc@gmail.com');
       expect(
-        screen.getByRole('link', { name: 'Enviar e-mail' }),
-      ).toHaveAttribute(
-        'href',
-        'mailto:contato.ricardolhc@gmail.com?subject=Contato%20pelo%20portf%C3%B3lio',
+        screen.getByRole('button', { name: 'Enviar mensagem' }),
+      ).toBeEnabled();
+    },
+  );
+});
+
+async function fillContact(user: ReturnType<typeof userEvent.setup>) {
+  for (const [name, text] of [
+    ['Nome', ' Ana '],
+    ['E-mail', ' ana@example.com '],
+    ['Assunto', ' Projeto & integração '],
+    ['Mensagem', ' Uma solução para a empresa. '],
+  ])
+    await user.type(screen.getByRole('textbox', { name }), text!);
+}
+describe('contact through registry, real gateway and browser boundary', () => {
+  it('uses the production composition root and only clears after a valid HTTP acknowledgement', async () => {
+    localStorage.setItem('portfolio.language', 'pt-BR');
+    vi.mocked(fetch).mockResolvedValue(
+      new Response('{"next":"https://formspree.io/thanks"}', { status: 200 }),
+    );
+    const user = userEvent.setup({ delay: null });
+    renderWithProviders(<App />, createRegistry());
+    await fillContact(user);
+    await user.click(screen.getByRole('button', { name: 'Enviar mensagem' }));
+    expect(fetch).toHaveBeenCalledExactlyOnceWith(
+      'https://formspree.io/f/moeeapay',
+      expect.objectContaining({
+        method: 'POST',
+        body: JSON.stringify({
+          name: 'Ana',
+          email: 'ana@example.com',
+          subject: 'Projeto & integração',
+          message: 'Uma solução para a empresa.',
+          _gotcha: '',
+        }),
+      }),
+    );
+    expect(
+      screen.getByRole('status', { name: 'Status da mensagem' }),
+    ).toHaveTextContent(/Mensagem enviada com sucesso/);
+    expect(screen.getByRole('textbox', { name: 'Mensagem' })).toHaveValue('');
+  });
+  it('substitutes the contact gateway in a specific registry without calling HTTP', async () => {
+    const deps = testDependencies();
+    const user = userEvent.setup({ delay: null });
+    renderWithProviders(<App />, deps.registry);
+    await fillContact(user);
+    await user.click(screen.getByRole('button', { name: 'Enviar mensagem' }));
+    expect(deps.send).toHaveBeenCalledWith({
+      name: 'Ana',
+      email: 'ana@example.com',
+      subject: 'Projeto & integração',
+      message: 'Uma solução para a empresa.',
+    });
+    expect(fetch).not.toHaveBeenCalled();
+    expect(
+      screen.getByRole('status', { name: 'Status da mensagem' }),
+    ).toHaveTextContent(/Mensagem enviada com sucesso/);
+  });
+  it.each(['network', 'invalid', 'rateLimited', 'rejected'])(
+    'preserves the draft after %s and recovers on retry through the real adapter',
+    async (condition) => {
+      localStorage.setItem('portfolio.language', 'pt-BR');
+      if (condition === 'network')
+        vi.mocked(fetch).mockRejectedValueOnce(new TypeError('offline'));
+      else
+        vi.mocked(fetch).mockResolvedValueOnce(
+          new Response(
+            condition === 'invalid'
+              ? '<html>not JSON</html>'
+              : '{"errors":[{"message":"private"}]}',
+            {
+              status:
+                condition === 'rateLimited'
+                  ? 429
+                  : condition === 'rejected'
+                    ? 422
+                    : 200,
+            },
+          ),
+        );
+      vi.mocked(fetch).mockResolvedValueOnce(
+        new Response('{"next":"https://formspree.io/thanks"}', { status: 200 }),
       );
+      const user = userEvent.setup({ delay: null });
+      renderWithProviders(<App />, createRegistry());
+      await fillContact(user);
+      await user.click(screen.getByRole('button', { name: 'Enviar mensagem' }));
+      expect(
+        screen.getByRole('status', { name: 'Status da mensagem' }),
+      ).toHaveTextContent(
+        condition === 'rateLimited'
+          ? /Muitas tentativas/
+          : /Não foi possível enviar/,
+      );
+      expect(screen.getByRole('textbox', { name: 'Nome' })).toHaveValue(
+        ' Ana ',
+      );
+      expect(screen.queryByText('private')).not.toBeInTheDocument();
+      await user.click(screen.getByRole('button', { name: 'Enviar mensagem' }));
+      expect(
+        screen.getByRole('status', { name: 'Status da mensagem' }),
+      ).toHaveTextContent(/Mensagem enviada com sucesso/);
+      expect(fetch).toHaveBeenCalledTimes(2);
     },
   );
 });

@@ -182,16 +182,40 @@ const pt = {
     title: 'Seu próximo projeto\ncomeça com uma conversa.',
     intro:
       'Estou sempre em busca de novos desafios para identificar problemas, otimizar processos e desenvolver soluções que gerem resultados reais para empresas — em oportunidades profissionais, projetos independentes e soluções sob demanda.',
-    emailLabel: 'E-mail de contato',
-    send: 'Enviar e-mail',
-    subject: 'Contato pelo portfólio',
+    formLabel: 'Formulário de contato',
+    hint: 'Todos os campos são obrigatórios.',
+    fields: {
+      name: 'Nome',
+      email: 'E-mail',
+      subject: 'Assunto',
+      message: 'Mensagem',
+    },
+    submit: 'Enviar mensagem',
+    sending: 'Enviando...',
+    statusLabel: 'Status da mensagem',
+    copyStatusLabel: 'Status da cópia',
+    honeypot: 'Deixe este campo vazio',
+    errors: {
+      required: 'Campo obrigatório.',
+      invalidEmail: 'Informe um e-mail válido.',
+      tooLong: 'Limite de caracteres excedido.',
+      singleLine: 'Use apenas uma linha neste campo.',
+    },
+    status: {
+      invalid: 'Revise os campos indicados.',
+      sending: 'Enviando sua mensagem...',
+      success:
+        'Mensagem enviada com sucesso! Obrigado pelo contato. Responderei assim que possível.',
+      error:
+        'Não foi possível enviar sua mensagem. Tente novamente ou entre em contato diretamente pelo e-mail.',
+      rateLimited:
+        'Muitas tentativas. Aguarde um pouco e tente novamente ou entre em contato pelo e-mail.',
+    },
     copyEmail: 'Copiar e-mail',
     copied: 'E-mail copiado',
     copyError:
       'A cópia automática não está disponível. Selecione e copie o endereço abaixo.',
     manualCopy: 'E-mail para copiar manualmente',
-    notice:
-      'O link abre seu aplicativo de e-mail. Você escreve e conclui o envio por lá.',
   },
   footer: {
     line: 'Software com propósito.',
@@ -384,16 +408,40 @@ const en: typeof pt = {
     title: 'Your next project\nstarts with a conversation.',
     intro:
       'I’m always looking for new challenges to identify problems, optimize processes and build solutions that deliver real results for businesses — through professional opportunities, independent projects and custom software development.',
-    emailLabel: 'Contact email',
-    send: 'Send email',
-    subject: 'Portfolio contact',
+    formLabel: 'Contact form',
+    hint: 'All fields are required.',
+    fields: {
+      name: 'Name',
+      email: 'Email',
+      subject: 'Subject',
+      message: 'Message',
+    },
+    submit: 'Send message',
+    sending: 'Sending...',
+    statusLabel: 'Message status',
+    copyStatusLabel: 'Copy status',
+    honeypot: 'Leave this field empty',
+    errors: {
+      required: 'Required field.',
+      invalidEmail: 'Enter a valid email address.',
+      tooLong: 'Character limit exceeded.',
+      singleLine: 'Use only one line in this field.',
+    },
+    status: {
+      invalid: 'Review the highlighted fields.',
+      sending: 'Sending your message...',
+      success:
+        'Message sent successfully! Thank you for getting in touch. I’ll reply as soon as possible.',
+      error:
+        'Could not send your message. Please try again or contact me directly by email.',
+      rateLimited:
+        'Too many attempts. Please wait and try again or contact me by email.',
+    },
     copyEmail: 'Copy email',
     copied: 'Email copied',
     copyError:
       'Automatic copying is unavailable. Select and copy the address below.',
     manualCopy: 'Email for manual copying',
-    notice:
-      'The link opens your email application. You write and send the message there.',
   },
   footer: {
     line: 'Software with purpose.',

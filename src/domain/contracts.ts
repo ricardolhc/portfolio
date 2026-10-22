@@ -11,6 +11,15 @@ export interface Environment {
 export interface ClipboardPort {
   write(text: string): Promise<void>;
 }
+export interface ContactMessage {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+export interface ContactGateway {
+  send(message: ContactMessage): Promise<void>;
+}
 export interface PreferencesApplication {
   load(): { language: Language; theme: Theme };
   saveLanguage(language: Language): void;

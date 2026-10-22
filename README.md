@@ -2,7 +2,7 @@
 
 Portfólio profissional de página única com React, Vite e TypeScript estrito. Apresenta experiência CLT como desenvolvedor Full Stack, desenvolvimento independente de soluções empresariais, formação em Engenharia de Software e certificação AWS.
 
-A identidade visual é editorial e monocromática, com fonte Geist hospedada no próprio build. Não há analytics, backend, fontes remotas, dados de clientes ou serviços de formulário.
+A identidade visual é editorial e monocromática, com fonte Geist hospedada no próprio build. Não há analytics, backend próprio, fontes remotas ou dados de clientes. O contato utiliza o Formspree somente quando o visitante envia o formulário.
 
 ## Funcionalidades
 
@@ -11,7 +11,7 @@ A identidade visual é editorial e monocromática, com fonte Geist hospedada no 
 - Tema claro/escuro com preferência inicial do sistema e escolha manual persistente.
 - Navegação por âncoras, menu mobile com Escape, foco visível e link para pular navegação.
 - Transições discretas com Motion e respeito a `prefers-reduced-motion`.
-- Contato em um clique por `mailto:`, cópia do e-mail e alternativa selecionável se a Clipboard API falhar.
+- Formulário de contato integrado ao Formspree, validação PT/EN, estados acessíveis e cópia alternativa do e-mail.
 - Seis categorias de tecnologias e práticas, em duas colunas no desktop e uma no mobile, com apresentação textual sem chips e práticas de cloud, entrega e qualidade.
 - Acesso direto à certificação AWS pelo link fornecido pelo proprietário.
 - Registry tipado, singleton/factory, detecção de ciclos, Context e serviços substituíveis nos testes.
@@ -32,22 +32,22 @@ Abra a URL local impressa pelo Vite, normalmente `http://127.0.0.1:5173/`.
 
 ## Comandos
 
-| Comando                    | Finalidade                                     |
-| -------------------------- | ---------------------------------------------- |
-| `npm run dev`              | Servidor de desenvolvimento                    |
-| `npm run build`            | TypeScript e build de produção em `dist/`      |
-| `npm run preview`          | Servir o build localmente                      |
-| `npm run lint`             | ESLint sem warnings permitidos                 |
-| `npm run typecheck`        | Verificar todos os arquivos TypeScript         |
-| `npm run format`           | Formatar com Prettier                          |
-| `npm run format:check`     | Verificar formatação                           |
-| `npm test`                 | Todos os testes Vitest, sem modo watch         |
-| `npm run test:unit`        | Registry, preferências, links e infraestrutura |
-| `npm run test:component`   | Interações de componentes e providers          |
-| `npm run test:integration` | Composition root, providers e adapters reais   |
-| `npm run test:coverage`    | Cobertura V8, terminal e HTML                  |
-| `npm run test:mutation`    | Stryker, terminal, HTML e JSON                 |
-| `npm run test:e2e`         | Chrome/Playwright, responsividade e axe        |
+| Comando                    | Finalidade                                   |
+| -------------------------- | -------------------------------------------- |
+| `npm run dev`              | Servidor de desenvolvimento                  |
+| `npm run build`            | TypeScript e build de produção em `dist/`    |
+| `npm run preview`          | Servir o build localmente                    |
+| `npm run lint`             | ESLint sem warnings permitidos               |
+| `npm run typecheck`        | Verificar todos os arquivos TypeScript       |
+| `npm run format`           | Formatar com Prettier                        |
+| `npm run format:check`     | Verificar formatação                         |
+| `npm test`                 | Todos os testes Vitest, sem modo watch       |
+| `npm run test:unit`        | Registry, preferências, validação e gateways |
+| `npm run test:component`   | Interações de componentes e providers        |
+| `npm run test:integration` | Composition root, providers e adapters reais |
+| `npm run test:coverage`    | Cobertura V8, terminal e HTML                |
+| `npm run test:mutation`    | Stryker, terminal, HTML e JSON               |
+| `npm run test:e2e`         | Chrome/Playwright, responsividade e axe      |
 
 Testes no navegador usam o build: execute `npm run build` primeiro. Localmente, o Playwright usa o Chrome instalado. Em CI (`CI=true`), usa Chromium; instale-o com `npx playwright install --with-deps chromium`. O servidor de preview é iniciado pelo Playwright quando necessário.
 
@@ -56,11 +56,12 @@ Testes no navegador usam o build: execute `npm run build` primeiro. Localmente, 
 ```text
 src/
   core/di/                  # Registry, tokens, inject, useInject, Context
-  domain/                   # Contratos e endereço de contato
-  application/              # Contato, preferências, detecção de idioma e tokens
-  infrastructure/           # Adapters para browser/storage/clipboard
+  domain/                   # Contratos, mensagem e validação de contato
+  config/                   # Endpoint público do Formspree
+  application/              # Preferências, detecção de idioma e tokens
+  infrastructure/           # Formspree, browser/storage/clipboard
   presentation/
-    components/             # Header, contato direto e seções semânticas
+    components/             # Header, formulário e seções semânticas
     preferences/            # Estado React, tema, idioma e metadados
     i18n/messages.ts        # Conteúdo e traduções PT/EN
     App.tsx
@@ -76,7 +77,7 @@ tests/
 .github/workflows/          # CI e Pages
 ```
 
-**Domain** contém os contratos e o endereço de contato. **Application** codifica o link de e-mail e coordena preferências. **Infrastructure** implementa persistência e clipboard do navegador. **Presentation** conhece contratos e tokens, sem instanciar infraestrutura. **Core** fornece a DI. O composition root monta o grafo antes da renderização. O link `mailto:` é uma âncora nativa; não precisa de um serviço de navegação intermediário.
+**Domain** contém `ContactMessage`, `ContactGateway` e validação pura. **Application** coordena preferências e declara tokens. **Infrastructure** implementa o gateway HTTP, persistência e clipboard. **Presentation** conhece contratos e tokens, sem instanciar infraestrutura nem chamar `fetch`. **Core** fornece a DI. O composition root registra `FormspreeContactGateway` antes da renderização; `ContactForm` o resolve com `useInject`.
 
 Os conteúdos profissionais são dados estáticos bilíngues. Não há uma interface de repositório de dados artificial para esse caso.
 
@@ -114,7 +115,7 @@ const independent = new Registry().register(
 
 ### Substituir dependências em testes
 
-Crie um registry novo, em vez de alterar singletons globais. Por exemplo, um clipboard sem efeitos externos:
+Crie um registry novo, em vez de alterar singletons globais. Por exemplo, um formulário sem efeitos externos:
 
 ```tsx
 import { Registry } from './src/core/di/registry';
@@ -122,6 +123,7 @@ import { TOKENS } from './src/application/tokens';
 import { PreferenceService } from './src/application/preference-service';
 
 const registry = new Registry()
+  .register(TOKENS.contactGateway, () => ({ send: async () => {} }))
   .register(TOKENS.clipboard, () => ({
     write: async (text) => {
       console.log(text);
@@ -135,7 +137,7 @@ const registry = new Registry()
         { language: 'pt-BR', prefersDark: () => false },
       ),
   );
-// renderWithProviders(<ContactActions />, registry)
+// renderWithProviders(<ContactForm />, registry)
 ```
 
 Para substituir somente um adapter e manter os serviços reais, monte um novo grafo a partir de `src/composition-root.ts`, registrando um fake no token do adapter **antes** dos consumidores. O registry rejeita sobrescritas acidentais; cada composição declara uma implementação por token.
@@ -154,19 +156,21 @@ Edite `src/presentation/i18n/messages.ts`. A versão inglesa é verificada contr
 
 Idioma inicial: preferência válida em `portfolio.language` → idioma primário do navegador (PT/EN) → português. Idiomas não suportados usam PT. Tema inicial: `portfolio.theme` válido → `prefers-color-scheme`. Alterações manuais persistem. Se o acesso ao `localStorage` falhar, a interface continua funcionando em memória. O tema e a meta `theme-color` são aplicados no HTML antes do React para reduzir flash visual; as trocas manuais mantêm essa meta sincronizada.
 
-## Contato nativo
+## Contato com Formspree
 
-O endereço está visível e o link **Enviar e-mail** abre diretamente `mailto:contato.ricardolhc@gmail.com`, com o assunto **Contato pelo portfólio** (ou **Portfolio contact** em inglês), codificado com `encodeURIComponent`. Não há campos prévios ou etapas intermediárias. O visitante escreve e conclui o envio no seu aplicativo; a página não envia mensagens nem confirma se um cliente está configurado.
+O formulário envia `name`, `email`, `subject` e `message` por POST JSON para **https://formspree.io/f/moeeapay**, com `Accept: application/json`. O endereço está centralizado em `src/config/contact.ts`: o ID é público e já fica disponível no build, sem variável de ambiente ou segredo adicional no GitHub Pages. Não há backend próprio, redirecionamento ou abertura de aplicativo de e-mail.
 
-**Copiar e-mail** usa a porta de clipboard injetada. O resultado aparece em uma região de status acessível. Se a API não estiver disponível ou o acesso for negado, um campo somente leitura permite selecionar e copiar o endereço manualmente; o link de e-mail continua funcionando. É possível tentar a cópia novamente. Feedback, assunto e controles acompanham o idioma escolhido. Nenhum teste abre um aplicativo externo ou envia mensagens reais.
+Todos os campos são obrigatórios e normalizados com `trim`. Limites: nome 100, e-mail 254, assunto 160 e mensagem 5.000 caracteres. Nome e assunto não aceitam quebras de linha. Erros ficam associados aos campos; o foco vai ao primeiro inválido. Durante o envio, os campos são preservados e novos envios são bloqueados. Somente uma resposta HTTP bem-sucedida com confirmação JSON reconhecida limpa os campos. Erros HTTP, rede, JSON inválido, timeout de 15 segundos e limite de requisições preservam o conteúdo e permitem tentar novamente.
 
-O formulário anterior foi removido com suas validações, composição de corpo, estados, tipos e serviço de abertura. A DI permanece para preferências e clipboard, onde existem efeitos reais substituíveis.
+O honeypot `_gotcha` impede o envio local quando preenchido. Validação no navegador não impede todo spam: filtros e eventuais restrições do formulário continuam sob controle do Formspree. Não foi adicionado CAPTCHA. Veja [as decisões da integração](docs/formspree-2026-10-22.md).
+
+**Copiar e-mail** é uma alternativa secundária e usa a porta de clipboard injetada. Seu status acessível informa sucesso ou falha; quando necessário, um campo somente leitura permite selecionar o endereço manualmente. Controles, validação e feedback acompanham PT/EN. Nenhum teste envia mensagens reais.
 
 ## Testes e cobertura
 
-Vitest executa testes em jsdom. React Testing Library e userEvent consultam papéis e labels acessíveis. `renderWithProviders` aceita qualquer registry; componentes usam clipboard falso e preferências em memória. A suíte de integração instancia o composition root e os providers reais, persistindo no localStorage do jsdom e substituindo somente a fronteira externa `navigator.clipboard`. Verifica recarga por nova árvore, preferências e acesso indisponível/negado. Não há snapshots como estratégia principal.
+Vitest executa testes em jsdom. React Testing Library e userEvent consultam papéis e labels acessíveis. `renderWithProviders` aceita qualquer registry; componentes usam gateway falso, clipboard falso e preferências em memória. A integração também exercita composition root, providers e gateway reais, substituindo somente fronteiras externas como `fetch` e clipboard. Verifica preferências, envio, confirmação, falhas e recuperação. O setup bloqueia requisições reais por padrão. Não há snapshots como estratégia principal.
 
-As cinco modalidades são unitários (Vitest), componentes (RTL), integração (Vitest/RTL), mutação (Stryker) e E2E (Playwright). E2E verifica navegação, conteúdo, temas/idiomas e persistência, contato, erros JavaScript, seis larguras e auditoria axe. O clique de e-mail é interceptado apenas no teste para verificar o destino sem iniciar um aplicativo externo; a cópia usa a Clipboard API real do Chrome em um fluxo e uma API indisponível em outro.
+As cinco modalidades são unitários (Vitest), componentes (RTL), integração (Vitest/RTL), mutação (Stryker) e E2E (Playwright). E2E verifica navegação, conteúdo, temas/idiomas e persistência, formulário, erros JavaScript, seis larguras e auditoria axe. Requisições Formspree são bloqueadas por padrão e interceptadas com respostas simuladas nos fluxos de envio; a cópia usa a Clipboard API real do Chrome em um fluxo e uma API indisponível em outro.
 
 A cobertura inclui o código de produção, exceto bootstrap, contratos sem execução e traduções estáticas. Metas mínimas: **85% linhas**, **80% branches**, **85% funções** e **85% statements**. HTML em `coverage/index.html`.
 
@@ -174,7 +178,7 @@ A cobertura inclui o código de produção, exceto bootstrap, contratos sem exec
 
 Stryker **10.0.0** e `@stryker-mutator/vitest-runner` **10.0.0** estão instalados com Vitest e coverage **4.1.12**, conferidos por `npm ls`. O runner declara peer Vitest `>=2.0.0`. O lockfile fixa a árvore usada na verificação.
 
-`stryker.config.json` inclui registry/inject/provider, preferências, codificação do link, endereço de contato, persistência, clipboard, detecção de idioma, provider de preferências e comportamento de controles, header e contato direto. Tipos, tradução estática, CSS e configurações ficam fora da mutação. O escopo acompanha a remoção do formulário, sem manter testes obsoletos nem excluir lógica relevante para elevar o score.
+`stryker.config.json` inclui registry/inject/provider, preferências, validação/normalização de contato, endpoint público, gateway Formspree, persistência, clipboard, detecção de idioma e comportamento dos controles, header e formulário. Tipos, tradução estática, CSS e configurações de ferramentas ficam fora da mutação. O escopo acompanha as regras atuais, sem manter testes do antigo `mailto:` nem excluir lógica relevante para elevar o score.
 
 - **Killed:** ao menos um teste detectou a alteração.
 - **Survived:** os testes passaram apesar da alteração; investigar se há uma lacuna comportamental, alteração apenas visual ou equivalência.
@@ -191,7 +195,7 @@ Os resultados medidos e a análise de sobreviventes ficam em [docs/verification.
 
 Os tokens em `src/styles.css` centralizam espaçamento de seções (56/72/80px), padding dos projetos (32/36/40px) e texto secundário (12/14/15px). Eles reduzem os intervalos entre projetos, tecnologias e formação e melhoram a legibilidade sem alterar a tipografia expressiva do Hero. Não foram adicionadas fontes ou bibliotecas.
 
-Os testes de navegador verificam **320, 375, 430, 768, 1024 e 1440px**, ambos os temas e idiomas, ausência de overflow horizontal e regras axe WCAG 2/2.1/2.2 AA. Fluxos adicionais cobrem menu, Escape, persistência, contato em um clique e cópia indisponível. As barras dos cards de experiência são comparadas nos dois temas. Capturas reais ficam em `reports/responsive/`; relatório Playwright em `playwright-report/`. Verificações automáticas não substituem uma auditoria completa com leitores de tela e dispositivos reais.
+Os testes de navegador verificam **320, 375, 430, 768, 1024 e 1440px**, ambos os temas e idiomas, ausência de overflow horizontal e regras axe WCAG 2/2.1/2.2 AA. Fluxos adicionais cobrem menu, Escape, persistência, envio simulado e cópia indisponível. As barras dos cards de experiência são comparadas nos dois temas. Capturas reais ficam em `reports/responsive/` e `reports/formspree/`; relatório Playwright em `playwright-report/`. Verificações automáticas não substituem uma auditoria completa com leitores de tela e dispositivos reais.
 
 Para repetir a auditoria Lighthouse, rode o build e o preview em outro terminal:
 
@@ -241,4 +245,4 @@ Referências: [deploy estático do Vite](https://vite.dev/guide/static-deploy.ht
 - Projetos privados não possuem links, screenshots ou tecnologias presumidas.
 - A certificação utiliza o link direto informado pelo proprietário, sem inventar emissão, validade ou identificadores adicionais.
 - Não existe arquivo PDF de currículo; nenhum botão de download foi criado.
-- Contato depende do cliente de e-mail do visitante ou de cópia manual; não há entrega automática nem confirmação de envio.
+- O envio depende da disponibilidade e configuração do Formspree. Não foi realizado envio real nem confirmada entrega ao destinatário; as respostas foram simuladas nos testes. Filtros antispam e restrições da conta não foram alterados.

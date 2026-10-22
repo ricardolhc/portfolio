@@ -64,3 +64,16 @@
 - Stryker completo: 228 mutantes, 87,72%, 200 mortos e 28 sobreviventes, zero erros/timeouts/sem cobertura. Mesmo escopo/thresholds. Sobreviventes reinspecionados: nomes de tokens e aspectos visuais/referência dos controles/header. Confirmação incremental após a nota estática: 87,72%, todos os 228 resultados reaproveitados, 18s.
 - Revisão independente sem achados materiais. Arquivos e critérios em refinement-2026-10-22.md; resultados em verification.md. Publicação remota não executada.
 - Lighthouse do build final: 99/100/100/100, CLS 0 e LCP 1,8s. Medição local de laboratório; sem implantação pública. Build final: JS 339,10 kB, 109,74 kB gzip.
+
+## Integração Formspree — 22 de outubro de 2026
+
+- Solicitação aplicada incrementalmente sobre `92f3c5c`; demais seções e workflows preservados, sem novas bibliotecas. A nova instrução substitui a opção anterior por contato nativo.
+- Testes novos observaram falhas antes da implementação dos contratos, validadores, gateway e formulário. `ContactGateway` foi registrado no registry existente e consumido por `useInject`; HTTP fica somente em infraestrutura.
+- Endpoint público centralizado: `https://formspree.io/f/moeeapay`. O build do Pages já inclui o valor, sem variável ausente ou segredo fictício. POST JSON com quatro campos e honeypot vazio, timeout de 15 segundos, sem cookies nem redirecionamento.
+- Formulário PT/EN com validação e limites, estados acessíveis, foco no primeiro erro, bloqueio concorrente e preservação após falha. Cópia alternativa fica em nível secundário, com fallback manual. Serviço e testes exclusivos do mailto removidos.
+- Consulta ao SDK oficial revelou confirmação por `next` textual. Um teste falhou antes do ajuste para aceitar esse formato, sem navegar e sem aceitar confirmação explicitamente falsa. Testes E2E e integração usam a resposta documentada.
+- Vitest bloqueia HTTP real por padrão. E2E intercepta todas as chamadas Formspree; sucesso, rejeição, rate limit, JSON inválido e rede são simulados. Nenhuma mensagem real foi enviada.
+- Revisão independente do diff sem achados materiais de código ou testes. Resultados finais e análise de sobreviventes registrados em verification.md; detalhes em formspree-2026-10-22.md.
+- Verificação final: lint, typecheck e formatação passaram; 80 unitários, 22 componentes e 9 integração. Cobertura: 111 testes, 100% linhas/funções/statements e 99,24% branches. Build passou e contém o endpoint exato uma única vez na configuração de origem. JS 343,88 kB, 111,54 kB gzip.
+- E2E: 13 passaram em 42,2s, com 24 combinações de largura/idioma/tema sem overflow ou violações axe nas regras executadas. Capturas desktop/mobile, claras/escuras, inspecionadas. Nenhum envio real ou publicação remota.
+- Stryker completo inicial: 86,30%, 438 mutantes. Reforço de testes e ajuste ao contrato do SDK: incremental de 445 mutantes com 88,31%. Asserção final de feedback inicial vazio: 88,54%, 394 mortos e 51 sobreviventes, sem timeouts/erros/sem cobertura; 432 resultados reutilizados, 13 reexecutados. Nenhuma exclusão nova. Lighthouse não reexecutado após o formulário.

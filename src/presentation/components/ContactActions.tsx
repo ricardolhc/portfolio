@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useInject } from '../../core/di/inject';
 import { TOKENS } from '../../application/tokens';
-import { createEmailLink } from '../../application/contact-service';
 import { CONTACT_EMAIL } from '../../domain/contact';
 import { usePreferences } from '../preferences/PreferencesProvider';
 import { Icon } from './Icon';
@@ -11,7 +10,6 @@ export function ContactActions() {
   const { t } = usePreferences();
   const c = t.contact;
   const [feedback, setFeedback] = useState<'copied' | 'copyError' | null>(null);
-  const href = createEmailLink(c.subject);
   const copy = async () => {
     try {
       await clipboard.write(CONTACT_EMAIL);
@@ -22,36 +20,22 @@ export function ContactActions() {
   };
 
   return (
-    <div className="contact-actions">
-      <a
-        className="contact-email"
-        href={href}
-        aria-label={`${c.emailLabel}: ${CONTACT_EMAIL}`}
+    <div className="contact-alternative">
+      <p className="contact-email">{CONTACT_EMAIL}</p>
+      <button
+        type="button"
+        className="contact-copy"
+        onClick={() => void copy()}
       >
-        {CONTACT_EMAIL}
-      </a>
-      <div className="contact-buttons">
-        <a
-          className="button button-primary"
-          href={href}
-          aria-describedby="contact-notice"
-        >
-          {c.send}
-          <Icon name="arrow" />
-        </a>
-        <button
-          type="button"
-          className="button button-secondary"
-          onClick={() => void copy()}
-        >
-          {c.copyEmail}
-          <Icon name="copy" />
-        </button>
-      </div>
-      <p id="contact-notice" className="contact-notice">
-        {c.notice}
-      </p>
-      <p className="contact-status" role="status" aria-live="polite">
+        {c.copyEmail}
+        <Icon name="copy" />
+      </button>
+      <p
+        className="contact-copy-status"
+        role="status"
+        aria-label={c.copyStatusLabel}
+        aria-live="polite"
+      >
         {feedback ? c[feedback] : ''}
       </p>
       {feedback === 'copyError' && (

@@ -5,45 +5,18 @@ import { ContactActions } from '../../src/presentation/components/ContactActions
 import { LanguageSwitcher } from '../../src/presentation/components/Controls';
 import { renderWithProviders, testDependencies } from '../renderWithProviders';
 
-describe('direct contact', () => {
+describe('secondary email alternative', () => {
   it.each([
-    [
-      'pt-BR',
-      'Enviar e-mail',
-      'Copiar e-mail',
-      'Contato%20pelo%20portf%C3%B3lio',
-      'E-mail copiado',
-    ],
-    ['en', 'Send email', 'Copy email', 'Portfolio%20contact', 'Email copied'],
+    ['pt-BR', 'Copiar e-mail', 'E-mail copiado'],
+    ['en', 'Copy email', 'Email copied'],
   ])(
-    'offers one-click email and accessible copy feedback in %s',
-    async (language, send, copy, subject, copied) => {
+    'copies the address with accessible feedback in %s',
+    async (language, copy, copied) => {
       const deps = testDependencies(language);
       const user = userEvent.setup({ delay: null });
       renderWithProviders(<ContactActions />, deps.registry);
-      expect(
-        screen.getByRole('link', { name: new RegExp(send!) }),
-      ).toHaveAttribute(
-        'href',
-        `mailto:contato.ricardolhc@gmail.com?subject=${subject}`,
-      );
-      expect(
-        screen.getByRole('link', { name: new RegExp(send!) }),
-      ).toHaveAccessibleDescription(
-        language === 'en'
-          ? 'The link opens your email application. You write and send the message there.'
-          : 'O link abre seu aplicativo de e-mail. Você escreve e conclui o envio por lá.',
-      );
-      expect(screen.queryByRole('form')).not.toBeInTheDocument();
+      expect(screen.getByText('contato.ricardolhc@gmail.com')).toBeVisible();
       expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
-      expect(
-        screen.getByRole('link', {
-          name:
-            language === 'en'
-              ? 'Contact email: contato.ricardolhc@gmail.com'
-              : 'E-mail de contato: contato.ricardolhc@gmail.com',
-        }),
-      ).toBeVisible();
       expect(screen.getByRole('status')).toBeEmptyDOMElement();
       await user.click(screen.getByRole('button', { name: copy }));
       expect(deps.write).toHaveBeenCalledExactlyOnceWith(
@@ -52,7 +25,7 @@ describe('direct contact', () => {
       expect(screen.getByRole('status')).toHaveTextContent(copied!);
     },
   );
-  it('provides a selectable fallback after denied clipboard access and allows retry', async () => {
+  it('provides a selectable fallback and translates copy failures without losing retry', async () => {
     const deps = testDependencies();
     deps.write.mockRejectedValueOnce(new Error('denied'));
     const user = userEvent.setup({ delay: null });
@@ -80,9 +53,6 @@ describe('direct contact', () => {
     expect(screen.getByRole('status')).toHaveTextContent(
       'Select and copy the address below.',
     );
-    expect(
-      screen.getByRole('textbox', { name: 'Email for manual copying' }),
-    ).toHaveValue('contato.ricardolhc@gmail.com');
     await user.click(screen.getByRole('button', { name: 'Copy email' }));
     expect(screen.getByRole('status')).toHaveTextContent('Email copied');
     expect(screen.queryByRole('textbox')).not.toBeInTheDocument();

@@ -1,5 +1,5 @@
 import { usePreferences } from '../preferences/PreferencesProvider';
-import { ContactActions } from './ContactActions';
+import { ContactForm } from './ContactForm';
 import { Icon } from './Icon';
 import { Reveal, SectionHeading } from './Section';
 
@@ -303,7 +303,7 @@ export function Contact() {
               </a>
             </div>
           </div>
-          <ContactActions />
+          <ContactForm />
         </Reveal>
       </div>
     </section>

@@ -219,7 +219,7 @@ describe('professional portfolio', () => {
     for (const link of screen.getAllByRole('link', { name: /GitHub/ }))
       expect(link).toHaveAttribute('href', 'https://github.com/ricardolhc');
     expect(
-      screen.getByRole('link', { name: /Send email/ }),
+      screen.getByRole('button', { name: 'Send message' }),
     ).toBeInTheDocument();
   });
 });

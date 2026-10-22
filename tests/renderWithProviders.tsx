@@ -13,8 +13,16 @@ export function testDependencies(language = 'pt-BR', theme = 'light') {
     ['portfolio.theme', theme],
   ]);
   const write = vi.fn().mockResolvedValue(undefined);
+  const send = vi
+    .fn<
+      (
+        message: import('../src/domain/contracts').ContactMessage,
+      ) => Promise<void>
+    >()
+    .mockResolvedValue(undefined);
   const registry = new Registry()
     .register(TOKENS.clipboard, () => ({ write }))
+    .register(TOKENS.contactGateway, () => ({ send }))
     .register(
       TOKENS.preferences,
       () =>
@@ -28,7 +36,7 @@ export function testDependencies(language = 'pt-BR', theme = 'light') {
           { language: 'pt-BR', prefersDark: () => false },
         ),
     );
-  return { registry, write, values };
+  return { registry, write, send, values };
 }
 
 export function renderWithProviders(

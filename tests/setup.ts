@@ -1,6 +1,12 @@
 import '@testing-library/jest-dom/vitest';
-import { afterEach, vi } from 'vitest';
+import { afterEach, beforeEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
+
+beforeEach(() => {
+  vi.spyOn(globalThis, 'fetch').mockRejectedValue(
+    new Error('Network disabled in automated tests'),
+  );
+});
 
 afterEach(() => {
   cleanup();

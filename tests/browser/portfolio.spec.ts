@@ -2,14 +2,22 @@ import { test, expect, type Page } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
 const browserErrors = new WeakMap<Page, string[]>();
+const contactEndpoint = 'https://formspree.io/f/moeeapay';
 const certificationUrl =
   'https://cp.certmetrics.com/amazon/en/public/verify/credential/f844a9917d974a3bb153aeb58edf6d2c';
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
+  await context.route('https://formspree.io/**', (route) =>
+    route.abort('blockedbyclient'),
+  );
   const errors: string[] = [];
   browserErrors.set(page, errors);
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => {
-    if (message.type() === 'error') errors.push(message.text());
+    const simulatedTransportError =
+      message.location().url.startsWith('https://formspree.io/') &&
+      message.text().includes('Failed to load resource');
+    if (message.type() === 'error' && !simulatedTransportError)
+      errors.push(message.text());
   });
 });
 test.afterEach(async ({ page }) => {
@@ -48,15 +56,33 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         expect(layout.document).toBeLessThanOrEqual(layout.viewport);
         expect(layout.body).toBeLessThanOrEqual(layout.viewport);
         await expect(
-          page.getByRole('link', {
-            name: language === 'en' ? 'Send email' : 'Enviar e-mail',
+          page.getByRole('button', {
+            name: language === 'en' ? 'Send message' : 'Enviar mensagem',
           }),
-        ).toHaveAttribute(
-          'href',
-          language === 'en'
-            ? 'mailto:contato.ricardolhc@gmail.com?subject=Portfolio%20contact'
-            : 'mailto:contato.ricardolhc@gmail.com?subject=Contato%20pelo%20portf%C3%B3lio',
-        );
+        ).toBeEnabled();
+        const fieldPositions = await page
+          .locator('.contact-field')
+          .evaluateAll((fields) =>
+            fields.map((field) => {
+              const rect = field.getBoundingClientRect();
+              return { x: rect.x, y: rect.y, width: rect.width };
+            }),
+          );
+        expect(fieldPositions).toHaveLength(4);
+        if (width >= 640) {
+          expect(fieldPositions[0]!.y).toBe(fieldPositions[1]!.y);
+          expect(fieldPositions[0]!.x).toBeLessThan(fieldPositions[1]!.x);
+          expect(fieldPositions[2]!.width).toBeGreaterThan(
+            fieldPositions[0]!.width,
+          );
+        } else {
+          for (let index = 1; index < fieldPositions.length; index++) {
+            expect(fieldPositions[index]!.x).toBe(fieldPositions[0]!.x);
+            expect(fieldPositions[index]!.y).toBeGreaterThan(
+              fieldPositions[index - 1]!.y,
+            );
+          }
+        }
         await expect(
           page.locator('#certifications .text-link'),
         ).toHaveAttribute('href', certificationUrl);
@@ -144,11 +170,17 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
           // Hide fixed overlays only for the tall crop; viewport navigation is checked below.
           style: '.site-header, .skip-link { visibility: hidden !important; }',
         });
+        if (width === 375 || width === 1440)
+          await page.locator('#contact').screenshot({
+            path: `reports/formspree/contact-${width}-${language}-${theme}.png`,
+            style:
+              '.site-header, .skip-link { visibility: hidden !important; }',
+          });
       }
   });
 }
 
-test('mobile navigation, keyboard, persistence and native contact fallback', async ({
+test('mobile navigation, preferences, Formspree submission and secondary email copying', async ({
   page,
   context,
 }) => {
@@ -158,15 +190,6 @@ test('mobile navigation, keyboard, persistence and native contact fallback', asy
       localStorage.setItem('portfolio.language', 'pt-BR');
     if (!localStorage.getItem('portfolio.theme'))
       localStorage.setItem('portfolio.theme', 'light');
-    document.addEventListener('click', (event) => {
-      const target = event.target as Element;
-      const link = target.closest('a[href^="mailto:"]');
-      if (link) {
-        event.preventDefault();
-        document.documentElement.dataset.emailClick =
-          link.getAttribute('href')!;
-      }
-    });
   });
   await page.goto('/');
   const menu = page.getByRole('button', { name: /Abrir menu|Fechar menu/ });
@@ -242,14 +265,90 @@ test('mobile navigation, keyboard, persistence and native contact fallback', asy
     .getByRole('link', { name: 'Contact', exact: true })
     .click();
   await expect(page).toHaveURL(/#contact$/);
-  await page.getByRole('link', { name: 'Send email', exact: true }).click();
-  await expect(page.locator('html')).toHaveAttribute(
-    'data-email-click',
-    'mailto:contato.ricardolhc@gmail.com?subject=Portfolio%20contact',
+  await page.getByRole('button', { name: 'Send message' }).click();
+  await expect(
+    page.getByRole('textbox', { name: 'Name', exact: true }),
+  ).toBeFocused();
+  await expect(page.getByText('Required field.', { exact: true })).toHaveCount(
+    4,
   );
+  await page
+    .getByRole('textbox', { name: 'Name', exact: true })
+    .fill('Browser Test');
+  await page
+    .getByRole('textbox', { name: 'Email', exact: true })
+    .fill('invalid');
+  await page
+    .getByRole('textbox', { name: 'Subject', exact: true })
+    .fill('Project & integration');
+  await page
+    .getByRole('textbox', { name: 'Message', exact: true })
+    .fill('A real business process to improve.');
+  await page.getByRole('button', { name: 'Send message' }).click();
+  await expect(
+    page.getByRole('textbox', { name: 'Email', exact: true }),
+  ).toBeFocused();
+  await expect(
+    page.getByText('Enter a valid email address.', { exact: true }),
+  ).toBeVisible();
+  await page
+    .getByRole('textbox', { name: 'Email', exact: true })
+    .fill('visitor@example.com');
+  let acknowledge!: () => void;
+  const confirmation = new Promise<void>((resolve) => {
+    acknowledge = resolve;
+  });
+  let submissions = 0;
+  await context.route(contactEndpoint, async (route) => {
+    if (route.request().method() === 'OPTIONS') {
+      await route.fulfill({
+        status: 204,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'content-type',
+        },
+      });
+      return;
+    }
+    submissions++;
+    expect(route.request().method()).toBe('POST');
+    expect(route.request().headers().accept).toBe('application/json');
+    expect(route.request().postDataJSON()).toEqual({
+      name: 'Browser Test',
+      email: 'visitor@example.com',
+      subject: 'Project & integration',
+      message: 'A real business process to improve.',
+      _gotcha: '',
+    });
+    await confirmation;
+    await route.fulfill({
+      status: 200,
+      json: { next: 'https://formspree.io/thanks' },
+      headers: { 'Access-Control-Allow-Origin': '*' },
+    });
+  });
+  await page.getByRole('button', { name: 'Send message' }).click();
+  await expect(page.getByRole('button', { name: 'Sending...' })).toBeDisabled();
+  await expect(
+    page.getByRole('textbox', { name: 'Name', exact: true }),
+  ).toHaveValue('Browser Test');
+  await page
+    .getByRole('form', { name: 'Contact form' })
+    .evaluate((form) => (form as HTMLFormElement).requestSubmit());
+  acknowledge();
+  await expect(
+    page.getByRole('status', { name: 'Message status' }),
+  ).toContainText('Message sent successfully!');
+  expect(submissions).toBe(1);
+  await expect(
+    page.getByRole('textbox', { name: 'Name', exact: true }),
+  ).toHaveValue('');
+  await expect(page).toHaveURL(/#contact$/);
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.getByRole('button', { name: 'Copy email', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('Email copied');
+  await expect(page.getByRole('status', { name: 'Copy status' })).toHaveText(
+    'Email copied',
+  );
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
     'contato.ricardolhc@gmail.com',
   );
@@ -285,9 +384,9 @@ test('mobile clipboard unavailable fallback remains usable and translated', asyn
   });
   await page.goto('/');
   await page.getByRole('button', { name: 'Copiar e-mail' }).click();
-  await expect(page.getByRole('status')).toContainText(
-    'Selecione e copie o endereço abaixo.',
-  );
+  await expect(
+    page.getByRole('status', { name: 'Status da cópia' }),
+  ).toContainText('Selecione e copie o endereço abaixo.');
   const address = page.getByRole('textbox', {
     name: 'E-mail para copiar manualmente',
   });
@@ -297,14 +396,90 @@ test('mobile clipboard unavailable fallback remains usable and translated', asyn
   await page
     .getByRole('button', { name: 'PT / EN: mudar para inglês' })
     .click();
-  await expect(page.getByRole('status')).toContainText(
+  await expect(page.getByRole('status', { name: 'Copy status' })).toContainText(
     'Select and copy the address below.',
   );
-  await expect(page.getByRole('link', { name: 'Send email' })).toHaveAttribute(
-    'href',
-    'mailto:contato.ricardolhc@gmail.com?subject=Portfolio%20contact',
-  );
+  await expect(
+    page.getByRole('button', { name: 'Send message' }),
+  ).toBeEnabled();
   expect(
     await page.evaluate(() => document.documentElement.scrollWidth),
   ).toBeLessThanOrEqual(320);
 });
+
+for (const failure of ['rejected', 'rateLimited', 'invalid', 'network']) {
+  test(`Formspree ${failure} preserves the draft, translates feedback and permits retry`, async ({
+    page,
+    context,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.addInitScript(() =>
+      localStorage.setItem('portfolio.language', 'pt-BR'),
+    );
+    await context.route(contactEndpoint, (route) =>
+      failure === 'network'
+        ? route.abort('failed')
+        : route.fulfill({
+            status:
+              failure === 'rateLimited'
+                ? 429
+                : failure === 'rejected'
+                  ? 422
+                  : 200,
+            contentType:
+              failure === 'invalid' ? 'text/html' : 'application/json',
+            body:
+              failure === 'invalid'
+                ? '<html>bad response</html>'
+                : '{"errors":[{"message":"private server detail"}]}',
+            headers: { 'Access-Control-Allow-Origin': '*' },
+          }),
+    );
+    await page.goto('/');
+    for (const [label, value] of [
+      ['Nome', 'Ana Silva'],
+      ['E-mail', 'visitor@example.com'],
+      ['Assunto', 'Projeto & integração'],
+      ['Mensagem', 'Um processo empresarial para melhorar.'],
+    ])
+      await page
+        .getByRole('textbox', { name: label, exact: true })
+        .fill(value!);
+    await page.getByRole('button', { name: 'Enviar mensagem' }).click();
+    await expect(
+      page.getByRole('status', { name: 'Status da mensagem' }),
+    ).toContainText(
+      failure === 'rateLimited'
+        ? 'Muitas tentativas'
+        : 'Não foi possível enviar',
+    );
+    await expect(page.getByRole('textbox', { name: 'Nome' })).toHaveValue(
+      'Ana Silva',
+    );
+    await expect(page.getByText('private server detail')).toHaveCount(0);
+    await page
+      .getByRole('button', { name: 'PT / EN: mudar para inglês' })
+      .click();
+    await expect(
+      page.getByRole('status', { name: 'Message status' }),
+    ).toContainText(
+      failure === 'rateLimited'
+        ? 'Too many attempts'
+        : 'Could not send your message',
+    );
+    await context.route(contactEndpoint, (route) =>
+      route.fulfill({
+        status: 200,
+        json: { next: 'https://formspree.io/thanks' },
+        headers: { 'Access-Control-Allow-Origin': '*' },
+      }),
+    );
+    await page.getByRole('button', { name: 'Send message' }).click();
+    await expect(
+      page.getByRole('status', { name: 'Message status' }),
+    ).toContainText('Message sent successfully!');
+    await expect(
+      page.getByRole('textbox', { name: 'Name', exact: true }),
+    ).toHaveValue('');
+  });
+}
