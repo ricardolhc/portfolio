@@ -1,25 +1,26 @@
 # Verificação da entrega
 
-Última verificação em 22 de outubro de 2026, Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções de 21 de outubro. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada.
+Última verificação em 22 de outubro de 2026, após a atualização de conteúdo e substituição do formulário por contato direto. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos estão em [updates-2026-10-22.md](updates-2026-10-22.md).
 
 ## Resultados executados
 
-| Verificação                     | Resultado                                                                  |
-| ------------------------------- | -------------------------------------------------------------------------- |
-| `npm run lint`                  | Passou, sem warnings                                                       |
-| `npm run typecheck`             | Passou                                                                     |
-| `npm run format:check`          | Passou                                                                     |
-| `npm run test:unit`             | 51 testes passaram em 4 arquivos                                           |
-| `npm run test:component`        | 21 testes passaram em 3 arquivos                                           |
-| `npm test`                      | 72 testes passaram                                                         |
-| `npm run test:coverage`         | 100% linhas, 99,21% branches, 100% funções, 100% statements                |
-| `npm run build`                 | Passou                                                                     |
-| `npm run test:mutation`         | 89,10%, acima de `high: 85` e `break: 75`; sem erros ou timeouts           |
-| `npm run test:e2e`              | 7 testes passaram; 24 combinações de largura/tema/idioma e fluxo mobile    |
-| Lighthouse 13.5.0, mobile local | Performance 99, acessibilidade 100, boas práticas 100, SEO 100             |
-| Layout shift no Lighthouse      | CLS 0; LCP de laboratório 1,8s                                             |
-| Auditoria npm                   | Zero vulnerabilidades após atualização transitiva                          |
-| Build de subcaminho             | Assets, favicon, preload de fonte, canonical e sitemap com prefixo correto |
+| Verificação                     | Resultado                                                                     |
+| ------------------------------- | ----------------------------------------------------------------------------- |
+| `npm run lint`                  | Passou, sem warnings                                                          |
+| `npm run typecheck`             | Passou                                                                        |
+| `npm run format:check`          | Passou                                                                        |
+| `npm run test:unit`             | 28 testes passaram em 3 arquivos                                              |
+| `npm run test:component`        | 15 testes passaram em 3 arquivos                                              |
+| `npm run test:integration`      | 3 testes passaram em 1 arquivo, grafo e adapters reais                        |
+| `npm test`                      | 46 testes passaram                                                            |
+| `npm run test:coverage`         | 100% linhas, 98,50% branches, 100% funções, 100% statements                   |
+| `npm run build`                 | Passou                                                                        |
+| `npm run test:mutation`         | 87,72%, acima de `high: 85` e `break: 75`; sem erros ou timeouts              |
+| `npm run test:e2e`              | 8 testes passaram; 24 combinações de largura/tema/idioma e dois fluxos mobile |
+| Lighthouse 13.5.0, mobile local | Performance 99, acessibilidade 100, boas práticas 100, SEO 100                |
+| Layout shift no Lighthouse      | CLS 0; LCP de laboratório 1,8s                                                |
+| Auditoria npm (anterior)        | Zero vulnerabilidades; dependências não foram alteradas nesta atualização     |
+| Build de subcaminho (anterior)  | Prefixos de assets e SEO validados; configuração de Pages preservada          |
 
 As medições de Lighthouse foram feitas no preview do build, em `http://127.0.0.1:4173/`. Não são medições de uma implantação pública. Relatórios completos são gerados localmente e ignorados pelo Git: `coverage/index.html`, `reports/lighthouse.report.html`, `reports/lighthouse.report.json`, `playwright-report/index.html`, `reports/responsive/*.png`.
 
@@ -27,7 +28,7 @@ As medições de Lighthouse foram feitas no preview do build, em `http://127.0.0
 
 Playwright executou o aplicativo real no Chrome instalado, com movimento reduzido, nas larguras 320, 375, 430, 768, 1024 e 1440px. Cada largura foi verificada em PT/EN e claro/escuro. As 24 combinações não apresentaram overflow horizontal nem violações nas regras axe WCAG 2 A/AA, 2.1 AA e 2.2 AA executadas.
 
-O fluxo mobile também verificou abertura do menu, fechamento com Escape e foco no botão, navegação por âncora, alternância de tema/idioma, persistência após recarga, validação/foco de formulário e preparação do texto copiável. Capturas reais das seis larguras foram inspecionadas.
+O fluxo mobile também verificou abertura do menu, fechamento com Escape e foco no botão, navegação por âncoras de projetos/certificação/contato, alternância de tema/idioma, persistência após recarga, clique de e-mail interceptado somente no teste e cópia real pela Clipboard API do Chrome. Outro fluxo de 320px verifica API indisponível, campo selecionável e tradução do erro. Não houve erros de página ou mensagens `console.error` nos testes. Os dois cards de experiência têm borda superior de 3px, mesma cor e contraste com o fundo nos dois temas. Capturas reais mobile e desktop foram inspecionadas.
 
 A primeira auditoria Lighthouse apontou CLS 0,114 devido à fonte e duas divergências entre texto visível e nome acessível. O preload local de Geist eliminou o deslocamento na medição seguinte. Os nomes acessíveis do logo e do seletor de idioma agora incluem o texto visível; o audit `label-content-name-mismatch` passou. Inputs mobile usam 16px para evitar zoom de foco no Safari; esse comportamento específico do Safari não foi medido em dispositivo físico.
 
@@ -35,13 +36,23 @@ Testes automatizados não equivalem a certificação WCAG completa. Não foram r
 
 ## Mutação e fortalecimento dos testes
 
-### Conferência adicional de 22 de outubro
+### Atualização de conteúdo e contato direto
+
+O novo escopo remove validadores e serviços exclusivos do formulário e inclui `ContactActions`. Não foram excluídas regras importantes. A execução completa avaliou **228 mutantes** em 3 minutos e 33 segundos: **87,28%**, com **199 `Killed` e 29 `Survived`**; zero `Timeout`, `RuntimeError` e `NoCoverage`. Os thresholds permanecem `high: 85`, `low: 70`, `break: 75`.
+
+Os sobreviventes foram inspecionados: 4 nomes descritivos de tokens, 18 alterações visuais nos controles, 6 no header (classes/ícone e optional chaining de referência presente durante o evento) e 1 que removia o nome acessível do link com o endereço. A última lacuna motivou asserções de nome e descrição acessíveis no contato, sem mudar o código de produção. Aspectos de layout são verificados no Chrome, enquanto a mutação roda em jsdom.
+
+A confirmação incremental concluiu em **87,72%**: **200 `Killed` e 28 `Survived`**, zero timeouts, erros ou mutantes sem cobertura, em 1 minuto e 54 segundos. Foram reaproveitados 149 resultados e reexecutados 79 mutantes; somente dois arquivos de teste mudaram. O mutante 114 (remoção do nome acessível) passou a `Killed`, e `ContactActions` atingiu 100% de detecção. Os 28 sobreviventes restantes são os 4 nomes de tokens, 18 alterações visuais dos controles e 6 alterações de header descritos acima. O cálculo final é `200 / 228`.
+
+A cobertura atual é de **144/144 linhas**, **67/67 funções**, **156/156 statements** e **66/67 branches**. A única branch não coberta no jsdom é a preferência de movimento reduzido em `Section.tsx`; os testes E2E rodam com movimento reduzido. Não há testes de formulário antigo mantidos artificialmente para preservar contagens.
+
+### Histórico anterior ao contato direto: conferência de 22 de outubro
 
 A nova execução completa, após corrigir o contato e sincronizar `theme-color`, avaliou **413 mutantes** em 5 minutos e 12 segundos: **88,38%**, com 365 `Killed` e 48 `Survived`. Não houve `Timeout`, `RuntimeError` ou `NoCoverage`.
 
 A análise dos novos sobreviventes motivou asserções para preservar a prévia ao copiar o endereço e recuperar o formulário após uma falha transitória de preparação. A confirmação incremental terminou em **89,10%**, em 2 minutos e 29 segundos: **368 `Killed`, 45 `Survived`**, zero timeouts, erros ou mutantes sem cobertura. Foram reaproveitados 253 resultados e reexecutados 160 mutantes; nenhum arquivo de produção mutado mudou entre essas duas execuções. O cálculo final é `368 / 413`.
 
-Registry/inject/provider, serviços de aplicação, validação, detecção de idioma, infraestrutura e provider de preferências tiveram 100% de detecção. Os 45 sobreviventes atuais mantêm a distribuição descrita abaixo: 7 nomes descritivos de tokens, 14 no formulário, 18 nos controles e 6 no header. Não foi adicionada nenhuma exclusão para aumentar o resultado. Os problemas anteriores de timeout e serialização do runner não ocorreram nesta conferência.
+Registry/inject/provider, serviços de aplicação, validação, detecção de idioma, infraestrutura e provider de preferências tiveram 100% de detecção. Os 45 sobreviventes daquela execução mantêm a distribuição descrita abaixo: 7 nomes descritivos de tokens, 14 no formulário, 18 nos controles e 6 no header. Não foi adicionada nenhuma exclusão para aumentar o resultado. Os problemas anteriores de timeout e serialização do runner não ocorreram nesta conferência.
 
 ### Histórico das primeiras execuções
 
@@ -76,6 +87,10 @@ Os relatórios HTML e JSON estão em `reports/mutation/`. O relatório inicial f
 
 ## Revisão independente
 
+Na atualização de conteúdo e contato direto, uma nova revisão do diff verificou os requisitos atuais, os contratos e as suítes. Não encontrou problemas materiais de código ou testes. O README apontado como desatualizado durante a revisão foi ajustado para explicar a nova DI e o contato direto. Nenhuma certificação Azure foi adicionada; os indicadores e relatórios dos projetos são dados fornecidos na solicitação atual.
+
+As observações a seguir registram as revisões anteriores ao contato direto.
+
 Uma revisão independente do código foi solicitada pela skill de revisão. Duas observações sobre dados profissionais foram retiradas pelo revisor ao confrontar o briefing original: o nome exato **AWS Certified Cloud Practitioner**, a presença nacional do empregador, as atividades corporativas e os semestres dos projetos foram fornecidos explicitamente pelo usuário. Mantê-los preserva o requisito; removê-los reduziria a fidelidade ao briefing. A revisão terminou sem achados materiais. Não foi realizada confirmação documental externa dessas informações.
 
 A melhoria visual de `theme-color` identificada na primeira revisão foi implementada em 22 de outubro: tanto o bootstrap quanto a alternância manual atualizam a cor sugerida à interface do navegador. Testes de componente e as 24 combinações de navegador verificam essa sincronização. A conferência adicional também corrigiu falhas de preparação do contato, com regressões reproduzidas antes das correções. O mapeamento integral está em [requirements-audit.md](requirements-audit.md).
@@ -89,4 +104,4 @@ A revisão independente das alterações adicionais também terminou sem achados
 - O build local, sem `VITE_SITE_URL`, não emite canonical ou URLs inventadas. O workflow Pages usa a URL e o caminho retornados pela configuração real do GitHub.
 - Não existe remote Git configurado. Não foram executados GitHub Actions remotamente, publicação no Pages ou verificação da hospedagem pública.
 - Não houve verificação documental da credencial AWS nem acesso a sistemas de clientes. Links fornecidos pelo proprietário foram preservados.
-- A abertura real de cliente de e-mail depende do visitante e foi substituída por fakes nos testes. O fluxo de preparação/cópia foi verificado no navegador.
+- A abertura real de cliente de e-mail depende do visitante. No E2E atual, apenas o clique na âncora é interceptado para verificar a URL sem lançar um aplicativo externo. A cópia real e o fallback foram verificados no navegador. O site não consegue confirmar envio.

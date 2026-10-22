@@ -4,7 +4,6 @@ import { PreferenceService } from '../../src/application/preference-service';
 import {
   BrowserPreferences,
   BrowserClipboard,
-  BrowserMailClient,
   browserEnvironment,
 } from '../../src/infrastructure/browser';
 
@@ -122,18 +121,6 @@ describe('browser adapters', () => {
       '(prefers-color-scheme: dark)',
     );
     localStorage.clear();
-  });
-  it('opens only mailto links via an injectable browser boundary', () => {
-    const navigate = vi.fn();
-    const mail = new BrowserMailClient(navigate);
-    mail.open('mailto:contato.ricardolhc@gmail.com?subject=Hi');
-    expect(navigate).toHaveBeenCalledWith(
-      'mailto:contato.ricardolhc@gmail.com?subject=Hi',
-    );
-    expect(() => mail.open('https://example.com')).toThrow(
-      'Only mailto URLs are allowed',
-    );
-    expect(navigate).toHaveBeenCalledTimes(1);
   });
   it('writes clipboard and reports unsupported or denied access', async () => {
     const writeText = vi.fn().mockResolvedValue(undefined);

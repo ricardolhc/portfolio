@@ -8,6 +8,7 @@ type IconName =
   | 'github'
   | 'linkedin'
   | 'mail'
+  | 'copy'
   | 'code';
 const paths: Record<IconName, string> = {
   arrow: 'M5 19 19 5M5 5h14v14',
@@ -20,6 +21,7 @@ const paths: Record<IconName, string> = {
     'M9 19c-4 1-4-2-6-2m12 5v-4a3.5 3.5 0 0 0-1-2.5c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.5-3.5 4.5 4.5 0 0 0-.1-3.5S17 1.5 14 3a12 12 0 0 0-6 0C5 1.5 3.6 2 3.6 2a4.5 4.5 0 0 0-.1 3.5A5 5 0 0 0 2 9c0 5 3 6.2 6 6.5A3.5 3.5 0 0 0 7 18v4',
   linkedin: 'M4 9v11M4 4v.1M9 20V9h4v2c2-4 7-2 7 2v7m-7 0v-7',
   mail: 'M3 6h18v13H3ZM3 6l9 7 9-7',
+  copy: 'M8 8h13v13H8ZM16 8V3H3v13h5',
   code: 'm8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18',
 };
 export function Icon({

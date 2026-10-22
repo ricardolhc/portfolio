@@ -1,7 +1,6 @@
 import type {
   ClipboardPort,
   Environment,
-  MailClient,
   PreferenceStore,
 } from '../domain/contracts';
 
@@ -32,19 +31,6 @@ export const browserEnvironment: Environment = {
   },
   prefersDark: () => window.matchMedia('(prefers-color-scheme: dark)').matches,
 };
-
-export class BrowserMailClient implements MailClient {
-  constructor(
-    private readonly navigate: (url: string) => void = (url) => {
-      window.location.href = url;
-    },
-  ) {}
-  open(url: string): void {
-    if (!url.startsWith('mailto:'))
-      throw new Error('Only mailto URLs are allowed');
-    this.navigate(url);
-  }
-}
 
 export class BrowserClipboard implements ClipboardPort {
   constructor(

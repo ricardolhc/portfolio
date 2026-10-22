@@ -17,6 +17,7 @@
     "test": "vitest run",
     "test:unit": "vitest run tests/unit",
     "test:component": "vitest run tests/component",
+    "test:integration": "vitest run tests/integration",
     "test:coverage": "vitest run --coverage",
     "test:mutation": "stryker run",
     "test:e2e": "playwright test"

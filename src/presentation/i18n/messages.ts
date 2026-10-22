@@ -29,7 +29,7 @@ const pt = {
     eyebrow: 'CÓDIGO COM PROPÓSITO. IMPACTO REAL.',
     role: 'Desenvolvedor Full Stack',
     statement:
-      'Desenvolvo soluções que simplificam processos e transformam problemas reais em resultados.',
+      'Desenvolvo aplicações e soluções de automação que simplificam processos e resolvem desafios reais de negócios.',
     projects: 'Explorar projetos',
     contact: 'Vamos conversar',
     scroll: 'Conheça minha trajetória',
@@ -39,10 +39,10 @@ const pt = {
   about: {
     eyebrow: '01 / SOBRE MIM',
     title: 'Do problema real\nà solução que funciona.',
-    lead: 'Sou Ricardo Costa. Conecto desenvolvimento de software, visão de processos e formação em Engenharia de Software.',
+    lead: 'Sou desenvolvedor Full Stack. Crio aplicações e automatizo processos para transformar desafios reais de empresas em soluções práticas e eficientes.',
     body: 'Minha trajetória combina experiência formal em desenvolvimento front-end e projetos independentes para empresas. No ambiente corporativo, atuo principalmente com React e TypeScript. De forma independente, desenvolvi soluções para reduzir tarefas manuais em processos fiscais e financeiros.',
     closing:
-      'Sou graduado em Engenharia de Software pela Unipampa e mestrando no programa de pós-graduação da mesma universidade. Meu foco é construir aplicações claras, funcionais e alinhadas ao problema que precisam resolver.',
+      'Graduado em Engenharia de Software pela Universidade Federal do Pampa e mestrando no programa de pós-graduação da mesma universidade. Meu foco é construir aplicações claras, funcionais e alinhadas ao problema que precisam resolver.',
     note: 'Engenharia na base.\nResultados na prática.',
   },
   experience: {
@@ -50,15 +50,13 @@ const pt = {
     title: 'Duas frentes.\nO mesmo compromisso.',
     intro:
       'Atuação corporativa e entregas independentes, com contextos e responsabilidades próprios.',
-    reference:
-      'Tempo de experiência CLT informado no briefing de outubro de 2026.',
     items: [
       {
         group: 'EXPERIÊNCIA FORMAL · CLT',
         title: 'Desenvolvedor Front-end',
         duration: '1 ano e 6 meses',
         description:
-          'Atuação em uma empresa com presença nacional no Brasil, principalmente com React e TypeScript.',
+          'Experiência profissional com carteira assinada, atuando principalmente com React e TypeScript em uma empresa com presença nacional no Brasil.',
         bullets: [
           'Desenvolvimento e manutenção de aplicações.',
           'Evolução de funcionalidades e subidas de versão em produção.',
@@ -99,7 +97,7 @@ const pt = {
         problem:
           'Organizar informações de notas fiscais e gerar documentos exigia atividades manuais demoradas.',
         solution:
-          'Um sistema para automatizar a geração de planilhas a partir de informações de notas fiscais, reduzindo a necessidade de intervenção humana.',
+          'Um sistema desenvolvido para automatizar a geração de planilhas a partir de informações de notas fiscais, reduzindo a necessidade de intervenção manual e tornando o processo já existente mais rápido, simples e eficiente.',
         metric: '98%',
         result: 'de redução no tempo de geração das planilhas',
       },
@@ -112,7 +110,7 @@ const pt = {
         problem:
           'O controle de duplicatas e pagamentos ligados a notas fiscais de entrada exigia trabalho manual recorrente.',
         solution:
-          'Ampliação da primeira solução, integrando funcionalidades para organizar duplicatas, boletos e pagamentos.',
+          'Evolução da solução anterior, integrando funcionalidades para organizar duplicatas, boletos e pagamentos, além de disponibilizar novos indicadores, relatórios e visões gerenciais que antes não estavam disponíveis.',
         metric: '≈80%',
         result: 'de redução do trabalho manual anteriormente necessário',
       },
@@ -123,7 +121,33 @@ const pt = {
     title: 'Ferramentas para\nconstruir de ponta a ponta.',
     intro:
       'Competências Full Stack, com experiência profissional formal concentrada em front-end.',
-    groups: ['Front-end', 'Back-end', 'Banco de dados'],
+    groups: [
+      { title: 'Front-end', items: ['React', 'TypeScript', 'HTML', 'CSS'] },
+      { title: 'Back-end', items: ['Java', 'Spring Boot', 'Node.js'] },
+      { title: 'Bancos de dados', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
+      {
+        title: 'Versionamento e ferramentas',
+        items: ['Git', 'GitHub', 'Azure DevOps / Azure Repos'],
+      },
+      {
+        title: 'CI/CD e deploy',
+        items: ['GitHub Actions', 'GitHub Pages', 'Azure Pipelines'],
+      },
+      {
+        title: 'Cloud',
+        items: ['Microsoft Azure', 'Amazon Web Services (AWS)'],
+      },
+      {
+        title: 'Testes e qualidade',
+        items: [
+          'Testes unitários',
+          'Testes de componentes',
+          'Testes de mutação',
+          'Testes de integração',
+          'Testes end-to-end (E2E)',
+        ],
+      },
+    ],
   },
   education: {
     eyebrow: '05 / FORMAÇÃO',
@@ -149,54 +173,23 @@ const pt = {
     title: 'Fundamentos sólidos.\nVisão de nuvem.',
     issuer: 'Emitida por Amazon Web Services (AWS)',
     category: 'Categoria Foundational',
-    reference: 'Perfil profissional no LinkedIn',
+    reference: 'Ver certificação',
   },
   contact: {
     eyebrow: '07 / CONTATO',
     title: 'Seu próximo projeto\ncomeça com uma conversa.',
     intro:
-      'Uma oportunidade de trabalho, um processo a simplificar ou uma ideia para desenvolver. Vamos conversar.',
+      'Estou sempre em busca de novos desafios para identificar problemas, otimizar processos e desenvolver soluções que gerem resultados reais para empresas — em oportunidades profissionais, projetos independentes e soluções sob demanda.',
     emailLabel: 'E-mail de contato',
-    formLabel: 'Formulário de contato',
-    fields: {
-      name: 'Nome',
-      email: 'E-mail',
-      subject: 'Assunto',
-      message: 'Mensagem',
-    },
-    placeholders: {
-      name: 'Como você se chama?',
-      email: 'voce@empresa.com',
-      subject: 'Sobre o que vamos conversar?',
-      message: 'Conte um pouco sobre sua ideia ou oportunidade.',
-    },
-    hint: 'Todos os campos são obrigatórios. Nome: 2–100 caracteres; assunto: 3–160; mensagem: 10–5.000.',
-    submit: 'Abrir aplicativo de e-mail',
-    notice:
-      'O formulário prepara um e-mail no seu aplicativo. Você revisa e conclui o envio por lá.',
-    prepared: 'E-mail preparado. Conclua o envio no seu aplicativo de e-mail.',
-    prepareError:
-      'Não foi possível preparar a mensagem. Seus dados continuam no formulário; copie o endereço para entrar em contato.',
-    openError:
-      'Não foi possível abrir o aplicativo. Use as opções de cópia abaixo.',
-    invalid: 'Revise os campos indicados para preparar seu e-mail.',
-    copyEmail: 'Copiar endereço',
-    copyMessage: 'Copiar mensagem',
-    copied: 'Texto copiado.',
+    send: 'Enviar e-mail',
+    subject: 'Contato pelo portfólio',
+    copyEmail: 'Copiar e-mail',
+    copied: 'E-mail copiado',
     copyError:
-      'A cópia automática não está disponível. Selecione e copie o texto abaixo.',
-    fallback:
-      'Sem aplicativo de e-mail? Copie o endereço e a mensagem, ou selecione o texto abaixo.',
-    preview: 'Mensagem para copiar',
-    emptyPreview: 'Preencha os campos para preparar sua mensagem.',
-    mailLabels: { name: 'Nome', email: 'E-mail', message: 'Mensagem' },
-    errors: {
-      required: 'Preencha este campo.',
-      short: 'O texto está muito curto. Confira os limites acima.',
-      long: 'O texto excede o limite permitido.',
-      email: 'Informe um endereço de e-mail válido.',
-      singleLine: 'Use apenas uma linha neste campo.',
-    },
+      'A cópia automática não está disponível. Selecione e copie o endereço abaixo.',
+    manualCopy: 'E-mail para copiar manualmente',
+    notice:
+      'O link abre seu aplicativo de e-mail. Você escreve e conclui o envio por lá.',
   },
   footer: {
     line: 'Software com propósito.',
@@ -236,7 +229,7 @@ const en: typeof pt = {
     eyebrow: 'PURPOSEFUL CODE. REAL IMPACT.',
     role: 'Full Stack Developer',
     statement:
-      'I develop solutions that simplify processes and turn real problems into results.',
+      'I develop applications and automation solutions that simplify processes and solve real business challenges.',
     projects: 'Explore projects',
     contact: 'Let’s talk',
     scroll: 'Explore my journey',
@@ -246,10 +239,10 @@ const en: typeof pt = {
   about: {
     eyebrow: '01 / ABOUT',
     title: 'From a real problem\nto a working solution.',
-    lead: 'I’m Ricardo Costa. I connect software development, process thinking and a background in Software Engineering.',
+    lead: 'I’m a Full Stack Developer. I build applications and automate processes to turn real business challenges into practical, efficient solutions.',
     body: 'My journey combines formal front-end employment and independent projects for businesses. In my corporate role, I work primarily with React and TypeScript. Independently, I have built solutions that reduce manual tasks in tax and financial processes.',
     closing:
-      'I hold a degree in Software Engineering from Unipampa and am pursuing a master’s degree in the university’s graduate program. I focus on building clear, functional applications aligned with the problems they need to solve.',
+      'I hold a degree in Software Engineering from the Federal University of Pampa and am pursuing a master’s degree in the graduate program at the same university. I focus on building clear, functional applications aligned with the problems they need to solve.',
     note: 'Engineering at the core.\nResults in practice.',
   },
   experience: {
@@ -257,15 +250,13 @@ const en: typeof pt = {
     title: 'Two paths.\nThe same commitment.',
     intro:
       'Corporate work and independent deliveries, each with its own context and responsibilities.',
-    reference:
-      'Formal employment duration as provided in the October 2026 brief.',
     items: [
       {
         group: 'FORMAL EMPLOYMENT · CLT',
         title: 'Front-end Developer',
         duration: '1 year and 6 months',
         description:
-          'Working at a company with a nationwide presence in Brazil, primarily with React and TypeScript.',
+          'Formal employment at a company with a nationwide presence in Brazil, working primarily with React and TypeScript.',
         bullets: [
           'Application development and maintenance.',
           'Feature improvements and production releases.',
@@ -306,7 +297,7 @@ const en: typeof pt = {
         problem:
           'Organizing invoice information and generating documents required time-consuming manual work.',
         solution:
-          'A system that automates spreadsheet generation from invoice information, reducing the need for human intervention.',
+          'A system developed to automate spreadsheet generation from invoice information, reducing the need for manual intervention and making the existing process faster, simpler and more efficient.',
         metric: '98%',
         result: 'reduction in spreadsheet generation time',
       },
@@ -319,7 +310,7 @@ const en: typeof pt = {
         problem:
           'Tracking payables and payments associated with incoming invoices required recurring manual work.',
         solution:
-          'An extension of the first solution, integrating features to organize payables, payment slips and payments.',
+          'An evolution of the previous solution, integrating features to organize payables, payment slips and payments, while also providing new indicators, reports and management views that were previously unavailable.',
         metric: '≈80%',
         result: 'reduction in the manual work previously required',
       },
@@ -330,7 +321,33 @@ const en: typeof pt = {
     title: 'Tools to build\nfrom end to end.',
     intro:
       'Full Stack skills, with formal professional experience focused on front-end development.',
-    groups: ['Front-end', 'Back-end', 'Database'],
+    groups: [
+      { title: 'Front-end', items: ['React', 'TypeScript', 'HTML', 'CSS'] },
+      { title: 'Back-end', items: ['Java', 'Spring Boot', 'Node.js'] },
+      { title: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
+      {
+        title: 'Version control and tools',
+        items: ['Git', 'GitHub', 'Azure DevOps / Azure Repos'],
+      },
+      {
+        title: 'CI/CD and deployment',
+        items: ['GitHub Actions', 'GitHub Pages', 'Azure Pipelines'],
+      },
+      {
+        title: 'Cloud',
+        items: ['Microsoft Azure', 'Amazon Web Services (AWS)'],
+      },
+      {
+        title: 'Testing and quality',
+        items: [
+          'Unit testing',
+          'Component testing',
+          'Mutation testing',
+          'Integration testing',
+          'End-to-end (E2E) testing',
+        ],
+      },
+    ],
   },
   education: {
     eyebrow: '05 / EDUCATION',
@@ -356,53 +373,23 @@ const en: typeof pt = {
     title: 'Solid foundations.\nCloud perspective.',
     issuer: 'Issued by Amazon Web Services (AWS)',
     category: 'Foundational category',
-    reference: 'Professional profile on LinkedIn',
+    reference: 'View certification',
   },
   contact: {
     eyebrow: '07 / CONTACT',
     title: 'Your next project\nstarts with a conversation.',
     intro:
-      'A job opportunity, a process to simplify or an idea to develop. Let’s talk.',
+      'I’m always looking for new challenges to identify problems, optimize processes and build solutions that deliver real results for businesses — through professional opportunities, independent projects and custom software development.',
     emailLabel: 'Contact email',
-    formLabel: 'Contact form',
-    fields: {
-      name: 'Name',
-      email: 'Email',
-      subject: 'Subject',
-      message: 'Message',
-    },
-    placeholders: {
-      name: 'What’s your name?',
-      email: 'you@company.com',
-      subject: 'What would you like to discuss?',
-      message: 'Tell me a little about your idea or opportunity.',
-    },
-    hint: 'All fields are required. Name: 2–100 characters; subject: 3–160; message: 10–5,000.',
-    submit: 'Open email application',
-    notice:
-      'This form prepares an email in your application. You review it and complete sending there.',
-    prepared: 'Email prepared. Complete sending in your email application.',
-    prepareError:
-      'Could not prepare the message. Your data is still in the form; copy the address to get in touch.',
-    openError: 'Could not open the application. Use the copy options below.',
-    invalid: 'Review the highlighted fields to prepare your email.',
-    copyEmail: 'Copy address',
-    copyMessage: 'Copy message',
-    copied: 'Text copied.',
+    send: 'Send email',
+    subject: 'Portfolio contact',
+    copyEmail: 'Copy email',
+    copied: 'Email copied',
     copyError:
-      'Automatic copying is unavailable. Select and copy the text below.',
-    fallback:
-      'No email app? Copy the address and message, or select the text below.',
-    preview: 'Message to copy',
-    emptyPreview: 'Fill in the fields to prepare your message.',
-    mailLabels: { name: 'Name', email: 'Email', message: 'Message' },
-    errors: {
-      required: 'Fill in this field.',
-      short: 'This text is too short. Check the limits above.',
-      long: 'This text exceeds the allowed limit.',
-      email: 'Enter a valid email address.',
-      singleLine: 'Use only one line in this field.',
-    },
+      'Automatic copying is unavailable. Select and copy the address below.',
+    manualCopy: 'Email for manual copying',
+    notice:
+      'The link opens your email application. You write and send the message there.',
   },
   footer: {
     line: 'Software with purpose.',

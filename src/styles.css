@@ -418,12 +418,9 @@ p {
 }
 .experience-card {
   border: 1px solid var(--line);
-  padding: 25px;
-  background: var(--surface);
-}
-.formal-card {
   border-top: 3px solid var(--fg);
-  padding-top: 23px;
+  padding: 23px 25px 25px;
+  background: var(--surface);
 }
 .card-topline {
   display: flex;
@@ -469,11 +466,6 @@ p {
   position: absolute;
   left: 0;
   color: var(--muted);
-}
-.experience-card .reference-note {
-  font-size: 10px !important;
-  line-height: 1.65;
-  margin-top: 25px;
 }
 .projects-section {
   --bg: #191919;
@@ -564,9 +556,10 @@ p {
 }
 .technology-grid {
   display: grid;
-  gap: 36px;
+  gap: 24px;
 }
 .technology-group {
+  min-width: 0;
   border-top: 1px solid var(--line);
   padding-top: 20px;
 }
@@ -578,19 +571,15 @@ p {
 .technology-group ul {
   list-style: none;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 .technology-group li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-block: 12px;
-  border-bottom: 1px solid var(--line);
-  font-size: 22px;
-  letter-spacing: -0.03em;
-}
-.technology-group li svg {
-  width: 15px;
-  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
 }
 .education-section,
 .certification-section {
@@ -677,18 +666,14 @@ p {
   font-size: clamp(32px, 3.9vw, 46px);
 }
 .contact-email {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  display: block;
+  width: fit-content;
+  max-width: 100%;
   min-height: 44px;
-  font-size: clamp(12px, 3.2vw, 17px);
+  font-size: clamp(14px, 3.8vw, 22px);
   letter-spacing: -0.03em;
   border-bottom: 1px solid var(--line);
   overflow-wrap: anywhere;
-}
-.contact-email svg {
-  width: 16px;
 }
 .contact-socials {
   display: flex;
@@ -702,101 +687,39 @@ p {
   font-size: 12px;
   min-height: 44px;
 }
-.contact-form-wrap {
+.contact-actions {
   min-width: 0;
+  align-self: center;
 }
-.form-hint {
-  font-size: 10px;
-  color: var(--muted);
-  margin-bottom: 22px;
-}
-.form-grid {
-  display: grid;
-  gap: 22px;
-}
-.field {
-  min-width: 0;
-}
-.field label {
-  display: block;
-  font-size: 11px;
-  margin-bottom: 8px;
-}
-.field input,
-.field textarea {
-  width: 100%;
-  min-height: 48px;
-  color: var(--fg);
-  background: var(--bg);
-  border: 1px solid var(--line);
-  padding: 14px;
-  font-size: 16px;
-  line-height: 1.6;
-}
-.field textarea {
-  resize: vertical;
-}
-.field input::placeholder,
-.field textarea::placeholder {
-  color: var(--muted);
-  opacity: 1;
-}
-.field [aria-invalid='true'] {
-  border: 2px solid var(--fg);
-}
-.field-error {
-  font-size: 11px;
-  font-weight: 550;
-  margin-top: 7px;
-}
-.submit-button {
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-top: 24px;
-  width: 100%;
 }
-.form-notice {
-  font-size: 10px;
+.contact-buttons .button {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+.contact-notice {
+  font-size: 12px;
   color: var(--muted);
+  margin-top: 16px;
+  max-width: 420px;
+}
+.contact-status {
+  font-size: 13px;
+  min-height: 24px;
   margin-top: 12px;
 }
-.form-status {
-  font-size: 12px;
-  font-weight: 500;
-  min-height: 24px;
-  margin-top: 10px;
-}
-.copy-options {
-  padding-top: 20px;
-  margin-top: 16px;
-  border-top: 1px solid var(--line);
-}
-.copy-options > p {
-  font-size: 10px;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-.text-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  min-height: 44px;
-  font-size: 11px;
-  background: transparent;
-  color: var(--fg);
-  border: 0;
-  padding-inline: 0 8px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.copy-preview {
-  display: block;
+.copy-address {
   width: 100%;
   border: 1px solid var(--line);
   padding: 12px;
-  resize: vertical;
-  font-size: 11px;
-  color: var(--muted);
+  font-size: 16px;
+  color: var(--fg);
   background: var(--bg);
-  margin-top: 10px;
+  margin-top: 8px;
 }
 .footer {
   display: grid;
@@ -871,10 +794,7 @@ p {
     grid-template-columns: 1fr 1fr;
   }
   .experience-card {
-    padding: 28px;
-  }
-  .formal-card {
-    padding-top: 26px;
+    padding: 26px 28px 28px;
   }
   .project-card {
     grid-template-columns: 1fr 1fr;
@@ -890,19 +810,10 @@ p {
     padding-left: 40px;
   }
   .technology-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
   }
-  .form-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px 18px;
-  }
-  .field-wide {
+  .technology-group:last-child {
     grid-column: 1 / -1;
-  }
-  .field input,
-  .field textarea {
-    font-size: 13px;
   }
   .footer {
     grid-template-columns: auto 1fr auto;
@@ -947,10 +858,7 @@ p {
     margin-top: 50px;
   }
   .experience-card {
-    padding: 36px;
-  }
-  .formal-card {
-    padding-top: 34px;
+    padding: 34px 36px 36px;
   }
   .experience-card > p:not(.duration) {
     max-width: 440px;
@@ -976,10 +884,8 @@ p {
     font-size: 36px;
   }
   .technology-grid {
-    gap: 64px;
-  }
-  .technology-group li {
-    font-size: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
   }
   .certification-card {
     padding: 36px;

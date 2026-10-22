@@ -1,4 +1,6 @@
-# Conferência do briefing — 22 de outubro de 2026
+# Conferência do briefing original — 22 de outubro de 2026
+
+Registro histórico anterior à solicitação de simplificação do contato e ampliação das tecnologias. O formulário descrito abaixo foi substituído por contato direto; a certificação passou a ter link específico fornecido pelo proprietário. Consulte [a atualização posterior](updates-2026-10-22.md) para o escopo atual e [verification.md](verification.md) para os resultados mais recentes.
 
 A revisão confrontou os requisitos originais com o código, os testes e a configuração de publicação. Não foi encontrada uma seção ou funcionalidade obrigatória ausente.
 

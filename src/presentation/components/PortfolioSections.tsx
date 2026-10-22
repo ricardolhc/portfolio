@@ -1,6 +1,5 @@
-import { CONTACT_EMAIL } from '../../domain/contact';
 import { usePreferences } from '../preferences/PreferencesProvider';
-import { ContactForm } from './ContactForm';
+import { ContactActions } from './ContactActions';
 import { Icon } from './Icon';
 import { Reveal, SectionHeading } from './Section';
 
@@ -8,6 +7,9 @@ export const SOCIAL = {
   github: 'https://github.com/ricardolhc',
   linkedin: 'https://www.linkedin.com/in/ricardo-costa-7a97a3254/',
 };
+
+const AWS_CERTIFICATION_URL =
+  'https://www.linkedin.com/in/ricardo-costa-7a97a3254/overlay/Certifications/327647614/treasury/?profileId=ACoAAD7D1rEB3JC8LRT0evZld_53vA3cctO_IU0';
 
 export function Hero() {
   const { t } = usePreferences();
@@ -109,10 +111,7 @@ export function Experience() {
         <SectionHeading id="experience" {...t.experience} />
         <div className="experience-grid">
           {t.experience.items.map((item, index) => (
-            <article
-              key={item.group}
-              className={`experience-card ${index === 0 ? 'formal-card' : ''}`}
-            >
+            <article key={item.group} className="experience-card">
               <div className="card-topline">
                 <span className="eyebrow">{item.group}</span>
                 <span className="mono" aria-hidden="true">
@@ -127,9 +126,6 @@ export function Experience() {
                   <li key={bullet}>{bullet}</li>
                 ))}
               </ul>
-              {index === 0 && (
-                <p className="reference-note">{t.experience.reference}</p>
-              )}
             </article>
           ))}
         </div>
@@ -189,11 +185,6 @@ export function Projects() {
 
 export function Technologies() {
   const { t } = usePreferences();
-  const groups = [
-    ['React', 'TypeScript', 'HTML', 'CSS'],
-    ['Java', 'Spring Boot', 'Node.js'],
-    ['PostgreSQL'],
-  ];
   return (
     <section
       id="technologies"
@@ -203,21 +194,15 @@ export function Technologies() {
       <Reveal>
         <SectionHeading id="technologies" {...t.technologies} />
         <div className="technology-grid">
-          {groups.map((group, index) => (
-            <div
-              className="technology-group"
-              key={t.technologies.groups[index]}
-            >
+          {t.technologies.groups.map((group, index) => (
+            <div className="technology-group" key={group.title}>
               <span className="mono muted" aria-hidden="true">
                 0{index + 1} —
               </span>
-              <h3>{t.technologies.groups[index]}</h3>
+              <h3>{group.title}</h3>
               <ul>
-                {group.map((technology) => (
-                  <li key={technology}>
-                    {technology}
-                    <Icon name="arrow" />
-                  </li>
+                {group.items.map((technology) => (
+                  <li key={technology}>{technology}</li>
                 ))}
               </ul>
             </div>
@@ -277,7 +262,7 @@ export function Certifications() {
           <p>{t.certifications.issuer}</p>
           <a
             className="text-link"
-            href={SOCIAL.linkedin}
+            href={AWS_CERTIFICATION_URL}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -303,14 +288,6 @@ export function Contact() {
         <Reveal className="contact-grid">
           <div>
             <SectionHeading id="contact" {...t.contact} />
-            <a
-              className="contact-email"
-              href={`mailto:${CONTACT_EMAIL}`}
-              aria-label={`${t.contact.emailLabel}: ${CONTACT_EMAIL}`}
-            >
-              {CONTACT_EMAIL}
-              <Icon name="arrow" />
-            </a>
             <div className="contact-socials">
               <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer">
                 <Icon name="github" />
@@ -327,7 +304,7 @@ export function Contact() {
               </a>
             </div>
           </div>
-          <ContactForm />
+          <ContactActions />
         </Reveal>
       </div>
     </section>

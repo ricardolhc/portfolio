@@ -9,7 +9,7 @@
     "src/infrastructure/**/*.ts",
     "src/presentation/preferences/**/*.tsx",
     "src/presentation/components/Controls.tsx",
-    "src/presentation/components/ContactForm.tsx",
+    "src/presentation/components/ContactActions.tsx",
     "src/presentation/components/Header.tsx"
   ],
   "reporters": ["clear-text", "progress", "html", "json"],

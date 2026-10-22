@@ -5,6 +5,73 @@ import { App } from '../../src/presentation/App';
 import { renderWithProviders, testDependencies } from '../renderWithProviders';
 
 describe('professional portfolio', () => {
+  it.each([
+    [
+      'pt-BR',
+      'Desenvolvo aplicações e soluções de automação que simplificam processos e resolvem desafios reais de negócios.',
+      'Ver certificação',
+      'Bancos de dados',
+      'Versionamento e ferramentas',
+      'CI/CD e deploy',
+      'Cloud',
+      'Testes e qualidade',
+      'Testes unitários',
+      'Testes de componentes',
+      'Testes de mutação',
+      'Testes de integração',
+      'Testes end-to-end (E2E)',
+      /Graduado em Engenharia de Software pela Universidade Federal do Pampa/,
+      /oportunidades profissionais, projetos independentes e soluções sob demanda/,
+      /processo já existente mais rápido, simples e eficiente/,
+      /novos indicadores, relatórios e visões gerenciais/,
+    ],
+    [
+      'en',
+      'I develop applications and automation solutions that simplify processes and solve real business challenges.',
+      'View certification',
+      'Databases',
+      'Version control and tools',
+      'CI/CD and deployment',
+      'Cloud',
+      'Testing and quality',
+      'Unit testing',
+      'Component testing',
+      'Mutation testing',
+      'Integration testing',
+      'End-to-end (E2E) testing',
+      /I hold a degree in Software Engineering from the Federal University of Pampa/,
+      /professional opportunities, independent projects and custom software development/,
+      /existing process faster, simpler and more efficient/,
+      /new indicators, reports and management views/,
+    ],
+  ] as const)(
+    'presents updated business content and categorized skills in %s',
+    (language, hero, certification, ...content) => {
+      renderWithProviders(<App />, testDependencies(language).registry);
+      expect(screen.getByText(hero)).toHaveClass('hero-statement');
+      for (const text of content)
+        expect(screen.getByText(text)).toBeInTheDocument();
+      const link = screen.getByRole('link', {
+        name: new RegExp(certification),
+      });
+      expect(link).toHaveAttribute(
+        'href',
+        'https://www.linkedin.com/in/ricardo-costa-7a97a3254/overlay/Certifications/327647614/treasury/?profileId=ACoAAD7D1rEB3JC8LRT0evZld_53vA3cctO_IU0',
+      );
+      expect(link).toHaveAttribute('target', '_blank');
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+      expect(screen.queryByText(/briefing|brief\./i)).not.toBeInTheDocument();
+      const experience = screen.getByRole('region', {
+        name: /Duas frentes|Two paths/,
+      });
+      const [formal, independent] = within(experience).getAllByRole('article');
+      expect(formal).toHaveTextContent(/1 ano e 6 meses|1 year and 6 months/);
+      expect(formal).toHaveTextContent(/carteira assinada|formal employment/i);
+      expect(independent).not.toHaveTextContent(
+        /1 ano e 6 meses|1 year and 6 months/,
+      );
+    },
+  );
   it('presents hero, real projects, distinct employment, technologies, education and certification', () => {
     renderWithProviders(<App />);
     expect(
@@ -31,7 +98,9 @@ describe('professional portfolio', () => {
     expect(within(projects).getByText('98%')).toBeInTheDocument();
     expect(within(projects).getByText('≈80%')).toBeInTheDocument();
     expect(
-      within(projects).getByText(/Ampliação da primeira solução/),
+      within(projects).getByText(
+        /novos indicadores, relatórios e visões gerenciais/,
+      ),
     ).toBeInTheDocument();
     const technologies = screen.getByRole('region', {
       name: /Ferramentas para/,
@@ -45,6 +114,21 @@ describe('professional portfolio', () => {
       'Spring Boot',
       'Node.js',
       'PostgreSQL',
+      'MongoDB',
+      'MySQL',
+      'Git',
+      'GitHub',
+      'Azure DevOps / Azure Repos',
+      'GitHub Actions',
+      'GitHub Pages',
+      'Azure Pipelines',
+      'Microsoft Azure',
+      'Amazon Web Services (AWS)',
+      'Testes unitários',
+      'Testes de componentes',
+      'Testes de mutação',
+      'Testes de integração',
+      'Testes end-to-end (E2E)',
     ])
       expect(within(technologies).getByText(tech)).toBeInTheDocument();
     expect(
@@ -119,9 +203,8 @@ describe('professional portfolio', () => {
     ).toBeInTheDocument();
     for (const link of screen.getAllByRole('link', { name: /GitHub/ }))
       expect(link).toHaveAttribute('href', 'https://github.com/ricardolhc');
-    expect(screen.getByLabelText('Name')).toBeRequired();
     expect(
-      screen.getByRole('button', { name: /Open email application/ }),
+      screen.getByRole('link', { name: /Send email/ }),
     ).toBeInTheDocument();
   });
 });
