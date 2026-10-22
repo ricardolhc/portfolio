@@ -65,6 +65,29 @@ describe('preferences', () => {
     expect(document.documentElement.dataset.theme).toBe('light');
     expect(deps.values.get('portfolio.theme')).toBe('light');
   });
+  it('keeps browser chrome in sync with the initial and manually selected theme', async () => {
+    const tag = document.createElement('meta');
+    tag.name = 'theme-color';
+    document.head.append(tag);
+    const user = userEvent.setup({ delay: null });
+    try {
+      renderWithProviders(
+        <ThemeToggle />,
+        testDependencies('pt-BR', 'dark').registry,
+      );
+      expect(tag).toHaveAttribute('content', '#141414');
+      await user.click(
+        screen.getByRole('button', { name: 'Ativar tema claro' }),
+      );
+      expect(tag).toHaveAttribute('content', '#f7f7f4');
+      await user.click(
+        screen.getByRole('button', { name: 'Ativar tema escuro' }),
+      );
+      expect(tag).toHaveAttribute('content', '#141414');
+    } finally {
+      tag.remove();
+    }
+  });
   it('switches language in both directions, updates document metadata and persists', async () => {
     const deps = testDependencies();
     const user = userEvent.setup({ delay: null });

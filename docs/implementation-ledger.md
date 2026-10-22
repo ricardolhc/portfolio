@@ -19,3 +19,16 @@
 - Revisão independente final: os dois apontamentos factuais foram retirados após confronto com os trechos exatos do briefing. Sem achados materiais. Melhoria visual opcional documentada: theme-color do navegador permanece claro.
 - CI/Pages e README entregues; tags das ações verificadas nos repositórios oficiais. Não há remote Git; nenhuma publicação nem execução remota foi alegada.
 - Trabalho preservado na branch local feat/portfolio e no checkout solicitado. Não existe branch-base anterior com commits para mesclar.
+
+## Conferência adicional — 22 de outubro de 2026
+
+- Solicitação: verificar se restava algo para implementar. Briefing confrontado com conteúdo, seções, arquitetura, scripts, testes, SEO e workflows. Mapeamento em requirements-audit.md.
+- Quatro regressões observadas antes das correções: theme-color não sincronizado, falha de composição por submit/cópia e falha de prévia ao trocar idioma.
+- Preparação, prévia e cópia corrigidas com preservação dos campos e feedback PT/EN. Theme-color acompanha a preferência inicial e trocas manuais.
+- Teste de ciclo ganhou um limite de recursão no fixture, para que remoção da proteção seja detectada por asserção em vez de timeout.
+- Verificação após correções: 72 testes passaram, cobertura 100% linhas/funções/statements e 99,21% branches. Lint, tipos, formatação e build passaram.
+- Playwright: 7 testes passaram, agora incluindo theme-color nas 24 combinações de largura/tema/idioma.
+- Lighthouse atualizado: 99/100/100/100, CLS 0.
+- Inglês do processo financeiro ajustado de receivables para payables, em coerência com as notas fiscais de entrada e pagamentos do briefing. Nenhum dado profissional novo foi acrescentado.
+- Stryker completo: 413 mutantes, 88,38%, 365 mortos e 48 sobreviventes; nenhum timeout, erro de runner ou mutante sem cobertura. Asserções adicionais de recuperação e preservação da prévia motivaram confirmação incremental: 89,10%, 368 mortos e 45 sobreviventes, também sem erros/timeouts. Foram reutilizados 253 resultados e reexecutados 160 mutantes.
+- Nova revisão independente do diff terminou sem achados materiais. Nenhuma funcionalidade obrigatória ausente foi identificada. Publicação continua dependente de remote Git real e ativação do Pages.

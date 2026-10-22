@@ -43,6 +43,14 @@
           ? 'dark'
           : 'light';
       }
+      document
+        .querySelector('meta[name="theme-color"]')
+        .setAttribute(
+          'content',
+          document.documentElement.dataset.theme === 'dark'
+            ? '#141414'
+            : '#f7f7f4',
+        );
     </script>
     <script type="application/ld+json">
       {

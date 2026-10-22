@@ -175,6 +175,8 @@ const pt = {
     notice:
       'O formulário prepara um e-mail no seu aplicativo. Você revisa e conclui o envio por lá.',
     prepared: 'E-mail preparado. Conclua o envio no seu aplicativo de e-mail.',
+    prepareError:
+      'Não foi possível preparar a mensagem. Seus dados continuam no formulário; copie o endereço para entrar em contato.',
     openError:
       'Não foi possível abrir o aplicativo. Use as opções de cópia abaixo.',
     invalid: 'Revise os campos indicados para preparar seu e-mail.',
@@ -280,7 +282,7 @@ const en: typeof pt = {
         bullets: [
           'Automation of tax and financial processes.',
           'Invoice information processing and spreadsheet generation.',
-          'Organization of information, receivables and payments.',
+          'Organization of information, payables and payments.',
         ],
       },
     ],
@@ -315,9 +317,9 @@ const en: typeof pt = {
         context:
           'During the fourth semester of my undergraduate degree, the earlier solution evolved to support financial tracking.',
         problem:
-          'Tracking receivables and payments associated with incoming invoices required recurring manual work.',
+          'Tracking payables and payments associated with incoming invoices required recurring manual work.',
         solution:
-          'An extension of the first solution, integrating features to organize receivables, payment slips and payments.',
+          'An extension of the first solution, integrating features to organize payables, payment slips and payments.',
         metric: '≈80%',
         result: 'reduction in the manual work previously required',
       },
@@ -380,6 +382,8 @@ const en: typeof pt = {
     notice:
       'This form prepares an email in your application. You review it and complete sending there.',
     prepared: 'Email prepared. Complete sending in your email application.',
+    prepareError:
+      'Could not prepare the message. Your data is still in the form; copy the address to get in touch.',
     openError: 'Could not open the application. Use the copy options below.',
     invalid: 'Review the highlighted fields to prepare your email.',
     copyEmail: 'Copy address',

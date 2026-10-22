@@ -1,6 +1,8 @@
 import { fireEvent, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import { TOKENS } from '../../src/application/tokens';
+import { LanguageSwitcher } from '../../src/presentation/components/Controls';
 import { ContactForm } from '../../src/presentation/components/ContactForm';
 import { renderWithProviders, testDependencies } from '../renderWithProviders';
 
@@ -70,6 +72,9 @@ describe('ContactForm', () => {
     );
     await user.click(screen.getByRole('button', { name: 'Copiar endereço' }));
     expect(deps.write).toHaveBeenLastCalledWith('contato.ricardolhc@gmail.com');
+    expect(screen.getByLabelText('Mensagem para copiar')).toHaveValue(
+      'Integração & software\n\nNome: Ana Silva\nE-mail: ana@example.com\n\nMensagem:\nOlá Ricardo, vamos automatizar um processo?',
+    );
     await user.click(screen.getByRole('button', { name: 'Copiar mensagem' }));
     expect(deps.write).toHaveBeenLastCalledWith(
       'Integração & software\n\nNome: Ana Silva\nE-mail: ana@example.com\n\nMensagem:\nOlá Ricardo, vamos automatizar um processo?',
@@ -187,5 +192,62 @@ describe('ContactForm', () => {
       (screen.getByLabelText('Mensagem para copiar') as HTMLTextAreaElement)
         .value,
     ).toContain('\nNova linha.');
+  });
+  it.each(['Abrir aplicativo de e-mail', 'Copiar mensagem'])(
+    'recovers from message preparation failures via %s',
+    async (button) => {
+      const deps = testDependencies();
+      const service = deps.registry.resolve(TOKENS.contact);
+      const prepare = vi.spyOn(service, 'prepare');
+      const user = userEvent.setup({ delay: null });
+      renderWithProviders(<ContactForm />, deps.registry);
+      await fillForm(user);
+      prepare.mockImplementationOnce(() => {
+        throw new Error('composition failed');
+      });
+      await user.click(screen.getByRole('button', { name: button }));
+      expect(screen.getByRole('status')).toHaveTextContent(
+        'Não foi possível preparar a mensagem.',
+      );
+      expect(screen.getByLabelText('Mensagem para copiar')).toHaveValue('');
+      expect(deps.open).not.toHaveBeenCalled();
+      expect(deps.write).not.toHaveBeenCalled();
+      await user.click(screen.getByRole('button', { name: 'Copiar endereço' }));
+      expect(deps.write).toHaveBeenCalledWith('contato.ricardolhc@gmail.com');
+      prepare.mockRestore();
+      await user.click(screen.getByRole('button', { name: button }));
+      expect(screen.getByLabelText('Mensagem para copiar')).toHaveValue(
+        'Integração & software\n\nNome: Ana Silva\nE-mail: ana@example.com\n\nMensagem:\nOlá Ricardo, vamos automatizar um processo?',
+      );
+    },
+  );
+  it('keeps the form usable if a prepared preview fails after changing language', async () => {
+    const deps = testDependencies();
+    const user = userEvent.setup({ delay: null });
+    renderWithProviders(
+      <>
+        <LanguageSwitcher />
+        <ContactForm />
+      </>,
+      deps.registry,
+    );
+    await fillForm(user);
+    await user.click(screen.getByRole('button', { name: 'Copiar mensagem' }));
+    vi.spyOn(
+      deps.registry.resolve(TOKENS.contact),
+      'prepare',
+    ).mockImplementation(() => {
+      throw new Error('unavailable');
+    });
+    await user.click(
+      screen.getByRole('button', { name: 'PT / EN: mudar para inglês' }),
+    );
+    expect(screen.getByRole('status')).toHaveTextContent(
+      'Could not prepare the message.',
+    );
+    expect(screen.getByLabelText('Message to copy')).toHaveValue('');
+    expect(screen.getByLabelText('Name')).toHaveValue('Ana Silva');
+    await user.click(screen.getByRole('button', { name: 'Copy address' }));
+    expect(screen.getByRole('status')).toHaveTextContent('Text copied.');
   });
 });

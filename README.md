@@ -150,7 +150,7 @@ Edite `src/presentation/i18n/messages.ts`. A versão inglesa é verificada contr
 - Tecnologias estão agrupadas em `Technologies`, no mesmo arquivo, sem classificações de proficiência.
 - Links profissionais estão em `SOCIAL`; o e-mail está em `src/domain/contact.ts`. Mantenha os dados estruturados de `index.html` em sincronia ao alterá-los.
 
-Idioma inicial: preferência válida em `portfolio.language` → idioma primário do navegador (PT/EN) → português. Idiomas não suportados usam PT. Tema inicial: `portfolio.theme` válido → `prefers-color-scheme`. Alterações manuais persistem. Se o acesso ao `localStorage` falhar, a interface continua funcionando em memória. O tema é aplicado no HTML antes do React para reduzir flash visual.
+Idioma inicial: preferência válida em `portfolio.language` → idioma primário do navegador (PT/EN) → português. Idiomas não suportados usam PT. Tema inicial: `portfolio.theme` válido → `prefers-color-scheme`. Alterações manuais persistem. Se o acesso ao `localStorage` falhar, a interface continua funcionando em memória. O tema e a meta `theme-color` são aplicados no HTML antes do React para reduzir flash visual; as trocas manuais mantêm essa meta sincronizada.
 
 ## Contato nativo
 
@@ -159,6 +159,8 @@ Nome, e-mail, assunto e mensagem são obrigatórios. Os valores são aparados an
 O botão **Abrir aplicativo de e-mail** solicita ao navegador a abertura de um `mailto:`. Isso **não envia a mensagem**. O visitante deve revisar e concluir o envio no seu cliente. A página não consegue confirmar se um handler de e-mail está instalado: navegadores podem ignorar a solicitação silenciosamente.
 
 As opções **Copiar endereço** e **Copiar mensagem** permitem usar webmail. Se Clipboard API não estiver disponível ou a permissão falhar, endereço e mensagem continuam em campos somente leitura, selecionáveis. Nenhum conteúdo do formulário é armazenado ou enviado para um servidor. Mensagens muito longas podem atingir limites de URL do navegador/cliente; nesse caso use a cópia do texto. Nenhum teste abre um aplicativo real de e-mail.
+
+Uma falha na composição da mensagem exibe um erro traduzido e preserva os dados digitados. A cópia do endereço continua disponível, inclusive se a prévia falhar depois de trocar o idioma.
 
 ## Testes e cobertura
 
@@ -176,7 +178,7 @@ Stryker **10.0.0** e `@stryker-mutator/vitest-runner` **10.0.0** estão instalad
 - **Survived:** os testes passaram apesar da alteração; investigar se há uma lacuna comportamental, alteração apenas visual ou equivalência.
 - **No coverage:** a mutação não foi exercitada.
 - **Timeout:** a alteração excedeu o limite; Stryker conta como detectada, mas isso não equivale a uma asserção explícita.
-- **RuntimeError:** a ferramenta não conseguiu avaliar o mutante por erro de execução do runner; ele não conta como detecção. A execução desta entrega apresentou um caso, detalhado no relatório de verificação.
+- **RuntimeError:** a ferramenta não conseguiu avaliar o mutante por erro de execução do runner; ele não conta como detecção. O histórico de investigação está no relatório de verificação.
 - **Mutation score:** proporção de mutações detectadas entre as válidas, conforme cálculo do Stryker. Não representa percentual de código coberto.
 
 Meta desejada **85%**. Thresholds: `high: 85`, `low: 70`, `break: 75`; abaixo de 75 o comando falha. Relatórios: `reports/mutation/mutation.html` e `mutation.json`. Execute a ferramenta antes de declarar resultados; a cobertura, sozinha, não demonstra sensibilidade dos testes.

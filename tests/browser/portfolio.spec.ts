@@ -21,6 +21,10 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         );
         await expect(page.locator('html')).toHaveAttribute('lang', language);
         await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
+        await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute(
+          'content',
+          theme === 'dark' ? '#141414' : '#f7f7f4',
+        );
         const layout = await page.evaluate(() => ({
           viewport: innerWidth,
           document: document.documentElement.scrollWidth,

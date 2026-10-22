@@ -42,6 +42,9 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   }, [language, t]);
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+    document
+      .querySelector('meta[name="theme-color"]')
+      ?.setAttribute('content', theme === 'dark' ? '#141414' : '#f7f7f4');
   }, [theme]);
   const setLanguage = (next: Language) => {
     service.saveLanguage(next);

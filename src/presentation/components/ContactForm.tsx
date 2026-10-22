@@ -1,7 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react';
 import { useInject } from '../../core/di/inject';
 import { TOKENS } from '../../application/tokens';
-import type { ContactData } from '../../domain/contracts';
+import type { ContactData, PreparedMessage } from '../../domain/contracts';
 import {
   CONTACT_EMAIL,
   CONTACT_FIELDS,
@@ -12,7 +12,13 @@ import {
 import { usePreferences } from '../preferences/PreferencesProvider';
 import { Icon } from './Icon';
 
-type Feedback = 'prepared' | 'openError' | 'invalid' | 'copied' | 'copyError';
+type Feedback =
+  | 'prepared'
+  | 'prepareError'
+  | 'openError'
+  | 'invalid'
+  | 'copied'
+  | 'copyError';
 const empty: ContactData = { name: '', email: '', subject: '', message: '' };
 
 export function ContactForm() {
@@ -36,8 +42,15 @@ export function ContactForm() {
         ?.focus();
       return null;
     }
-    setPrepared(true);
-    return service.prepare(data, c.mailLabels);
+    try {
+      const message = service.prepare(data, c.mailLabels);
+      setPrepared(true);
+      return message;
+    } catch {
+      setPrepared(false);
+      setFeedback('prepareError');
+      return null;
+    }
   };
   const submit = (event: FormEvent) => {
     event.preventDefault();
@@ -51,20 +64,29 @@ export function ContactForm() {
     }
   };
   const copy = async (address: boolean) => {
-    let text = CONTACT_EMAIL;
-    if (!address) {
-      const message = prepare();
-      if (!message) return;
-      text = `${message.subject}\n\n${message.body}`;
-    }
     try {
+      let text = CONTACT_EMAIL;
+      if (address && !preview) setPrepared(false);
+      if (!address) {
+        const message = prepare();
+        if (!message) return;
+        text = `${message.subject}\n\n${message.body}`;
+      }
       await service.copy(text);
       setFeedback('copied');
     } catch {
       setFeedback('copyError');
     }
   };
-  const preview = prepared ? service.prepare(data, c.mailLabels) : null;
+  let preview: PreparedMessage | null = null;
+  if (prepared) {
+    try {
+      preview = service.prepare(data, c.mailLabels);
+    } catch {
+      // Keep entered data and the email-address fallback available if composition fails.
+    }
+  }
+  const status = prepared && !preview ? 'prepareError' : feedback;
 
   return (
     <div className="contact-form-wrap">
@@ -139,7 +161,7 @@ export function ContactForm() {
         </button>
         <p className="form-notice">{c.notice}</p>
         <p className="form-status" role="status" aria-live="polite">
-          {feedback ? c[feedback] : ''}
+          {status ? c[status] : ''}
         </p>
       </form>
       <div className="copy-options">

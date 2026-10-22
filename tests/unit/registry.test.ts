@@ -51,10 +51,16 @@ describe('Registry', () => {
   it('detects circular graphs and releases resolution state on failure', () => {
     const a = createToken<number>('a');
     const b = createToken<number>('b');
+    let resolutions = 0;
+    const bounded = (resolve: () => number) => {
+      if (++resolutions > 4) throw new Error('Cycle was not rejected');
+      return resolve();
+    };
     const r = new Registry()
-      .register(a, (x) => x.resolve(b))
-      .register(b, (x) => x.resolve(a));
+      .register(a, (x) => bounded(() => x.resolve(b)))
+      .register(b, (x) => bounded(() => x.resolve(a)));
     expect(() => r.resolve(a)).toThrow('Circular dependency: a');
+    resolutions = 0;
     expect(() => r.resolve(a)).toThrow('Circular dependency: a');
     let attempts = 0;
     const retry = createToken<number>('retry');
