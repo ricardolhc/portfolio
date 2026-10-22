@@ -129,29 +129,28 @@ const pt = {
     ],
   },
   projects: {
-    eyebrow: '03 / PROJETOS SELECIONADOS',
+    eyebrow: '03 / PROJETOS',
     title: 'Menos trabalho manual.\nMais resultado.',
     intro:
       'Soluções independentes para processos empresariais reais. Empresas preservadas por privacidade.',
-    problem: 'O CONTEXTO',
-    solution: 'A SOLUÇÃO',
-    outcome: 'O RESULTADO',
+    problem: 'Contexto',
+    solution: 'Solução',
+    outcome: 'Resultado',
     continuity:
       'Uma solução, evolução contínua — da automação fiscal à gestão financeira, em projetos independentes para necessidades reais de empresas.',
     items: [
       {
         number: '01',
-        category: 'AUTOMAÇÃO FISCAL',
+        category: 'Automação fiscal',
         title: 'Da nota fiscal\nà planilha.',
         context:
-          'Automação de um processo empresarial real de processamento de notas fiscais e geração de planilhas.',
+          'Automação do processamento de notas fiscais eletrônicas e geração de planilhas para otimizar rotinas empresariais.',
         problem:
           'O processamento de notas fiscais e a geração de planilhas exigiam atividades manuais repetitivas e demoradas.',
         solution:
-          'Aplicação para automatizar o processamento de notas fiscais eletrônicas e a geração de planilhas. Integra-se à SEFAZ para obter informações tributárias associadas às notas fiscais e utiliza APIs REST para comunicação com outra aplicação, reduzindo verificações manuais e aumentando a eficiência operacional.',
+          'Desenvolvimento de uma aplicação com integração à SEFAZ para consulta de informações tributárias, geração automatizada de planilhas e comunicação com outro sistema por meio de APIs REST.',
         metric: '≈98%',
-        result:
-          'de redução no tempo de execução do processo de processamento e geração de planilhas',
+        result: 'de redução no tempo de processamento e geração de planilhas.',
         technologies: [
           'Java',
           'JavaFX',
@@ -163,17 +162,17 @@ const pt = {
       },
       {
         number: '02',
-        category: 'GESTÃO FINANCEIRA',
+        category: 'Gestão financeira',
         title: 'Do documento\nao pagamento.',
         context:
-          'Evolução da automação fiscal para atender necessidades de controle financeiro, acompanhamento de pagamentos e informações gerenciais.',
+          'Evolução da solução fiscal para um sistema web de gestão de notas fiscais, duplicatas, boletos e pagamentos.',
         problem:
-          'A gestão de notas fiscais, duplicatas, boletos e pagamentos exigia acompanhamento manual e dificultava a organização das informações financeiras.',
+          'O acompanhamento de documentos e pagamentos exigia atividades manuais recorrentes, dificultando a organização das rotinas financeiras.',
         solution:
-          'Evolução da solução anterior para um sistema web de gestão financeira de notas fiscais, duplicatas e boletos. Reúne dashboard de pagamentos, pendências e vencimentos, pesquisa e filtros, acompanhamento de pagamentos e recebimentos e atualização em lote. O pagamento inteligente permite selecionar e atualizar múltiplas duplicatas. Gráficos interativos, relatórios, indicadores gerenciais e rankings de fornecedores ampliam a visibilidade das informações.',
+          'Desenvolvimento de funcionalidades para gestão financeira, incluindo dashboards, indicadores gerenciais, pesquisas avançadas, atualizações em lote e pagamento inteligente de duplicatas.',
         metric: '≈80%',
         result:
-          'de redução do trabalho manual nas rotinas de gestão de duplicatas e boletos',
+          'de redução do trabalho manual nas rotinas de gestão de duplicatas e boletos.',
         technologies: [
           'Java',
           'Spring Boot',
@@ -183,7 +182,7 @@ const pt = {
         ],
       },
     ],
-    technologies: 'TECNOLOGIAS E INTEGRAÇÕES',
+    technologies: 'Tecnologias e integrações',
   },
   technologies: {
     eyebrow: '04 / TECNOLOGIAS',
@@ -283,8 +282,9 @@ const pt = {
     eyebrow: '06 / CERTIFICAÇÃO',
     title: 'Fundamentos sólidos.\nVisão de nuvem.',
     issuer: 'Emitida por Amazon Web Services (AWS)',
-    category: 'Categoria Foundational',
+    category: 'Foundational',
     reference: 'Ver certificação',
+    logoAlt: 'Amazon Web Services (AWS)',
   },
   contact: {
     eyebrow: '07 / CONTATO',
@@ -464,29 +464,29 @@ const en: typeof pt = {
     ],
   },
   projects: {
-    eyebrow: '03 / SELECTED PROJECTS',
+    eyebrow: '03 / PROJECTS',
     title: 'Less manual work.\nMore results.',
     intro:
       'Independent solutions for real business processes. Company identities kept private.',
-    problem: 'THE CONTEXT',
-    solution: 'THE SOLUTION',
-    outcome: 'THE RESULT',
+    problem: 'Context',
+    solution: 'Solution',
+    outcome: 'Result',
     continuity:
       'One solution, continuous evolution — from tax automation to financial management, through independent projects addressing real business needs.',
     items: [
       {
         number: '01',
-        category: 'TAX AUTOMATION',
+        category: 'Invoice Processing Automation',
         title: 'From invoice\nto spreadsheet.',
         context:
-          'Automation of a real business process for invoice processing and spreadsheet generation.',
+          'Automated Brazilian Electronic Invoice (NF-e) processing and spreadsheet generation to streamline business routines.',
         problem:
           'Invoice processing and spreadsheet generation required repetitive, time-consuming manual activities.',
         solution:
-          'An application that automates Brazilian Electronic Invoice (NF-e) processing and spreadsheet generation. It integrates with SEFAZ to retrieve tax information associated with invoices and uses REST APIs to communicate with another application, reducing manual checks and improving operational efficiency.',
+          'Development of an application integrating with SEFAZ to retrieve tax information, generate spreadsheets automatically and communicate with another system through REST APIs.',
         metric: '≈98%',
         result:
-          'reduction in the time required for invoice processing and spreadsheet generation',
+          'reduction in invoice processing and spreadsheet generation time.',
         technologies: [
           'Java',
           'JavaFX',
@@ -498,17 +498,17 @@ const en: typeof pt = {
       },
       {
         number: '02',
-        category: 'FINANCIAL MANAGEMENT',
+        category: 'Financial Management',
         title: 'From document\nto payment.',
         context:
-          'An evolution of tax automation to support financial control, payment tracking and management information.',
+          'An evolution of the tax automation solution into a web system for managing invoices, payables, payment slips and payments.',
         problem:
-          'Managing invoices, payables, payment slips and payments required manual tracking and made financial information harder to organize.',
+          'Tracking documents and payments required recurring manual work, making financial routines harder to organize.',
         solution:
-          'An evolution of the earlier solution into a web-based financial management system for invoices, payables and payment slips. It combines a dashboard of payments, outstanding items and due dates, search and filters, payment and receipt tracking, and batch updates. Smart payment features support selecting and updating multiple payables. Interactive charts, reports, management indicators and supplier rankings improve visibility into financial information.',
+          'Development of financial management features, including dashboards, management indicators, advanced searches, batch updates and smart payment of payables.',
         metric: '≈80%',
         result:
-          'reduction in manual work for payables and payment slip management routines',
+          'reduction in manual work for payables and payment slip management routines.',
         technologies: [
           'Java',
           'Spring Boot',
@@ -518,7 +518,7 @@ const en: typeof pt = {
         ],
       },
     ],
-    technologies: 'TECHNOLOGIES AND INTEGRATIONS',
+    technologies: 'Technologies & Integrations',
   },
   technologies: {
     eyebrow: '04 / TECHNOLOGIES',
@@ -619,8 +619,9 @@ const en: typeof pt = {
     eyebrow: '06 / CERTIFICATION',
     title: 'Solid foundations.\nCloud perspective.',
     issuer: 'Issued by Amazon Web Services (AWS)',
-    category: 'Foundational category',
-    reference: 'View certification',
+    category: 'Foundational',
+    reference: 'View Credential',
+    logoAlt: 'Amazon Web Services (AWS)',
   },
   contact: {
     eyebrow: '07 / CONTACT',

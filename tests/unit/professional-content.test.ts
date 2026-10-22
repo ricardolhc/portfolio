@@ -111,7 +111,13 @@ describe.each(['pt-BR', 'en'] as const)(
         language === 'en' ? /batch|bulk/ : /lote/,
       );
       expect(finance!.solution).toMatch(
-        language === 'en' ? /supplier rankings/ : /rankings de fornecedores/,
+        language === 'en' ? /smart.*payment/i : /pagamento inteligente/,
+      );
+      expect(c.projects.eyebrow).toBe(
+        language === 'en' ? '03 / PROJECTS' : '03 / PROJETOS',
+      );
+      expect(c.certifications.reference).toBe(
+        language === 'en' ? 'View Credential' : 'Ver certificação',
       );
       expect(c.projects.continuity).toMatch(
         language === 'en' ? /evolution/ : /evolução/,

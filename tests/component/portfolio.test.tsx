@@ -135,7 +135,7 @@ describe('professional portfolio', () => {
         }),
       ).toHaveAttribute('type', 'email');
       const certification = screen.getByRole('link', {
-        name: en ? /View certification/ : /Ver certificação/,
+        name: en ? /View Credential/ : /Ver certificação/,
       });
       expect(certification).toHaveAttribute(
         'href',

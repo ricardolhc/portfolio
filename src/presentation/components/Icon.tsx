@@ -9,6 +9,13 @@ type IconName =
   | 'linkedin'
   | 'mail'
   | 'copy'
+  | 'server'
+  | 'desktop'
+  | 'database'
+  | 'branch'
+  | 'cloud'
+  | 'check'
+  | 'activity'
   | 'code';
 const paths: Record<IconName, string> = {
   arrow: 'M5 19 19 5M5 5h14v14',
@@ -23,6 +30,16 @@ const paths: Record<IconName, string> = {
   mail: 'M3 6h18v13H3ZM3 6l9 7 9-7',
   copy: 'M8 8h13v13H8ZM16 8V3H3v13h5',
   code: 'm8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18',
+  server: 'M3 3h18v7H3ZM3 14h18v7H3ZM7 6.5h.01M7 17.5h.01M11 6.5h6M11 17.5h6',
+  desktop: 'M2 3h20v14H2ZM8 21h8M12 17v4',
+  database:
+    'M20 5c0 2-3.6 3-8 3S4 7 4 5s3.6-3 8-3 8 1 8 3ZM4 5v14c0 2 3.6 3 8 3s8-1 8-3V5M4 12c0 2 3.6 3 8 3s8-1 8-3',
+  branch:
+    'M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 22a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM18 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM6 8v8M18 10c0 4-12 1-12 6',
+  cloud:
+    'M6 18a4 4 0 0 1-1-7.9 7 7 0 0 1 13-2.4A5 5 0 0 1 18 18ZM8 13h8M12 9v8',
+  check: 'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6ZM8 12l3 3 5-6',
+  activity: 'M3 3v18h18M6 14l4-5 4 3 5-7',
 };
 export function Icon({
   name,

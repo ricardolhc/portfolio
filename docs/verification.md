@@ -1,26 +1,26 @@
 # Verificação da entrega
 
-Última verificação em 22 de outubro de 2026, após a atualização profissional da Compass UOL, projetos e formação. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [content-2026-10-22.md](content-2026-10-22.md).
+Última verificação em 22 de outubro de 2026, após o refinamento visual de Projetos, Tecnologias e Certificação. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [editorial-2026-10-22.md](editorial-2026-10-22.md).
 
 ## Resultados executados
 
-| Verificação                    | Resultado                                                                   |
-| ------------------------------ | --------------------------------------------------------------------------- |
-| `npm run lint`                 | Passou, sem warnings                                                        |
-| `npm run typecheck`            | Passou                                                                      |
-| `npm run format:check`         | Passou                                                                      |
-| `npm run test:unit`            | 82 testes passaram em 5 arquivos                                            |
-| `npm run test:component`       | 21 testes passaram em 4 arquivos                                            |
-| `npm run test:integration`     | 9 testes passaram em 1 arquivo, grafo/gateway reais com HTTP simulado       |
-| Suíte Vitest pela cobertura    | 112 testes passaram em 10 arquivos                                          |
-| `npm run test:coverage`        | 100% linhas, 99,27% branches, 100% funções, 100% statements                 |
-| `npm run build`                | Passou                                                                      |
-| `npm run test:mutation`        | 88,54%, acima da meta de 85%; sem erros, timeouts ou mutantes sem cobertura |
-| `npm run test:e2e`             | 13 testes passaram; 24 combinações e fluxos de formulário/mobile/animação   |
-| Lighthouse (anterior)          | 99/100/100/100 no refinamento; não reexecutado após o formulário            |
-| Layout shift (anterior)        | CLS 0; LCP 1,8s no refinamento, sem nova medição nesta alteração            |
-| Auditoria npm (anterior)       | Zero vulnerabilidades; dependências não foram alteradas nesta atualização   |
-| Build de subcaminho (anterior) | Prefixos de assets e SEO validados; configuração de Pages preservada        |
+| Verificação                    | Resultado                                                                 |
+| ------------------------------ | ------------------------------------------------------------------------- |
+| `npm run lint`                 | Passou, sem warnings                                                      |
+| `npm run typecheck`            | Passou                                                                    |
+| `npm run format:check`         | Passou                                                                    |
+| `npm run test:unit`            | 82 testes passaram em 5 arquivos                                          |
+| `npm run test:component`       | 27 testes passaram em 5 arquivos                                          |
+| `npm run test:integration`     | 9 testes passaram em 1 arquivo, grafo/gateway reais com HTTP simulado     |
+| Suíte Vitest pela cobertura    | 118 testes passaram em 11 arquivos                                        |
+| `npm run test:coverage`        | 100% linhas, 98,56% branches, 100% funções, 100% statements               |
+| `npm run build`                | Passou                                                                    |
+| Mutação (anterior)             | 88,54% na etapa anterior; não reexecutada neste refinamento visual        |
+| `npm run test:e2e`             | 13 testes passaram; 24 combinações e fluxos de formulário/mobile/animação |
+| Lighthouse (anterior)          | 99/100/100/100 no refinamento; não reexecutado após o formulário          |
+| Layout shift (anterior)        | CLS 0; LCP 1,8s no refinamento, sem nova medição nesta alteração          |
+| Auditoria npm (anterior)       | Zero vulnerabilidades; dependências não foram alteradas nesta atualização |
+| Build de subcaminho (anterior) | Prefixos de assets e SEO validados; configuração de Pages preservada      |
 
 As medições anteriores de Lighthouse foram feitas no preview do build, em `http://127.0.0.1:4173/`. Não são medições de uma implantação pública nem resultados do formulário atual. Relatórios completos são gerados localmente e ignorados pelo Git: `coverage/index.html`, `reports/mutation/mutation.html`, `playwright-report/index.html`, `reports/formspree/*.png` e capturas históricas em `reports/responsive/`.
 
@@ -28,7 +28,7 @@ As medições anteriores de Lighthouse foram feitas no preview do build, em `htt
 
 Playwright executou o aplicativo real no Chrome instalado, com movimento reduzido, nas larguras 320, 375, 430, 768, 1024 e 1440px. Cada largura foi verificada em PT/EN e claro/escuro. As 24 combinações não apresentaram overflow horizontal nem violações nas regras axe WCAG 2 A/AA, 2.1 AA e 2.2 AA executadas.
 
-As posições reais dos oito grupos confirmaram duas colunas/quatro linhas a partir de 768px e uma coluna abaixo disso. Os itens de tecnologias têm borda zero; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 30,8s.
+As posições reais dos oito grupos confirmaram duas colunas de alturas adaptativas a partir de 768px, com leitura de cima para baixo em cada coluna, e uma coluna abaixo disso. As tecnologias usam tags com borda de 1px; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 36,6s.
 
 O fluxo mobile também verificou abertura do menu, fechamento com Escape e foco no botão, navegação por âncoras de projetos/certificação/contato, alternância de tema/idioma e persistência após recarga. O formulário foi preenchido e validado, com payload e cabeçalhos conferidos, estado pendente, prevenção de envio duplicado, confirmação simulada e limpeza. Cenários adicionais simularam HTTP 422/429, JSON inválido e falha de rede, preservando o conteúdo e permitindo recuperação em inglês. Todas as requisições Formspree foram interceptadas; nenhuma chegou ao serviço real.
 
@@ -40,7 +40,13 @@ Testes automatizados não equivalem a certificação WCAG completa. Não foram r
 
 ## Mutação e fortalecimento dos testes
 
-### Atualização profissional e preservação das funcionalidades
+### Refinamento visual das três seções
+
+O escopo e thresholds do Stryker foram preservados; nenhum arquivo do escopo de mutação foi alterado. Stryker não foi reexecutado nesta alteração de apresentação. O score de 88,54% descrito no histórico não é uma medição nova. Foram executados testes de componentes, integração, cobertura e E2E para as alterações visuais e a preservação dos fluxos. Seis novos casos PT/EN verificam os cases, listas de tags e logotipo local/ação da credencial.
+
+Cobertura atual: **216/216 linhas**, **86/86 funções**, **240/240 statements** e **137/139 branches**. Branches não exercitadas no jsdom: preferência de movimento reduzido em Section.tsx (coberta no navegador) e fallback de ícone para categoria futura em PortfolioSections.tsx. Capturas em reports/editorial/ foram inspecionadas. Build: JS **355,74 kB**, **116,10 kB gzip**; CSS **20,40 kB**, **5,42 kB gzip**. Lighthouse não foi reexecutado.
+
+### Histórico: atualização profissional e preservação das funcionalidades
 
 Os dados novos foram fornecidos pelo proprietário e verificados nos dois idiomas por testes de conteúdo e componentes. As responsabilidades e tecnologias da Compass UOL são específicas de cada vínculo; os projetos independentes permanecem em outro card. Os testes também verificam períodos, instituições, modalidade profissional do mestrado, Láurea Acadêmica, média na escala original, métricas dos projetos, oito categorias de tecnologias e novo label do e-mail.
 
@@ -124,6 +130,8 @@ Os dois timeouts anteriores removiam a proteção de ciclos do registry, produzi
 Os relatórios HTML e JSON estão em `reports/mutation/`. O relatório inicial foi preservado localmente em `reports/mutation-initial.json`. Alterações de nomes de tokens e aspectos visuais também participam da pontuação; nenhuma exclusão foi adicionada para ocultá-las.
 
 ## Revisão independente
+
+A revisão independente do refinamento comparou o diff com `2ecfbb7` e não encontrou achados materiais. Conferiu escopo das três seções, responsividade, leitura por colunas, cores locais do card AWS, SVG/atribuição, link preservado e traduções. Uma conferência automatizada dos dados confirmou alterações somente em projects e certifications; Hero, About, ExperienceRole, Experience, Education e Contact mantêm o código idêntico ao commit anterior.
 
 Uma revisão independente da atualização de conteúdo comparou o diff com `6320234` e não encontrou achados materiais. Conferiu fidelidade das experiências, associação das tecnologias, datas, métricas, formação, PT/EN, label do contato e preservação de CSS/layout/funcionalidades. Lint, typecheck e diff sem erros de whitespace foram também executados pelo revisor.
 

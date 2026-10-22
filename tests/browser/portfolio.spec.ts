@@ -106,14 +106,15 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
             }),
           );
         if (width >= 768) {
-          for (const row of [0, 2, 4, 6]) {
-            expect(technologyLayout[row]!.x).toBe(technologyLayout[0]!.x);
-            expect(technologyLayout[row + 1]!.x).toBe(technologyLayout[1]!.x);
-            expect(technologyLayout[row]!.y).toBe(technologyLayout[row + 1]!.y);
+          const columns = [
+            ...new Set(technologyLayout.map((group) => group.x)),
+          ];
+          expect(columns).toHaveLength(2);
+          for (const x of columns) {
+            const column = technologyLayout.filter((group) => group.x === x);
+            for (let index = 1; index < column.length; index++)
+              expect(column[index]!.y).toBeGreaterThan(column[index - 1]!.y);
           }
-          expect(technologyLayout[1]!.x).toBeGreaterThan(
-            technologyLayout[0]!.x,
-          );
         } else {
           for (let index = 1; index < technologyLayout.length; index++) {
             expect(technologyLayout[index]!.x).toBe(technologyLayout[0]!.x);
@@ -137,9 +138,36 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
           .evaluateAll((items) =>
             items.map((item) => getComputedStyle(item).borderTopWidth),
           );
-        expect(technologyBorders.every((border) => border === '0px')).toBe(
+        expect(technologyBorders.every((border) => border === '1px')).toBe(
           true,
         );
+        for (const project of await page.locator('.project-card').all()) {
+          const content = await project
+            .locator('.project-content')
+            .boundingBox();
+          const result = await project.locator('.project-result').boundingBox();
+          const tags = await project
+            .locator('.project-technologies')
+            .boundingBox();
+          expect(tags!.y).toBeGreaterThanOrEqual(result!.y + result!.height);
+          expect(tags!.x).toBe(content!.x);
+          if (width >= 768) expect(result!.x).toBeGreaterThan(content!.x);
+          else {
+            expect(result!.x).toBe(content!.x);
+            expect(result!.y).toBeGreaterThan(content!.y + content!.height);
+          }
+        }
+        const logo = page.getByRole('img', {
+          name: 'Amazon Web Services (AWS)',
+        });
+        await logo.scrollIntoViewIfNeeded();
+        await expect(logo).toBeVisible();
+        expect(
+          await logo.evaluate(
+            (image: HTMLImageElement) =>
+              image.complete && image.naturalWidth > 0,
+          ),
+        ).toBe(true);
         const bars = await page
           .locator('.experience-card')
           .evaluateAll((cards) =>
@@ -244,7 +272,7 @@ test('mobile navigation, preferences, Formspree submission and secondary email c
     page.getByRole('heading', { name: 'AWS Certified Cloud Practitioner' }),
   ).toBeInViewport();
   await expect(
-    page.getByRole('link', { name: /View certification/ }),
+    page.getByRole('link', { name: /View Credential/ }),
   ).toHaveAttribute('href', certificationUrl);
   await context.route(certificationUrl, (route) =>
     route.fulfill({
@@ -254,7 +282,7 @@ test('mobile navigation, preferences, Formspree submission and secondary email c
     }),
   );
   const credentialTab = page.waitForEvent('popup');
-  await page.getByRole('link', { name: /View certification/ }).click();
+  await page.getByRole('link', { name: /View Credential/ }).click();
   const popup = await credentialTab;
   await popup.waitForLoadState();
   expect(popup.url()).toBe(certificationUrl);

@@ -3,4 +3,5 @@ dist
 coverage
 reports
 .stryker-tmp
+src/assets/aws-logo.svg
 package-lock.json

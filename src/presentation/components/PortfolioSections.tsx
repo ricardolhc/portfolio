@@ -2,6 +2,7 @@ import { usePreferences } from '../preferences/PreferencesProvider';
 import { ContactForm } from './ContactForm';
 import { Icon } from './Icon';
 import { Reveal, SectionHeading } from './Section';
+import awsLogo from '../../assets/aws-logo.svg';
 
 export const SOCIAL = {
   github: 'https://github.com/ricardolhc',
@@ -158,6 +159,16 @@ export function Experience() {
   );
 }
 
+function TechnologyTags({ items, label }: { items: string[]; label: string }) {
+  return (
+    <ul className="technology-tags" aria-label={label}>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
 export function Projects() {
   const { t } = usePreferences();
   return (
@@ -172,31 +183,39 @@ export function Projects() {
           <div className="project-list">
             {t.projects.items.map((project) => (
               <article key={project.number} className="project-card">
-                <div className="project-identity">
-                  <span className="project-number mono">/{project.number}</span>
-                  <p className="eyebrow">{project.category}</p>
-                  <h3 className="whitespace-pre-line">{project.title}</h3>
-                  <p className="project-context">{project.context}</p>
-                </div>
-                <div className="project-details">
-                  <div>
-                    <h4 className="eyebrow">{t.projects.problem}</h4>
-                    <p>{project.problem}</p>
+                <div className="project-content">
+                  <div className="project-identity">
+                    <div className="project-meta">
+                      <span className="project-number mono">
+                        /{project.number}
+                      </span>
+                      <p className="eyebrow">{project.category}</p>
+                    </div>
+                    <h3 className="whitespace-pre-line">{project.title}</h3>
+                    <p className="project-context">{project.context}</p>
                   </div>
-                  <div>
-                    <h4 className="eyebrow">{t.projects.solution}</h4>
-                    <p>{project.solution}</p>
-                    <p className="project-context">
-                      {t.projects.technologies}:{' '}
-                      {project.technologies.join(' · ')}
-                    </p>
+                  <div className="project-details">
+                    <div>
+                      <h4 className="eyebrow">{t.projects.problem}</h4>
+                      <p>{project.problem}</p>
+                    </div>
+                    <div>
+                      <h4 className="eyebrow">{t.projects.solution}</h4>
+                      <p>{project.solution}</p>
+                    </div>
                   </div>
                 </div>
                 <div className="project-result">
                   <span className="eyebrow">{t.projects.outcome}</span>
                   <strong>{project.metric}</strong>
                   <p>{project.result}</p>
-                  <span className="result-line" aria-hidden="true" />
+                </div>
+                <div className="project-technologies">
+                  <h4 className="eyebrow">{t.projects.technologies}</h4>
+                  <TechnologyTags
+                    items={project.technologies}
+                    label={t.projects.technologies}
+                  />
                 </div>
               </article>
             ))}
@@ -224,15 +243,27 @@ export function Technologies() {
         <div className="technology-grid">
           {t.technologies.groups.map((group, index) => (
             <div className="technology-group" key={group.title}>
-              <span className="mono muted" aria-hidden="true">
-                0{index + 1} —
-              </span>
+              <div className="technology-topline" aria-hidden="true">
+                <span className="mono muted">0{index + 1}</span>
+                <Icon
+                  name={
+                    (
+                      [
+                        'code',
+                        'server',
+                        'desktop',
+                        'database',
+                        'branch',
+                        'cloud',
+                        'check',
+                        'activity',
+                      ] as const
+                    )[index] ?? 'code'
+                  }
+                />
+              </div>
               <h3>{group.title}</h3>
-              <ul>
-                {group.items.map((technology) => (
-                  <li key={technology}>{technology}</li>
-                ))}
-              </ul>
+              <TechnologyTags items={group.items} label={group.title} />
             </div>
           ))}
         </div>
@@ -279,8 +310,15 @@ export function Certifications() {
         <SectionHeading id="certifications" {...t.certifications} />
         <article className="certification-card">
           <div className="certification-top">
-            <span className="aws-mark" aria-hidden="true">
-              aws<span>↘</span>
+            <span className="aws-mark">
+              <img
+                src={awsLogo}
+                alt={t.certifications.logoAlt}
+                width="304"
+                height="182"
+                loading="lazy"
+                decoding="async"
+              />
             </span>
             <span className="status-tag">{t.certifications.category}</span>
           </div>
