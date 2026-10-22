@@ -48,3 +48,19 @@
 - Nova revisão independente sem achados de código/testes; README atualizado para o contato simplificado. Mapeamento dos ajustes em updates-2026-10-22.md.
 - Stryker incremental final: 87,72%, 200 mortos e 28 sobreviventes em 228 mutantes, sem erros/timeouts/sem cobertura. Reutilizados 149 resultados, reexecutados 79; contato direto atingiu 100% de detecção. Sobreviventes restritos a nomes de tokens e alterações visuais/referência de controles e header, analisados em verification.md.
 - Capturas adicionais de experiência, tecnologias e contato em inglês/escuro inspecionadas em 375px e 1440px, além das capturas claras de 320/375/768/1440px.
+
+## Refinamento visual e profissional — 22 de outubro de 2026
+
+- Solicitação aplicada sobre `0421f8d`. Skills de brainstorming, TDD, revisão e verificação usadas para uma alteração delimitada no projeto existente. Nenhuma biblioteca, camada ou serviço novo.
+- Card CLT atualizado para Full Stack com React/TypeScript e prática em Java/Node.js. Duração removida dos dados públicos e JSX, sem datas substitutas. CSS da duração removido. Independentes continuam separados.
+- Certificação adotou o link CertMetrics fornecido pelo proprietário, com target/rel/ícone preservados.
+- Tecnologias em seis grupos: duas colunas/três linhas em >=768px, uma abaixo disso. Itens textuais sem caixas; ordem e composição testadas nos dois idiomas.
+- Abertura e experiência de Sobre revisadas. Contextos dos projetos destacam necessidades empresariais; graduação fica em nota secundária de continuidade. Soluções, indicadores/relatórios, três áreas e métricas reais preservados.
+- Tokens de seção: 56/72/80px em vez de 72/96/112px. Rótulos/números com 12px, complementares 14px, parágrafos 15px. Fonte e escala do Hero preservadas.
+- Testes de conteúdo/componentes/integração observaram 13 falhas contra a implementação anterior; E2E de 1440px detectou o link antigo. Após implementar, 54 testes passaram: 36 unitários, 15 de componentes e 3 de integração. Nota acadêmica também teve regressão observada antes do ajuste.
+- E2E final: 9 passaram em 28,0s, com 24 combinações, geometria de grade, tipografia, bordas, overflow, axe, header mobile, persistência, contato e animação normal. A certificação abre uma aba com resposta controlada no teste; nenhum aplicativo de e-mail foi iniciado.
+- Capturas completas, recortes de tecnologias em claro/escuro e viewport de navegação mobile inspecionados. Recortes altos ocultam overlays fixos somente durante a captura; teste de viewport mantém o header real e mede ausência de sobreposição.
+- Cobertura final: 100% linhas/funções/statements, 98,50% branches. Lint/tipos e build executados com sucesso; sem modificações em DI, preferências, contato ou deploy.
+- Stryker completo: 228 mutantes, 87,72%, 200 mortos e 28 sobreviventes, zero erros/timeouts/sem cobertura. Mesmo escopo/thresholds. Sobreviventes reinspecionados: nomes de tokens e aspectos visuais/referência dos controles/header. Confirmação incremental após a nota estática: 87,72%, todos os 228 resultados reaproveitados, 18s.
+- Revisão independente sem achados materiais. Arquivos e critérios em refinement-2026-10-22.md; resultados em verification.md. Publicação remota não executada.
+- Lighthouse do build final: 99/100/100/100, CLS 0 e LCP 1,8s. Medição local de laboratório; sem implantação pública. Build final: JS 339,10 kB, 109,74 kB gzip.

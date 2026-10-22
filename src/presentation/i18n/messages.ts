@@ -39,8 +39,8 @@ const pt = {
   about: {
     eyebrow: '01 / SOBRE MIM',
     title: 'Do problema real\nà solução que funciona.',
-    lead: 'Sou desenvolvedor Full Stack. Crio aplicações e automatizo processos para transformar desafios reais de empresas em soluções práticas e eficientes.',
-    body: 'Minha trajetória combina experiência formal em desenvolvimento front-end e projetos independentes para empresas. No ambiente corporativo, atuo principalmente com React e TypeScript. De forma independente, desenvolvi soluções para reduzir tarefas manuais em processos fiscais e financeiros.',
+    lead: 'Atuo no desenvolvimento de aplicações e na automação de processos, buscando transformar necessidades reais em soluções práticas, eficientes e alinhadas aos objetivos de cada projeto.',
+    body: 'Minha trajetória reúne atuação profissional no desenvolvimento de software e projetos independentes para empresas. Trabalho principalmente com React e TypeScript, com experiência também em Java e Node.js, além de desenvolver soluções voltadas à otimização de processos fiscais e financeiros.',
     closing:
       'Graduado em Engenharia de Software pela Universidade Federal do Pampa e mestrando no programa de pós-graduação da mesma universidade. Meu foco é construir aplicações claras, funcionais e alinhadas ao problema que precisam resolver.',
     note: 'Engenharia na base.\nResultados na prática.',
@@ -53,21 +53,19 @@ const pt = {
     items: [
       {
         group: 'EXPERIÊNCIA FORMAL · CLT',
-        title: 'Desenvolvedor Front-end',
-        duration: '1 ano e 6 meses',
+        title: 'Desenvolvedor Full Stack',
         description:
-          'Experiência profissional com carteira assinada, atuando principalmente com React e TypeScript em uma empresa com presença nacional no Brasil.',
+          'Atuação no desenvolvimento e manutenção de aplicações, principalmente com React e TypeScript, além de experiência no desenvolvimento com Java e Node.js. Participação em integrações com sistemas externos, evolução de funcionalidades e publicações em produção.',
         bullets: [
           'Desenvolvimento e manutenção de aplicações.',
-          'Evolução de funcionalidades e subidas de versão em produção.',
+          'Evolução de funcionalidades e publicações em produção.',
           'Integração com sistemas externos.',
-          'Manutenção e evolução de sistemas empresariais.',
+          'Manutenção e evolução de sistemas.',
         ],
       },
       {
         group: 'PROJETOS INDEPENDENTES',
         title: 'Soluções para empresas',
-        duration: 'Desenvolvimento independente',
         description:
           'Prestação de serviços de desenvolvimento para outras empresas, com ferramentas voltadas a necessidades reais de operação.',
         bullets: [
@@ -86,14 +84,15 @@ const pt = {
     problem: 'O CONTEXTO',
     solution: 'A SOLUÇÃO',
     outcome: 'O RESULTADO',
-    continuity: 'Uma solução, evolução contínua',
+    continuity:
+      'Uma solução, evolução contínua — projetos independentes desenvolvidos durante a graduação.',
     items: [
       {
         number: '01',
         category: 'AUTOMAÇÃO FISCAL',
         title: 'Da nota fiscal\nà planilha.',
         context:
-          'Desenvolvido durante o segundo semestre da graduação para um processo empresarial real.',
+          'Desenvolvido para otimizar um processo empresarial real, automatizando atividades que anteriormente exigiam trabalho manual.',
         problem:
           'Organizar informações de notas fiscais e gerar documentos exigia atividades manuais demoradas.',
         solution:
@@ -106,7 +105,7 @@ const pt = {
         category: 'GESTÃO FINANCEIRA',
         title: 'Do documento\nao pagamento.',
         context:
-          'No quarto semestre da graduação, a solução anterior evoluiu para atender ao acompanhamento financeiro.',
+          'Evolução da solução anterior para atender novas necessidades de controle financeiro, acompanhamento de pagamentos e geração de informações gerenciais.',
         problem:
           'O controle de duplicatas e pagamentos ligados a notas fiscais de entrada exigia trabalho manual recorrente.',
         solution:
@@ -118,24 +117,27 @@ const pt = {
   },
   technologies: {
     eyebrow: '04 / TECNOLOGIAS',
-    title: 'Ferramentas para\nconstruir de ponta a ponta.',
+    title: 'Tecnologias e práticas.',
     intro:
-      'Competências Full Stack, com experiência profissional formal concentrada em front-end.',
+      'Do front-end ao back-end, passando por dados, cloud, entrega contínua e qualidade de software.',
     groups: [
       { title: 'Front-end', items: ['React', 'TypeScript', 'HTML', 'CSS'] },
       { title: 'Back-end', items: ['Java', 'Spring Boot', 'Node.js'] },
       { title: 'Bancos de dados', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
       {
-        title: 'Versionamento e ferramentas',
-        items: ['Git', 'GitHub', 'Azure DevOps / Azure Repos'],
-      },
-      {
-        title: 'CI/CD e deploy',
-        items: ['GitHub Actions', 'GitHub Pages', 'Azure Pipelines'],
+        title: 'Versionamento e CI/CD',
+        items: [
+          'Git',
+          'GitHub',
+          'Azure DevOps / Azure Repos',
+          'GitHub Actions',
+          'Azure Pipelines',
+          'GitHub Pages',
+        ],
       },
       {
         title: 'Cloud',
-        items: ['Microsoft Azure', 'Amazon Web Services (AWS)'],
+        items: ['Amazon Web Services (AWS)', 'Microsoft Azure'],
       },
       {
         title: 'Testes e qualidade',
@@ -239,8 +241,8 @@ const en: typeof pt = {
   about: {
     eyebrow: '01 / ABOUT',
     title: 'From a real problem\nto a working solution.',
-    lead: 'I’m a Full Stack Developer. I build applications and automate processes to turn real business challenges into practical, efficient solutions.',
-    body: 'My journey combines formal front-end employment and independent projects for businesses. In my corporate role, I work primarily with React and TypeScript. Independently, I have built solutions that reduce manual tasks in tax and financial processes.',
+    lead: 'I develop applications and automate processes, turning real needs into practical, efficient solutions aligned with each project’s goals.',
+    body: 'My background combines professional software development and independent projects for businesses. I work primarily with React and TypeScript, with practical experience in Java and Node.js, and develop solutions to optimize tax and financial processes.',
     closing:
       'I hold a degree in Software Engineering from the Federal University of Pampa and am pursuing a master’s degree in the graduate program at the same university. I focus on building clear, functional applications aligned with the problems they need to solve.',
     note: 'Engineering at the core.\nResults in practice.',
@@ -253,21 +255,19 @@ const en: typeof pt = {
     items: [
       {
         group: 'FORMAL EMPLOYMENT · CLT',
-        title: 'Front-end Developer',
-        duration: '1 year and 6 months',
+        title: 'Full Stack Developer',
         description:
-          'Formal employment at a company with a nationwide presence in Brazil, working primarily with React and TypeScript.',
+          'Application development and maintenance, primarily with React and TypeScript, with practical development experience in Java and Node.js. Participation in external system integrations, feature improvements and production releases.',
         bullets: [
           'Application development and maintenance.',
           'Feature improvements and production releases.',
           'Integration with external systems.',
-          'Maintenance and evolution of business systems.',
+          'System maintenance and evolution.',
         ],
       },
       {
         group: 'INDEPENDENT PROJECTS',
         title: 'Solutions for businesses',
-        duration: 'Independent development',
         description:
           'Software development services for other businesses, with tools addressing real operational needs.',
         bullets: [
@@ -286,14 +286,15 @@ const en: typeof pt = {
     problem: 'THE CONTEXT',
     solution: 'THE SOLUTION',
     outcome: 'THE RESULT',
-    continuity: 'One solution, continuous improvement',
+    continuity:
+      'One solution, continuous improvement — independent projects developed during my undergraduate degree.',
     items: [
       {
         number: '01',
         category: 'TAX AUTOMATION',
         title: 'From invoice\nto spreadsheet.',
         context:
-          'Developed during the second semester of my undergraduate degree for a real business process.',
+          'Developed to optimize a real business process by automating activities that previously required manual work.',
         problem:
           'Organizing invoice information and generating documents required time-consuming manual work.',
         solution:
@@ -306,7 +307,7 @@ const en: typeof pt = {
         category: 'FINANCIAL MANAGEMENT',
         title: 'From document\nto payment.',
         context:
-          'During the fourth semester of my undergraduate degree, the earlier solution evolved to support financial tracking.',
+          'An evolution of the previous solution to address new needs for financial control, payment tracking and management information.',
         problem:
           'Tracking payables and payments associated with incoming invoices required recurring manual work.',
         solution:
@@ -318,24 +319,27 @@ const en: typeof pt = {
   },
   technologies: {
     eyebrow: '04 / TECHNOLOGIES',
-    title: 'Tools to build\nfrom end to end.',
+    title: 'Technologies and practices.',
     intro:
-      'Full Stack skills, with formal professional experience focused on front-end development.',
+      'From front-end and back-end to data, cloud, continuous delivery and software quality.',
     groups: [
       { title: 'Front-end', items: ['React', 'TypeScript', 'HTML', 'CSS'] },
       { title: 'Back-end', items: ['Java', 'Spring Boot', 'Node.js'] },
       { title: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
       {
-        title: 'Version control and tools',
-        items: ['Git', 'GitHub', 'Azure DevOps / Azure Repos'],
-      },
-      {
-        title: 'CI/CD and deployment',
-        items: ['GitHub Actions', 'GitHub Pages', 'Azure Pipelines'],
+        title: 'Version control and CI/CD',
+        items: [
+          'Git',
+          'GitHub',
+          'Azure DevOps / Azure Repos',
+          'GitHub Actions',
+          'Azure Pipelines',
+          'GitHub Pages',
+        ],
       },
       {
         title: 'Cloud',
-        items: ['Microsoft Azure', 'Amazon Web Services (AWS)'],
+        items: ['Amazon Web Services (AWS)', 'Microsoft Azure'],
       },
       {
         title: 'Testing and quality',

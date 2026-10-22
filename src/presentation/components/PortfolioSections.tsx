@@ -9,7 +9,7 @@ export const SOCIAL = {
 };
 
 const AWS_CERTIFICATION_URL =
-  'https://www.linkedin.com/in/ricardo-costa-7a97a3254/overlay/Certifications/327647614/treasury/?profileId=ACoAAD7D1rEB3JC8LRT0evZld_53vA3cctO_IU0';
+  'https://cp.certmetrics.com/amazon/en/public/verify/credential/f844a9917d974a3bb153aeb58edf6d2c';
 
 export function Hero() {
   const { t } = usePreferences();
@@ -119,7 +119,6 @@ export function Experience() {
                 </span>
               </div>
               <h3>{item.title}</h3>
-              <p className="duration">{item.duration}</p>
               <p>{item.description}</p>
               <ul>
                 {item.bullets.map((bullet) => (

@@ -1,32 +1,34 @@
 # Verificação da entrega
 
-Última verificação em 22 de outubro de 2026, após a atualização de conteúdo e substituição do formulário por contato direto. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos estão em [updates-2026-10-22.md](updates-2026-10-22.md).
+Última verificação em 22 de outubro de 2026, após o refinamento visual e profissional Full Stack. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [refinement-2026-10-22.md](refinement-2026-10-22.md).
 
 ## Resultados executados
 
-| Verificação                     | Resultado                                                                     |
-| ------------------------------- | ----------------------------------------------------------------------------- |
-| `npm run lint`                  | Passou, sem warnings                                                          |
-| `npm run typecheck`             | Passou                                                                        |
-| `npm run format:check`          | Passou                                                                        |
-| `npm run test:unit`             | 28 testes passaram em 3 arquivos                                              |
-| `npm run test:component`        | 15 testes passaram em 3 arquivos                                              |
-| `npm run test:integration`      | 3 testes passaram em 1 arquivo, grafo e adapters reais                        |
-| `npm test`                      | 46 testes passaram                                                            |
-| `npm run test:coverage`         | 100% linhas, 98,50% branches, 100% funções, 100% statements                   |
-| `npm run build`                 | Passou                                                                        |
-| `npm run test:mutation`         | 87,72%, acima de `high: 85` e `break: 75`; sem erros ou timeouts              |
-| `npm run test:e2e`              | 8 testes passaram; 24 combinações de largura/tema/idioma e dois fluxos mobile |
-| Lighthouse 13.5.0, mobile local | Performance 99, acessibilidade 100, boas práticas 100, SEO 100                |
-| Layout shift no Lighthouse      | CLS 0; LCP de laboratório 1,8s                                                |
-| Auditoria npm (anterior)        | Zero vulnerabilidades; dependências não foram alteradas nesta atualização     |
-| Build de subcaminho (anterior)  | Prefixos de assets e SEO validados; configuração de Pages preservada          |
+| Verificação                     | Resultado                                                                 |
+| ------------------------------- | ------------------------------------------------------------------------- |
+| `npm run lint`                  | Passou, sem warnings                                                      |
+| `npm run typecheck`             | Passou                                                                    |
+| `npm run format:check`          | Passou                                                                    |
+| `npm run test:unit`             | 36 testes passaram em 4 arquivos                                          |
+| `npm run test:component`        | 15 testes passaram em 3 arquivos                                          |
+| `npm run test:integration`      | 3 testes passaram em 1 arquivo, grafo e adapters reais                    |
+| `npm test`                      | 54 testes passaram em 8 arquivos                                          |
+| `npm run test:coverage`         | 100% linhas, 98,50% branches, 100% funções, 100% statements               |
+| `npm run build`                 | Passou                                                                    |
+| `npm run test:mutation`         | 87,72%, acima de `high: 85` e `break: 75`; sem erros ou timeouts          |
+| `npm run test:e2e`              | 9 testes passaram; 24 combinações e fluxos mobile/animação                |
+| Lighthouse 13.5.0, mobile local | Performance 99, acessibilidade 100, boas práticas 100, SEO 100            |
+| Layout shift no Lighthouse      | CLS 0; LCP de laboratório 1,8s                                            |
+| Auditoria npm (anterior)        | Zero vulnerabilidades; dependências não foram alteradas nesta atualização |
+| Build de subcaminho (anterior)  | Prefixos de assets e SEO validados; configuração de Pages preservada      |
 
 As medições de Lighthouse foram feitas no preview do build, em `http://127.0.0.1:4173/`. Não são medições de uma implantação pública. Relatórios completos são gerados localmente e ignorados pelo Git: `coverage/index.html`, `reports/lighthouse.report.html`, `reports/lighthouse.report.json`, `playwright-report/index.html`, `reports/responsive/*.png`.
 
 ## Responsividade e acessibilidade
 
 Playwright executou o aplicativo real no Chrome instalado, com movimento reduzido, nas larguras 320, 375, 430, 768, 1024 e 1440px. Cada largura foi verificada em PT/EN e claro/escuro. As 24 combinações não apresentaram overflow horizontal nem violações nas regras axe WCAG 2 A/AA, 2.1 AA e 2.2 AA executadas.
+
+No refinamento, as posições reais dos seis grupos confirmaram duas colunas/três linhas a partir de 768px e uma coluna abaixo disso. Os itens de tecnologias têm borda zero; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 9 E2E da rodada final passaram em 28,0s. Capturas estão em `reports/refinement/` e `reports/responsive/`.
 
 O fluxo mobile também verificou abertura do menu, fechamento com Escape e foco no botão, navegação por âncoras de projetos/certificação/contato, alternância de tema/idioma, persistência após recarga, clique de e-mail interceptado somente no teste e cópia real pela Clipboard API do Chrome. Outro fluxo de 320px verifica API indisponível, campo selecionável e tradução do erro. Não houve erros de página ou mensagens `console.error` nos testes. Os dois cards de experiência têm borda superior de 3px, mesma cor e contraste com o fundo nos dois temas. Capturas reais mobile e desktop foram inspecionadas.
 
@@ -36,7 +38,15 @@ Testes automatizados não equivalem a certificação WCAG completa. Não foram r
 
 ## Mutação e fortalecimento dos testes
 
-### Atualização de conteúdo e contato direto
+### Refinamento visual e profissional
+
+A execução completa do refinamento avaliou **228 mutantes** em 3 minutos e 9 segundos: **87,72%**, com **200 `Killed` e 28 `Survived`**, zero `Timeout`, `RuntimeError` e `NoCoverage`. O escopo e os thresholds 85/70/75 foram mantidos, sem exclusões adicionais. Os novos testes de dados estáticos verificam PT/EN, mas não acrescentam mutantes de regras executáveis; a suíte total tem 54 testes e o dry run de mutação selecionou os 46 relevantes ao escopo executável.
+
+Após acrescentar a nota acadêmica secundária dos projetos e finalizar os testes visuais, a confirmação incremental manteve **87,72%** em 18 segundos. Todos os 228 resultados foram reaproveitados porque nenhum arquivo mutado ou teste relevante à mutação mudou; o dry run do runner passou. O novo caso estático foi executado na suíte unitária e na cobertura completa, ambas verdes. Não foi alegada uma segunda avaliação completa dos mutantes.
+
+Os sobreviventes foram reinspecionados e mantêm a distribuição anterior: 4 nomes descritivos de tokens, 18 alterações visuais nos controles e 6 no header (ícone/classes e optional chaining de referência presente durante o evento). Registry/inject/provider, serviços de aplicação, endereço/link de e-mail, infraestrutura, preferências e contato direto mantiveram 100% de detecção. Geometria, tipografia e contraste são verificados no navegador, pois jsdom não calcula layout.
+
+### Histórico: atualização de conteúdo e contato direto
 
 O novo escopo remove validadores e serviços exclusivos do formulário e inclui `ContactActions`. Não foram excluídas regras importantes. A execução completa avaliou **228 mutantes** em 3 minutos e 33 segundos: **87,28%**, com **199 `Killed` e 29 `Survived`**; zero `Timeout`, `RuntimeError` e `NoCoverage`. Os thresholds permanecem `high: 85`, `low: 70`, `break: 75`.
 
@@ -86,6 +96,8 @@ Os dois timeouts anteriores removiam a proteção de ciclos do registry, produzi
 Os relatórios HTML e JSON estão em `reports/mutation/`. O relatório inicial foi preservado localmente em `reports/mutation-initial.json`. Alterações de nomes de tokens e aspectos visuais também participam da pontuação; nenhuma exclusão foi adicionada para ocultá-las.
 
 ## Revisão independente
+
+Uma nova revisão independente do refinamento comparou o diff com `0421f8d` e não encontrou problemas materiais ou requisitos faltantes. Conferiu textos, grupos/ordem, link CertMetrics, ausência de duração pública, CSS responsivo e preservação dos recursos existentes. Os comandos de validação e a inspeção visual foram executados pelo agente principal.
 
 Na atualização de conteúdo e contato direto, uma nova revisão do diff verificou os requisitos atuais, os contratos e as suítes. Não encontrou problemas materiais de código ou testes. O README apontado como desatualizado durante a revisão foi ajustado para explicar a nova DI e o contato direto. Nenhuma certificação Azure foi adicionada; os indicadores e relatórios dos projetos são dados fornecidos na solicitação atual.
 

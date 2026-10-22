@@ -3,7 +3,7 @@ import AxeBuilder from '@axe-core/playwright';
 
 const browserErrors = new WeakMap<Page, string[]>();
 const certificationUrl =
-  'https://www.linkedin.com/in/ricardo-costa-7a97a3254/overlay/Certifications/327647614/treasury/?profileId=ACoAAD7D1rEB3JC8LRT0evZld_53vA3cctO_IU0';
+  'https://cp.certmetrics.com/amazon/en/public/verify/credential/f844a9917d974a3bb153aeb58edf6d2c';
 test.beforeEach(async ({ page }) => {
   const errors: string[] = [];
   browserErrors.set(page, errors);
@@ -62,7 +62,58 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         ).toHaveAttribute('href', certificationUrl);
         await expect(
           page.locator('#technologies .technology-group'),
-        ).toHaveCount(7);
+        ).toHaveCount(6);
+        await expect(page.locator('#experience h3').first()).toHaveText(
+          language === 'en'
+            ? 'Full Stack Developer'
+            : 'Desenvolvedor Full Stack',
+        );
+        await expect(page.locator('body')).not.toContainText(
+          language === 'en' ? '1 year and 6 months' : '1 ano e 6 meses',
+        );
+        const technologyLayout = await page
+          .locator('.technology-group')
+          .evaluateAll((groups) =>
+            groups.map((group) => {
+              const rect = group.getBoundingClientRect();
+              return { x: rect.x, y: rect.y };
+            }),
+          );
+        if (width >= 768) {
+          for (const row of [0, 2, 4]) {
+            expect(technologyLayout[row]!.x).toBe(technologyLayout[0]!.x);
+            expect(technologyLayout[row + 1]!.x).toBe(technologyLayout[1]!.x);
+            expect(technologyLayout[row]!.y).toBe(technologyLayout[row + 1]!.y);
+          }
+          expect(technologyLayout[1]!.x).toBeGreaterThan(
+            technologyLayout[0]!.x,
+          );
+        } else {
+          for (let index = 1; index < technologyLayout.length; index++) {
+            expect(technologyLayout[index]!.x).toBe(technologyLayout[0]!.x);
+            expect(technologyLayout[index]!.y).toBeGreaterThan(
+              technologyLayout[index - 1]!.y,
+            );
+          }
+        }
+        const typography = await page
+          .locator(
+            '.eyebrow, .mono, .project-context, .project-details p, .education-item p, .status-tag',
+          )
+          .evaluateAll((nodes) =>
+            nodes
+              .filter((node) => getComputedStyle(node).display !== 'none')
+              .map((node) => parseFloat(getComputedStyle(node).fontSize)),
+          );
+        expect(Math.min(...typography)).toBeGreaterThanOrEqual(12);
+        const technologyBorders = await page
+          .locator('.technology-group li')
+          .evaluateAll((items) =>
+            items.map((item) => getComputedStyle(item).borderTopWidth),
+          );
+        expect(technologyBorders.every((border) => border === '0px')).toBe(
+          true,
+        );
         const bars = await page
           .locator('.experience-card')
           .evaluateAll((cards) =>
@@ -88,6 +139,11 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
             path: `reports/responsive/${width}.png`,
             fullPage: true,
           });
+        await page.locator('#technologies').screenshot({
+          path: `reports/refinement/technologies-${width}-${language}-${theme}.png`,
+          // Hide fixed overlays only for the tall crop; viewport navigation is checked below.
+          style: '.site-header, .skip-link { visibility: hidden !important; }',
+        });
       }
   });
 }
@@ -145,6 +201,19 @@ test('mobile navigation, keyboard, persistence and native contact fallback', asy
   await page.getByRole('button', { name: 'Open menu' }).click();
   await page
     .getByRole('navigation')
+    .getByRole('link', { name: 'Technologies' })
+    .click();
+  const technologyTitle = await page
+    .getByRole('heading', { name: 'Technologies and practices.' })
+    .boundingBox();
+  const header = await page.locator('.site-header').boundingBox();
+  expect(technologyTitle!.y).toBeGreaterThanOrEqual(header!.y + header!.height);
+  await page.screenshot({
+    path: 'reports/refinement/mobile-navigation-dark-en.png',
+  });
+  await page.getByRole('button', { name: 'Open menu' }).click();
+  await page
+    .getByRole('navigation')
     .getByRole('link', { name: 'Certifications' })
     .click();
   await expect(page).toHaveURL(/#certifications$/);
@@ -154,6 +223,19 @@ test('mobile navigation, keyboard, persistence and native contact fallback', asy
   await expect(
     page.getByRole('link', { name: /View certification/ }),
   ).toHaveAttribute('href', certificationUrl);
+  await context.route(certificationUrl, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'text/html',
+      body: '<title>Credential destination fixture</title>',
+    }),
+  );
+  const credentialTab = page.waitForEvent('popup');
+  await page.getByRole('link', { name: /View certification/ }).click();
+  const popup = await credentialTab;
+  await popup.waitForLoadState();
+  expect(popup.url()).toBe(certificationUrl);
+  await popup.close();
   await page.getByRole('button', { name: 'Open menu' }).click();
   await page
     .getByRole('navigation')
@@ -171,6 +253,23 @@ test('mobile navigation, keyboard, persistence and native contact fallback', asy
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
     'contato.ricardolhc@gmail.com',
   );
+});
+
+test('section content appears during normal motion without leaving blank areas', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  for (const id of ['projects', 'technologies', 'education']) {
+    const section = page.locator(`#${id}`);
+    await section.scrollIntoViewIfNeeded();
+    await expect(section.getByRole('heading', { level: 2 })).toBeVisible();
+    await expect(section.locator('div[style]').first()).toHaveCSS(
+      'opacity',
+      '1',
+    );
+  }
 });
 
 test('mobile clipboard unavailable fallback remains usable and translated', async ({

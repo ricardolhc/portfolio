@@ -27,6 +27,12 @@ describe('real composition root, providers and browser adapters', () => {
     browserClipboard({ writeText });
     localStorage.setItem('portfolio.language', 'pt-BR');
     renderWithProviders(<App />, createRegistry());
+    expect(
+      screen.getByRole('region', { name: /Duas frentes/ }),
+    ).toHaveTextContent('Desenvolvedor Full Stack');
+    expect(
+      screen.getByRole('region', { name: 'Tecnologias e práticas.' }),
+    ).toHaveTextContent('Versionamento e CI/CD');
     await user.click(
       screen.getByRole('button', { name: 'Ativar tema escuro' }),
     );
@@ -39,6 +45,15 @@ describe('real composition root, providers and browser adapters', () => {
     renderWithProviders(<App />, createRegistry());
     expect(document.documentElement).toHaveAttribute('lang', 'en');
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+    expect(screen.getByRole('region', { name: /Two paths/ })).toHaveTextContent(
+      'Full Stack Developer',
+    );
+    expect(
+      screen.getByRole('region', { name: 'Technologies and practices.' }),
+    ).toHaveTextContent('Version control and CI/CD');
+    expect(
+      screen.queryByText(/1 ano e 6 meses|1 year and 6 months/i),
+    ).not.toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Send email' })).toHaveAttribute(
       'href',
       'mailto:contato.ricardolhc@gmail.com?subject=Portfolio%20contact',

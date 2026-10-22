@@ -1,6 +1,6 @@
 # Ricardo Costa · Portfólio Full Stack
 
-Portfólio profissional de página única com React, Vite e TypeScript estrito. Apresenta experiência CLT em front-end, desenvolvimento independente de soluções empresariais, formação em Engenharia de Software e certificação AWS.
+Portfólio profissional de página única com React, Vite e TypeScript estrito. Apresenta experiência CLT como desenvolvedor Full Stack, desenvolvimento independente de soluções empresariais, formação em Engenharia de Software e certificação AWS.
 
 A identidade visual é editorial e monocromática, com fonte Geist hospedada no próprio build. Não há analytics, backend, fontes remotas, dados de clientes ou serviços de formulário.
 
@@ -12,12 +12,12 @@ A identidade visual é editorial e monocromática, com fonte Geist hospedada no 
 - Navegação por âncoras, menu mobile com Escape, foco visível e link para pular navegação.
 - Transições discretas com Motion e respeito a `prefers-reduced-motion`.
 - Contato em um clique por `mailto:`, cópia do e-mail e alternativa selecionável se a Clipboard API falhar.
-- Sete categorias de tecnologias e práticas, incluindo cloud, CI/CD e cinco modalidades de teste.
+- Seis categorias de tecnologias e práticas, em duas colunas no desktop e uma no mobile, com apresentação textual sem chips e práticas de cloud, entrega e qualidade.
 - Acesso direto à certificação AWS pelo link fornecido pelo proprietário.
 - Registry tipado, singleton/factory, detecção de ciclos, Context e serviços substituíveis nos testes.
 - CI, cobertura, testes de mutação e deploy GitHub Pages.
 
-O período de **1 ano e 6 meses** corresponde exclusivamente à experiência **CLT**, conforme o briefing de outubro de 2026. Projetos independentes são apresentados separadamente. Não foram inventados empregador, datas, contratos, tecnologias dos projetos, URLs de demonstração, depoimentos ou dados de credenciais.
+A experiência formal e os projetos independentes são apresentados separadamente, sem divulgar a duração do vínculo profissional. A descrição inclui React, TypeScript e conhecimento prático em Java e Node.js, conforme as informações do proprietário. Não foram inventados empregador, datas, contratos, tecnologias dos projetos, URLs de demonstração, depoimentos ou dados de credenciais.
 
 ## Requisitos e instalação
 
@@ -148,6 +148,7 @@ Edite `src/presentation/i18n/messages.ts`. A versão inglesa é verificada contr
 - Para adicionar um projeto, acrescente um objeto em `projects.items` **nos dois idiomas**: número, categoria, título, contexto, problema, solução, métrica e resultado. Não informe tecnologias ou links sem confirmação.
 - A certificação atual é apresentada em `Certifications`, em `PortfolioSections.tsx`. Para uma certificação adicional, acrescente conteúdo PT/EN e um novo artigo semântico, mantendo emissor e categoria reais. Não crie credenciais ou verificações presumidas.
 - Categorias e tecnologias ficam em `technologies.groups` nas duas traduções, sem classificações de proficiência. GitHub Pages é hospedagem/deploy; GitHub Actions e Azure Pipelines são automação de CI/CD.
+- A grade usa seis grupos na ordem front-end, back-end, bancos de dados, versionamento/CI/CD, cloud e testes. A partir de 768px são duas colunas; abaixo disso, uma. Não há bordas em cada tecnologia nem alturas mínimas nos grupos.
 - O link direto da certificação fica em `AWS_CERTIFICATION_URL`, em `PortfolioSections.tsx`; utilize somente o endereço real informado pelo proprietário.
 - Links profissionais estão em `SOCIAL`; o e-mail está em `src/domain/contact.ts`. Mantenha os dados estruturados de `index.html` em sincronia ao alterá-los.
 
@@ -187,6 +188,8 @@ Meta desejada **85%**. Thresholds: `high: 85`, `low: 70`, `break: 75`; abaixo de
 Os resultados medidos e a análise de sobreviventes ficam em [docs/verification.md](docs/verification.md).
 
 ## Responsividade, acessibilidade e performance
+
+Os tokens em `src/styles.css` centralizam espaçamento de seções (56/72/80px), padding dos projetos (32/36/40px) e texto secundário (12/14/15px). Eles reduzem os intervalos entre projetos, tecnologias e formação e melhoram a legibilidade sem alterar a tipografia expressiva do Hero. Não foram adicionadas fontes ou bibliotecas.
 
 Os testes de navegador verificam **320, 375, 430, 768, 1024 e 1440px**, ambos os temas e idiomas, ausência de overflow horizontal e regras axe WCAG 2/2.1/2.2 AA. Fluxos adicionais cobrem menu, Escape, persistência, contato em um clique e cópia indisponível. As barras dos cards de experiência são comparadas nos dois temas. Capturas reais ficam em `reports/responsive/`; relatório Playwright em `playwright-report/`. Verificações automáticas não substituem uma auditoria completa com leitores de tela e dispositivos reais.
 

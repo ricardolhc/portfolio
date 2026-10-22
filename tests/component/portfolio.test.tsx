@@ -11,8 +11,7 @@ describe('professional portfolio', () => {
       'Desenvolvo aplicações e soluções de automação que simplificam processos e resolvem desafios reais de negócios.',
       'Ver certificação',
       'Bancos de dados',
-      'Versionamento e ferramentas',
-      'CI/CD e deploy',
+      'Versionamento e CI/CD',
       'Cloud',
       'Testes e qualidade',
       'Testes unitários',
@@ -30,8 +29,7 @@ describe('professional portfolio', () => {
       'I develop applications and automation solutions that simplify processes and solve real business challenges.',
       'View certification',
       'Databases',
-      'Version control and tools',
-      'CI/CD and deployment',
+      'Version control and CI/CD',
       'Cloud',
       'Testing and quality',
       'Unit testing',
@@ -56,7 +54,7 @@ describe('professional portfolio', () => {
       });
       expect(link).toHaveAttribute(
         'href',
-        'https://www.linkedin.com/in/ricardo-costa-7a97a3254/overlay/Certifications/327647614/treasury/?profileId=ACoAAD7D1rEB3JC8LRT0evZld_53vA3cctO_IU0',
+        'https://cp.certmetrics.com/amazon/en/public/verify/credential/f844a9917d974a3bb153aeb58edf6d2c',
       );
       expect(link).toHaveAttribute('target', '_blank');
       expect(link).toHaveAttribute('rel', 'noopener noreferrer');
@@ -65,11 +63,24 @@ describe('professional portfolio', () => {
         name: /Duas frentes|Two paths/,
       });
       const [formal, independent] = within(experience).getAllByRole('article');
-      expect(formal).toHaveTextContent(/1 ano e 6 meses|1 year and 6 months/);
-      expect(formal).toHaveTextContent(/carteira assinada|formal employment/i);
-      expect(independent).not.toHaveTextContent(
-        /1 ano e 6 meses|1 year and 6 months/,
+      expect(
+        within(formal!).getByRole('heading', {
+          name:
+            language === 'en'
+              ? 'Full Stack Developer'
+              : 'Desenvolvedor Full Stack',
+        }),
+      ).toBeInTheDocument();
+      expect(formal).toHaveTextContent('Java');
+      expect(formal).toHaveTextContent('Node.js');
+      expect(independent).toHaveTextContent(
+        language === 'en' ? 'INDEPENDENT PROJECTS' : 'PROJETOS INDEPENDENTES',
       );
+      expect(
+        screen.queryByText(
+          /1 ano e 6 meses|1 year and 6 months|sistemas empresariais/i,
+        ),
+      ).not.toBeInTheDocument();
     },
   );
   it('presents hero, real projects, distinct employment, technologies, education and certification', () => {
@@ -87,7 +98,11 @@ describe('professional portfolio', () => {
     expect(
       within(experience).getByText('EXPERIÊNCIA FORMAL · CLT'),
     ).toBeInTheDocument();
-    expect(within(experience).getByText('1 ano e 6 meses')).toBeInTheDocument();
+    expect(
+      within(experience).getByRole('heading', {
+        name: 'Desenvolvedor Full Stack',
+      }),
+    ).toBeInTheDocument();
     expect(
       within(experience).getByText('PROJETOS INDEPENDENTES'),
     ).toBeInTheDocument();
@@ -103,7 +118,7 @@ describe('professional portfolio', () => {
       ),
     ).toBeInTheDocument();
     const technologies = screen.getByRole('region', {
-      name: /Ferramentas para/,
+      name: 'Tecnologias e práticas.',
     });
     for (const tech of [
       'React',
@@ -189,7 +204,7 @@ describe('professional portfolio', () => {
     for (const title of [
       /Two paths/,
       /Less manual work/,
-      /Tools to build/,
+      /Technologies and practices/,
       /Where practice/,
       /Solid foundations/,
       /Your next project/,
