@@ -99,6 +99,32 @@ export function About() {
   );
 }
 
+interface ExperienceRoleContent {
+  title: string;
+  details: string;
+  description: string;
+  bullets: string[];
+  technologies: string[];
+}
+
+function ExperienceRole({ role }: { role: ExperienceRoleContent }) {
+  return (
+    <>
+      <h3>{role.title}</h3>
+      {role.details && <p className="university">{role.details}</p>}
+      <p>{role.description}</p>
+      <ul>
+        {role.bullets.map((bullet) => (
+          <li key={bullet}>{bullet}</li>
+        ))}
+      </ul>
+      {role.technologies.length > 0 && (
+        <p className="project-context">{role.technologies.join(' · ')}</p>
+      )}
+    </>
+  );
+}
+
 export function Experience() {
   const { t } = usePreferences();
   return (
@@ -118,13 +144,12 @@ export function Experience() {
                   0{index + 1}
                 </span>
               </div>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <ul>
-                {item.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
+              <ExperienceRole role={item} />
+              {item.additionalRoles.map((role) => (
+                <div className="education-item" key={role.title}>
+                  <ExperienceRole role={role} />
+                </div>
+              ))}
             </article>
           ))}
         </div>
@@ -161,6 +186,10 @@ export function Projects() {
                   <div>
                     <h4 className="eyebrow">{t.projects.solution}</h4>
                     <p>{project.solution}</p>
+                    <p className="project-context">
+                      {t.projects.technologies}:{' '}
+                      {project.technologies.join(' · ')}
+                    </p>
                   </div>
                 </div>
                 <div className="project-result">
@@ -227,7 +256,8 @@ export function Education() {
             <article className="education-item" key={item.title}>
               <span className="status-tag">{item.status}</span>
               <h3>{item.title}</h3>
-              <p className="university">{t.education.university}</p>
+              <p className="university">{item.institution}</p>
+              <p>{item.period}</p>
               <p>{item.description}</p>
             </article>
           ))}

@@ -6,7 +6,7 @@ import { LanguageSwitcher } from '../../src/presentation/components/Controls';
 import { ContactGatewayError } from '../../src/domain/contact';
 import { renderWithProviders, testDependencies } from '../renderWithProviders';
 
-const fields = ['Nome', 'E-mail', 'Assunto', 'Mensagem'];
+const fields = ['Nome', 'Seu melhor e-mail', 'Assunto', 'Mensagem'];
 const values = [
   'Ana Silva',
   'ana@example.com',
@@ -30,7 +30,7 @@ describe('Formspree contact form', () => {
     ],
     [
       'en',
-      ['Name', 'Email', 'Subject', 'Message'],
+      ['Name', 'Best email to reach you', 'Subject', 'Message'],
       'Send message',
       'Message sent successfully! Thank you for getting in touch. I’ll reply as soon as possible.',
     ],
@@ -119,13 +119,15 @@ describe('Formspree contact form', () => {
       'true',
     );
     await user.type(
-      screen.getByRole('textbox', { name: 'E-mail' }),
+      screen.getByRole('textbox', { name: 'Seu melhor e-mail' }),
       'not-an-email',
     );
     await user.click(screen.getByRole('button', { name: 'Enviar mensagem' }));
-    expect(screen.getByRole('textbox', { name: 'E-mail' })).toHaveFocus();
     expect(
-      screen.getByRole('textbox', { name: 'E-mail' }),
+      screen.getByRole('textbox', { name: 'Seu melhor e-mail' }),
+    ).toHaveFocus();
+    expect(
+      screen.getByRole('textbox', { name: 'Seu melhor e-mail' }),
     ).toHaveAccessibleDescription('Informe um e-mail válido.');
     expect(deps.send).not.toHaveBeenCalled();
   });

@@ -1,6 +1,6 @@
 # Ricardo Costa · Portfólio Full Stack
 
-Portfólio profissional de página única com React, Vite e TypeScript estrito. Apresenta experiência CLT como desenvolvedor Full Stack, desenvolvimento independente de soluções empresariais, formação em Engenharia de Software e certificação AWS.
+Portfólio profissional de página única com React, Vite e TypeScript estrito. Apresenta atuação como Desenvolvedor Trainee e estágio Full Stack na Compass UOL, desenvolvimento independente de soluções empresariais, formação em Engenharia de Software e certificação AWS.
 
 A identidade visual é editorial e monocromática, com fonte Geist hospedada no próprio build. Não há analytics, backend próprio, fontes remotas ou dados de clientes. O contato utiliza o Formspree somente quando o visitante envia o formulário.
 
@@ -12,12 +12,12 @@ A identidade visual é editorial e monocromática, com fonte Geist hospedada no 
 - Navegação por âncoras, menu mobile com Escape, foco visível e link para pular navegação.
 - Transições discretas com Motion e respeito a `prefers-reduced-motion`.
 - Formulário de contato integrado ao Formspree, validação PT/EN, estados acessíveis e cópia alternativa do e-mail.
-- Seis categorias de tecnologias e práticas, em duas colunas no desktop e uma no mobile, com apresentação textual sem chips e práticas de cloud, entrega e qualidade.
+- Oito categorias de tecnologias e práticas, em duas colunas no desktop e uma no mobile, com apresentação textual sem chips.
 - Acesso direto à certificação AWS pelo link fornecido pelo proprietário.
 - Registry tipado, singleton/factory, detecção de ciclos, Context e serviços substituíveis nos testes.
 - CI, cobertura, testes de mutação e deploy GitHub Pages.
 
-A experiência formal e os projetos independentes são apresentados separadamente, sem divulgar a duração do vínculo profissional. A descrição inclui React, TypeScript e conhecimento prático em Java e Node.js, conforme as informações do proprietário. Não foram inventados empregador, datas, contratos, tecnologias dos projetos, URLs de demonstração, depoimentos ou dados de credenciais.
+A experiência corporativa e os projetos independentes são apresentados separadamente. Na Compass UOL, trainee desde maio de 2025 e estágio de julho a dezembro de 2024 têm responsabilidades e tecnologias próprias; Java, JavaFX e Spring Boot aparecem nos projetos independentes correspondentes. Os períodos e dados acadêmicos foram fornecidos pelo proprietário. Não foram inventados contratos, clientes, URLs de demonstração, depoimentos ou dados de credenciais. A graduação inclui Láurea Acadêmica e média 9,13/10; o mestrado profissional está em andamento e o IFAM complementa a formação técnica.
 
 ## Requisitos e instalação
 
@@ -147,10 +147,11 @@ Para substituir somente um adapter e manter os serviços reais, monte um novo gr
 Edite `src/presentation/i18n/messages.ts`. A versão inglesa é verificada contra o formato da portuguesa pelo TypeScript.
 
 - Hero, experiência, formação, certificação e textos acessíveis ficam nesse arquivo.
-- Para adicionar um projeto, acrescente um objeto em `projects.items` **nos dois idiomas**: número, categoria, título, contexto, problema, solução, métrica e resultado. Não informe tecnologias ou links sem confirmação.
+- Para adicionar um projeto, acrescente um objeto em `projects.items` **nos dois idiomas**: número, categoria, título, contexto, problema, solução, métrica, resultado e tecnologias. Não informe tecnologias ou links sem confirmação.
 - A certificação atual é apresentada em `Certifications`, em `PortfolioSections.tsx`. Para uma certificação adicional, acrescente conteúdo PT/EN e um novo artigo semântico, mantendo emissor e categoria reais. Não crie credenciais ou verificações presumidas.
 - Categorias e tecnologias ficam em `technologies.groups` nas duas traduções, sem classificações de proficiência. GitHub Pages é hospedagem/deploy; GitHub Actions e Azure Pipelines são automação de CI/CD.
-- A grade usa seis grupos na ordem front-end, back-end, bancos de dados, versionamento/CI/CD, cloud e testes. A partir de 768px são duas colunas; abaixo disso, uma. Não há bordas em cada tecnologia nem alturas mínimas nos grupos.
+- A grade usa oito grupos: front-end, back-end/APIs, desktop, dados/cache, versionamento/CI/CD, cloud, qualidade e analytics/infraestrutura de aplicações. A partir de 768px são duas colunas; abaixo disso, uma. Não há bordas em cada tecnologia nem alturas mínimas nos grupos.
+- A experiência mantém dois cards. O primeiro distingue os vínculos da Compass UOL por meio de `additionalRoles`; cada vínculo tem título, detalhes, responsabilidades e tecnologias próprios. O segundo não recebe datas. A formação possui instituição e período por item, incluindo previsão explícita no mestrado.
 - O link direto da certificação fica em `AWS_CERTIFICATION_URL`, em `PortfolioSections.tsx`; utilize somente o endereço real informado pelo proprietário.
 - Links profissionais estão em `SOCIAL`; o e-mail está em `src/domain/contact.ts`. Mantenha os dados estruturados de `index.html` em sincronia ao alterá-los.
 
@@ -241,8 +242,9 @@ Referências: [deploy estático do Vite](https://vite.dev/guide/static-deploy.ht
 ## Limitações e informações pendentes
 
 - Não há remote Git configurado neste checkout nem URL pública definida. Os workflows são entregues; execução no GitHub e publicação dependem do repositório remoto e da ativação do Pages.
-- Nome do empregador, datas profissionais/acadêmicas, duração dos serviços independentes e detalhes dos contratos não foram fornecidos e foram omitidos.
-- Projetos privados não possuem links, screenshots ou tecnologias presumidas.
+- Duração dos serviços independentes, nomes de clientes e detalhes dos contratos não foram fornecidos e foram omitidos.
+- Projetos privados não possuem links ou screenshots presumidos; tecnologias descritas são as confirmadas pelo proprietário.
+- Não foi fornecido link público de comprovação da Láurea Acadêmica; nenhum endereço foi inventado.
 - A certificação utiliza o link direto informado pelo proprietário, sem inventar emissão, validade ou identificadores adicionais.
 - Não existe arquivo PDF de currículo; nenhum botão de download foi criado.
 - O envio depende da disponibilidade e configuração do Formspree. Não foi realizado envio real nem confirmada entrega ao destinatário; as respostas foram simuladas nos testes. Filtros antispam e restrições da conta não foram alterados.

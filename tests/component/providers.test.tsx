@@ -120,7 +120,7 @@ describe('preferences', () => {
       renderWithProviders(<LanguageSwitcher />);
       expect(tags[0]).toHaveAttribute(
         'content',
-        'Desenvolvedor Full Stack com experiência corporativa em React e TypeScript e projetos independentes de automação empresarial. Conheça Ricardo Costa.',
+        'Desenvolvedor Full Stack na Compass UOL, com experiência em aplicações web e soluções independentes de automação fiscal e gestão financeira. Conheça Ricardo Costa.',
       );
       expect(tags[1]).toHaveAttribute(
         'content',
@@ -128,7 +128,7 @@ describe('preferences', () => {
       );
       expect(tags[2]).toHaveAttribute(
         'content',
-        'Desenvolvedor Full Stack com experiência corporativa em React e TypeScript e projetos independentes de automação empresarial. Conheça Ricardo Costa.',
+        'Desenvolvedor Full Stack na Compass UOL, com experiência em aplicações web e soluções independentes de automação fiscal e gestão financeira. Conheça Ricardo Costa.',
       );
       expect(tags[3]).toHaveAttribute('content', 'pt_BR');
       await user.click(
@@ -136,7 +136,7 @@ describe('preferences', () => {
       );
       expect(tags[0]).toHaveAttribute(
         'content',
-        'Full Stack Developer with corporate experience in React and TypeScript and independent business automation projects. Meet Ricardo Costa.',
+        'Full Stack Developer at Compass UOL, with web application experience and independent tax automation and financial management solutions. Meet Ricardo Costa.',
       );
       expect(tags[1]).toHaveAttribute(
         'content',
@@ -144,7 +144,7 @@ describe('preferences', () => {
       );
       expect(tags[2]).toHaveAttribute(
         'content',
-        'Full Stack Developer with corporate experience in React and TypeScript and independent business automation projects. Meet Ricardo Costa.',
+        'Full Stack Developer at Compass UOL, with web application experience and independent tax automation and financial management solutions. Meet Ricardo Costa.',
       );
       expect(tags[3]).toHaveAttribute('content', 'en_US');
     } finally {

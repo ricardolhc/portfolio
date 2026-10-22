@@ -5,161 +5,152 @@ import { App } from '../../src/presentation/App';
 import { renderWithProviders, testDependencies } from '../renderWithProviders';
 
 describe('professional portfolio', () => {
-  it.each([
-    [
-      'pt-BR',
-      'Desenvolvo aplicações e soluções de automação que simplificam processos e resolvem desafios reais de negócios.',
-      'Ver certificação',
-      'Bancos de dados',
-      'Versionamento e CI/CD',
-      'Cloud',
-      'Testes e qualidade',
-      'Testes unitários',
-      'Testes de componentes',
-      'Testes de mutação',
-      'Testes de integração',
-      'Testes end-to-end (E2E)',
-      /Graduado em Engenharia de Software pela Universidade Federal do Pampa/,
-      /oportunidades profissionais, projetos independentes e soluções sob demanda/,
-      /processo já existente mais rápido, simples e eficiente/,
-      /novos indicadores, relatórios e visões gerenciais/,
-    ],
-    [
-      'en',
-      'I develop applications and automation solutions that simplify processes and solve real business challenges.',
-      'View certification',
-      'Databases',
-      'Version control and CI/CD',
-      'Cloud',
-      'Testing and quality',
-      'Unit testing',
-      'Component testing',
-      'Mutation testing',
-      'Integration testing',
-      'End-to-end (E2E) testing',
-      /I hold a degree in Software Engineering from the Federal University of Pampa/,
-      /professional opportunities, independent projects and custom software development/,
-      /existing process faster, simpler and more efficient/,
-      /new indicators, reports and management views/,
-    ],
-  ] as const)(
-    'presents updated business content and categorized skills in %s',
-    (language, hero, certification, ...content) => {
+  it.each(['pt-BR', 'en'] as const)(
+    'presents accurate corporate roles, independent projects and education in %s',
+    (language) => {
+      const en = language === 'en';
       renderWithProviders(<App />, testDependencies(language).registry);
-      expect(screen.getByText(hero)).toHaveClass('hero-statement');
-      for (const text of content)
-        expect(screen.getByText(text)).toBeInTheDocument();
-      const link = screen.getByRole('link', {
-        name: new RegExp(certification),
-      });
-      expect(link).toHaveAttribute(
-        'href',
-        'https://cp.certmetrics.com/amazon/en/public/verify/credential/f844a9917d974a3bb153aeb58edf6d2c',
+      expect(
+        screen.getByRole('heading', { level: 1, name: 'Ricardo Costa' }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole('link', {
+          name: en ? /Ricardo Costa — home/ : /Ricardo Costa — início/,
+        }),
+      ).toHaveAccessibleName(
+        en ? 'rc. Ricardo Costa — home' : 'rc. Ricardo Costa — início',
       );
-      expect(link).toHaveAttribute('target', '_blank');
-      expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-      expect(screen.queryByText(/briefing|brief\./i)).not.toBeInTheDocument();
+      expect(
+        screen.getByRole('link', {
+          name: en ? /Explore projects/ : /Explorar projetos/,
+        }),
+      ).toHaveAttribute('href', '#projects');
+      expect(
+        screen.getByText(
+          en
+            ? 'I develop web applications and automation solutions that simplify processes, integrate systems and solve real business challenges.'
+            : 'Desenvolvo aplicações web e soluções de automação que simplificam processos, integram sistemas e resolvem desafios reais de negócios.',
+        ),
+      ).toHaveClass('hero-statement');
       const experience = screen.getByRole('region', {
         name: /Duas frentes|Two paths/,
       });
-      const [formal, independent] = within(experience).getAllByRole('article');
+      const cards = within(experience).getAllByRole('article');
+      expect(cards).toHaveLength(2);
+      const [corporate, independent] = cards;
       expect(
-        within(formal!).getByRole('heading', {
-          name:
-            language === 'en'
-              ? 'Full Stack Developer'
-              : 'Desenvolvedor Full Stack',
+        within(corporate!).getByRole('heading', {
+          name: en ? 'Trainee Software Developer' : 'Desenvolvedor Trainee',
         }),
       ).toBeInTheDocument();
-      expect(formal).toHaveTextContent('Java');
-      expect(formal).toHaveTextContent('Node.js');
-      expect(independent).toHaveTextContent(
-        language === 'en' ? 'INDEPENDENT PROJECTS' : 'PROJETOS INDEPENDENTES',
-      );
       expect(
-        screen.queryByText(
-          /1 ano e 6 meses|1 year and 6 months|sistemas empresariais/i,
-        ),
+        within(corporate!).getByRole('heading', {
+          name: en
+            ? 'Full Stack Developer — Internship'
+            : 'Desenvolvedor Full Stack — Estágio',
+        }),
+      ).toBeInTheDocument();
+      expect(within(corporate!).getAllByText(/Compass UOL/)).toHaveLength(2);
+      for (const tech of [
+        'Redis',
+        'Kubernetes',
+        'OpenLens',
+        'AWS EC2',
+        'AWS S3',
+      ])
+        expect(corporate).toHaveTextContent(tech);
+      expect(corporate).not.toHaveTextContent('SEFAZ');
+      expect(independent).toHaveTextContent('SEFAZ');
+      expect(independent).not.toHaveTextContent('Compass UOL');
+      expect(independent).not.toHaveTextContent(/2024|2025|2026/);
+      const projects = screen.getByRole('region', {
+        name: /Menos trabalho manual|Less manual work/,
+      });
+      const [tax, financial] = within(projects).getAllByRole('article');
+      expect(tax).toHaveTextContent('SEFAZ');
+      expect(tax).toHaveTextContent('JavaFX');
+      expect(tax).toHaveTextContent('≈98%');
+      expect(financial).toHaveTextContent('≈80%');
+      for (const tech of ['Spring Boot', 'Thymeleaf', 'PostgreSQL'])
+        expect(financial).toHaveTextContent(tech);
+      expect(financial).not.toHaveTextContent('JavaFX');
+      const technologies = screen.getByRole('region', {
+        name: /Tecnologias e práticas|Technologies and practices/,
+      });
+      expect(
+        within(technologies).getAllByRole('heading', { level: 3 }),
+      ).toHaveLength(8);
+      for (const tech of [
+        'React',
+        'TypeScript',
+        'JavaScript',
+        'HTML',
+        'CSS',
+        'Thymeleaf',
+        'Java',
+        'Spring Boot',
+        'Node.js',
+        'Express.js',
+        'JavaFX',
+        'PostgreSQL',
+        'MongoDB',
+        'MySQL',
+        'Redis',
+        'Git',
+        'GitHub',
+        'Azure DevOps / Azure Repos',
+        'GitHub Actions',
+        'GitHub Pages',
+        'Azure Pipelines',
+        'Microsoft Azure',
+        'Amazon Web Services (AWS)',
+        'Jest',
+        'Stryker',
+        'Postman',
+        'Google Analytics 4 (GA4)',
+        'Kubernetes',
+        'Argo',
+        'OpenLens',
+      ])
+        expect(within(technologies).getByText(tech)).toBeInTheDocument();
+      const education = screen.getByRole('region', {
+        name: /A prática encontra|Where practice/,
+      });
+      expect(within(education).getAllByRole('article')).toHaveLength(3);
+      expect(education).toHaveTextContent(
+        en ? 'Láurea Acadêmica (Academic Honors)' : 'Láurea Acadêmica',
+      );
+      expect(education).toHaveTextContent(en ? '9.13/10' : '9,13/10');
+      expect(education).toHaveTextContent('FAPERGS');
+      expect(education).toHaveTextContent('IFAM');
+      expect(education).toHaveTextContent(
+        en
+          ? 'Professional Master’s Degree in Software Engineering'
+          : 'Mestrado Profissional em Engenharia de Software',
+      );
+      expect(education).toHaveTextContent(en ? 'In progress' : 'Em andamento');
+      expect(
+        screen.getByRole('textbox', {
+          name: en ? 'Best email to reach you' : 'Seu melhor e-mail',
+        }),
+      ).toHaveAttribute('type', 'email');
+      const certification = screen.getByRole('link', {
+        name: en ? /View certification/ : /Ver certificação/,
+      });
+      expect(certification).toHaveAttribute(
+        'href',
+        'https://cp.certmetrics.com/amazon/en/public/verify/credential/f844a9917d974a3bb153aeb58edf6d2c',
+      );
+      expect(certification).toHaveAttribute('target', '_blank');
+      expect(certification).toHaveAttribute('rel', 'noopener noreferrer');
+      expect(
+        screen.queryByText(/1 ano e 6 meses|1 year and 6 months|briefing/),
+      ).not.toBeInTheDocument();
+      expect(
+        screen.queryByRole('link', { name: /currículo|download/i }),
       ).not.toBeInTheDocument();
     },
   );
-  it('presents hero, real projects, distinct employment, technologies, education and certification', () => {
-    renderWithProviders(<App />);
-    expect(
-      screen.getByRole('heading', { level: 1, name: 'Ricardo Costa' }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('link', { name: /Ricardo Costa — início/ }),
-    ).toHaveAccessibleName('rc. Ricardo Costa — início');
-    expect(
-      screen.getByRole('link', { name: /Explorar projetos/ }),
-    ).toHaveAttribute('href', '#projects');
-    const experience = screen.getByRole('region', { name: /Duas frentes/ });
-    expect(
-      within(experience).getByText('EXPERIÊNCIA FORMAL · CLT'),
-    ).toBeInTheDocument();
-    expect(
-      within(experience).getByRole('heading', {
-        name: 'Desenvolvedor Full Stack',
-      }),
-    ).toBeInTheDocument();
-    expect(
-      within(experience).getByText('PROJETOS INDEPENDENTES'),
-    ).toBeInTheDocument();
-    const projects = screen.getByRole('region', {
-      name: /Menos trabalho manual/,
-    });
-    expect(within(projects).getAllByRole('article')).toHaveLength(2);
-    expect(within(projects).getByText('98%')).toBeInTheDocument();
-    expect(within(projects).getByText('≈80%')).toBeInTheDocument();
-    expect(
-      within(projects).getByText(
-        /novos indicadores, relatórios e visões gerenciais/,
-      ),
-    ).toBeInTheDocument();
-    const technologies = screen.getByRole('region', {
-      name: 'Tecnologias e práticas.',
-    });
-    for (const tech of [
-      'React',
-      'TypeScript',
-      'HTML',
-      'CSS',
-      'Java',
-      'Spring Boot',
-      'Node.js',
-      'PostgreSQL',
-      'MongoDB',
-      'MySQL',
-      'Git',
-      'GitHub',
-      'Azure DevOps / Azure Repos',
-      'GitHub Actions',
-      'GitHub Pages',
-      'Azure Pipelines',
-      'Microsoft Azure',
-      'Amazon Web Services (AWS)',
-      'Testes unitários',
-      'Testes de componentes',
-      'Testes de mutação',
-      'Testes de integração',
-      'Testes end-to-end (E2E)',
-    ])
-      expect(within(technologies).getByText(tech)).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', {
-        name: 'Mestrado em Engenharia de Software',
-      }),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Graduação concluída')).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: 'AWS Certified Cloud Practitioner' }),
-    ).toBeInTheDocument();
-    expect(screen.getByText('Categoria Foundational')).toBeInTheDocument();
-    expect(
-      screen.queryByRole('link', { name: /currículo|download/i }),
-    ).not.toBeInTheDocument();
-  });
   it('provides accessible navigation and closes the mobile menu on navigation or Escape', async () => {
     const user = userEvent.setup({ delay: null });
     renderWithProviders(<App />);

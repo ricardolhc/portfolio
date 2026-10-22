@@ -2,7 +2,7 @@ const pt = {
   meta: {
     title: 'Ricardo Costa — Desenvolvedor Full Stack',
     description:
-      'Desenvolvedor Full Stack com experiência corporativa em React e TypeScript e projetos independentes de automação empresarial. Conheça Ricardo Costa.',
+      'Desenvolvedor Full Stack na Compass UOL, com experiência em aplicações web e soluções independentes de automação fiscal e gestão financeira. Conheça Ricardo Costa.',
   },
   skip: 'Ir para o conteúdo',
   home: 'Ricardo Costa — início',
@@ -29,7 +29,7 @@ const pt = {
     eyebrow: 'CÓDIGO COM PROPÓSITO. IMPACTO REAL.',
     role: 'Desenvolvedor Full Stack',
     statement:
-      'Desenvolvo aplicações e soluções de automação que simplificam processos e resolvem desafios reais de negócios.',
+      'Desenvolvo aplicações web e soluções de automação que simplificam processos, integram sistemas e resolvem desafios reais de negócios.',
     projects: 'Explorar projetos',
     contact: 'Vamos conversar',
     scroll: 'Conheça minha trajetória',
@@ -39,10 +39,10 @@ const pt = {
   about: {
     eyebrow: '01 / SOBRE MIM',
     title: 'Do problema real\nà solução que funciona.',
-    lead: 'Atuo no desenvolvimento de aplicações e na automação de processos, buscando transformar necessidades reais em soluções práticas, eficientes e alinhadas aos objetivos de cada projeto.',
-    body: 'Minha trajetória reúne atuação profissional no desenvolvimento de software e projetos independentes para empresas. Trabalho principalmente com React e TypeScript, com experiência também em Java e Node.js, além de desenvolver soluções voltadas à otimização de processos fiscais e financeiros.',
+    lead: 'Desenvolvo aplicações web com React, TypeScript, Java, Spring Boot e Node.js, com foco em soluções confiáveis e alinhadas às necessidades do negócio.',
+    body: 'Na Compass UOL, participo do desenvolvimento Front-end e Back-end de aplicações utilizadas por milhares de usuários, com integração de APIs REST, testes automatizados, manutenção e acompanhamento de entregas em homologação e produção. Em projetos independentes para empresas, desenvolvi soluções de automação fiscal e gestão financeira: aproximadamente 98% de redução no tempo de processamento e geração de planilhas e 80% no trabalho manual das rotinas de duplicatas e boletos.',
     closing:
-      'Graduado em Engenharia de Software pela Universidade Federal do Pampa e mestrando no programa de pós-graduação da mesma universidade. Meu foco é construir aplicações claras, funcionais e alinhadas ao problema que precisam resolver.',
+      'Sou bacharel em Engenharia de Software pela Universidade Federal do Pampa (UNIPAMPA), com Láurea Acadêmica e média geral de 9,13/10, e curso o Mestrado Profissional na mesma instituição. Tenho interesse especial em desenvolvimento Back-end, arquitetura de software, qualidade de código e computação em nuvem.',
     note: 'Engenharia na base.\nResultados na prática.',
   },
   experience: {
@@ -52,27 +52,79 @@ const pt = {
       'Atuação corporativa e entregas independentes, com contextos e responsabilidades próprios.',
     items: [
       {
-        group: 'EXPERIÊNCIA FORMAL · CLT',
-        title: 'Desenvolvedor Full Stack',
+        group: 'EXPERIÊNCIA CORPORATIVA',
+        title: 'Desenvolvedor Trainee',
+        details: 'Compass UOL · maio de 2025 – atualmente · Remoto',
         description:
-          'Atuação no desenvolvimento e manutenção de aplicações, principalmente com React e TypeScript, além de experiência no desenvolvimento com Java e Node.js. Participação em integrações com sistemas externos, evolução de funcionalidades e publicações em produção.',
+          'Desenvolvimento e evolução de aplicações web utilizadas por milhares de usuários, com atuação Front-end e Back-end, integração de sistemas, testes automatizados e acompanhamento de entregas em homologação e produção.',
         bullets: [
-          'Desenvolvimento e manutenção de aplicações.',
-          'Evolução de funcionalidades e publicações em produção.',
-          'Integração com sistemas externos.',
-          'Manutenção e evolução de sistemas.',
+          'Interfaces, componentes e funcionalidades com React e TypeScript.',
+          'Desenvolvimento e manutenção de funcionalidades Back-end com Node.js, MongoDB e Redis.',
+          'Integração com APIs REST e validação e testes com Postman.',
+          'Testes unitários, de componentes e de mutação com Jest e Stryker.',
+          'Implementação de eventos de rastreamento com Google Analytics 4 (GA4).',
+          'Acompanhamento de aplicações e validação de pods Kubernetes com Argo e OpenLens.',
+          'Correção de problemas, refatoração e manutenção evolutiva de sistemas.',
+          'Colaboração com equipes multidisciplinares em metodologias ágeis.',
+        ],
+        technologies: [
+          'React',
+          'TypeScript',
+          'JavaScript',
+          'Node.js',
+          'MongoDB',
+          'Redis',
+          'Postman',
+          'Jest',
+          'Stryker',
+          'GA4',
+          'Git',
+          'Kubernetes',
+          'Argo',
+          'OpenLens',
+        ],
+        additionalRoles: [
+          {
+            title: 'Desenvolvedor Full Stack — Estágio',
+            details: 'Compass UOL · julho de 2024 – dezembro de 2024 · Remoto',
+            description:
+              'Participação em programa de bolsas com desenvolvimento de uma aplicação web Full Stack, implementação de funcionalidades, integração entre Front-end e Back-end e publicação em nuvem.',
+            bullets: [
+              'Interfaces com React e APIs com Node.js e Express.',
+              'Persistência com MongoDB e funcionalidades de cadastro e upload de imagens.',
+              'Deploy na AWS com EC2 e S3.',
+              'Trabalho em equipe com Scrum e versionamento com Git.',
+            ],
+            technologies: [
+              'React',
+              'JavaScript',
+              'Node.js',
+              'Express.js',
+              'MongoDB',
+              'AWS EC2',
+              'AWS S3',
+              'Git',
+              'Scrum',
+            ],
+          },
         ],
       },
       {
         group: 'PROJETOS INDEPENDENTES',
         title: 'Soluções para empresas',
+        details: '',
         description:
-          'Prestação de serviços de desenvolvimento para outras empresas, com ferramentas voltadas a necessidades reais de operação.',
+          'Desenvolvimento independente de soluções de software para empresas, envolvendo automação fiscal, integração entre aplicações e gestão financeira. Atuação do levantamento das necessidades à implementação e evolução, com resultados mensuráveis na redução de atividades manuais.',
         bullets: [
-          'Automação de processos fiscais e financeiros.',
-          'Processamento de informações de notas fiscais e geração de planilhas.',
-          'Organização de informações, duplicatas e pagamentos.',
+          'Automação do processamento de notas fiscais e geração de planilhas.',
+          'Integração com a SEFAZ para consulta de informações tributárias e comunicação entre aplicações por APIs REST.',
+          'Desenvolvimento e evolução de sistema de gestão financeira para documentos, duplicatas e boletos.',
+          'Criação de dashboards e indicadores gerenciais.',
+          'Processamento e atualização de informações em lote.',
+          'Redução do esforço manual em atividades operacionais.',
         ],
+        technologies: [],
+        additionalRoles: [],
       },
     ],
   },
@@ -85,35 +137,53 @@ const pt = {
     solution: 'A SOLUÇÃO',
     outcome: 'O RESULTADO',
     continuity:
-      'Uma solução, evolução contínua — projetos independentes desenvolvidos durante a graduação.',
+      'Uma solução, evolução contínua — da automação fiscal à gestão financeira, em projetos independentes para necessidades reais de empresas.',
     items: [
       {
         number: '01',
         category: 'AUTOMAÇÃO FISCAL',
         title: 'Da nota fiscal\nà planilha.',
         context:
-          'Desenvolvido para otimizar um processo empresarial real, automatizando atividades que anteriormente exigiam trabalho manual.',
+          'Automação de um processo empresarial real de processamento de notas fiscais e geração de planilhas.',
         problem:
-          'Organizar informações de notas fiscais e gerar documentos exigia atividades manuais demoradas.',
+          'O processamento de notas fiscais e a geração de planilhas exigiam atividades manuais repetitivas e demoradas.',
         solution:
-          'Um sistema desenvolvido para automatizar a geração de planilhas a partir de informações de notas fiscais, reduzindo a necessidade de intervenção manual e tornando o processo já existente mais rápido, simples e eficiente.',
-        metric: '98%',
-        result: 'de redução no tempo de geração das planilhas',
+          'Aplicação para automatizar o processamento de notas fiscais eletrônicas e a geração de planilhas. Integra-se à SEFAZ para obter informações tributárias associadas às notas fiscais e utiliza APIs REST para comunicação com outra aplicação, reduzindo verificações manuais e aumentando a eficiência operacional.',
+        metric: '≈98%',
+        result:
+          'de redução no tempo de execução do processo de processamento e geração de planilhas',
+        technologies: [
+          'Java',
+          'JavaFX',
+          'HTML',
+          'CSS',
+          'APIs REST',
+          'Integração com SEFAZ',
+        ],
       },
       {
         number: '02',
         category: 'GESTÃO FINANCEIRA',
         title: 'Do documento\nao pagamento.',
         context:
-          'Evolução da solução anterior para atender novas necessidades de controle financeiro, acompanhamento de pagamentos e geração de informações gerenciais.',
+          'Evolução da automação fiscal para atender necessidades de controle financeiro, acompanhamento de pagamentos e informações gerenciais.',
         problem:
-          'O controle de duplicatas e pagamentos ligados a notas fiscais de entrada exigia trabalho manual recorrente.',
+          'A gestão de notas fiscais, duplicatas, boletos e pagamentos exigia acompanhamento manual e dificultava a organização das informações financeiras.',
         solution:
-          'Evolução da solução anterior, integrando funcionalidades para organizar duplicatas, boletos e pagamentos, além de disponibilizar novos indicadores, relatórios e visões gerenciais que antes não estavam disponíveis.',
+          'Evolução da solução anterior para um sistema web de gestão financeira de notas fiscais, duplicatas e boletos. Reúne dashboard de pagamentos, pendências e vencimentos, pesquisa e filtros, acompanhamento de pagamentos e recebimentos e atualização em lote. O pagamento inteligente permite selecionar e atualizar múltiplas duplicatas. Gráficos interativos, relatórios, indicadores gerenciais e rankings de fornecedores ampliam a visibilidade das informações.',
         metric: '≈80%',
-        result: 'de redução do trabalho manual anteriormente necessário',
+        result:
+          'de redução do trabalho manual nas rotinas de gestão de duplicatas e boletos',
+        technologies: [
+          'Java',
+          'Spring Boot',
+          'Thymeleaf',
+          'JavaScript',
+          'PostgreSQL',
+        ],
       },
     ],
+    technologies: 'TECNOLOGIAS E INTEGRAÇÕES',
   },
   technologies: {
     eyebrow: '04 / TECNOLOGIAS',
@@ -121,9 +191,29 @@ const pt = {
     intro:
       'Do front-end ao back-end, passando por dados, cloud, entrega contínua e qualidade de software.',
     groups: [
-      { title: 'Front-end', items: ['React', 'TypeScript', 'HTML', 'CSS'] },
-      { title: 'Back-end', items: ['Java', 'Spring Boot', 'Node.js'] },
-      { title: 'Bancos de dados', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
+      {
+        title: 'Front-end',
+        items: [
+          'React',
+          'TypeScript',
+          'JavaScript',
+          'HTML',
+          'CSS',
+          'Thymeleaf',
+        ],
+      },
+      {
+        title: 'Back-end e APIs',
+        items: ['Java', 'Spring Boot', 'Node.js', 'Express.js', 'APIs REST'],
+      },
+      {
+        title: 'Desenvolvimento Desktop',
+        items: ['JavaFX'],
+      },
+      {
+        title: 'Bancos de dados e cache',
+        items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'],
+      },
       {
         title: 'Versionamento e CI/CD',
         items: [
@@ -140,33 +230,52 @@ const pt = {
         items: ['Amazon Web Services (AWS)', 'Microsoft Azure'],
       },
       {
-        title: 'Testes e qualidade',
+        title: 'Testes e qualidade de software',
         items: [
           'Testes unitários',
           'Testes de componentes',
-          'Testes de mutação',
           'Testes de integração',
+          'Testes de mutação',
           'Testes end-to-end (E2E)',
+          'Jest',
+          'Stryker',
+          'Postman',
         ],
+      },
+      {
+        title: 'Analytics e infraestrutura de aplicações',
+        items: ['Google Analytics 4 (GA4)', 'Kubernetes', 'Argo', 'OpenLens'],
       },
     ],
   },
   education: {
     eyebrow: '05 / FORMAÇÃO',
     title: 'A prática encontra\na engenharia.',
-    university: 'Universidade Federal do Pampa — Unipampa',
     items: [
       {
-        title: 'Mestrado em Engenharia de Software',
+        title: 'Mestrado Profissional em Engenharia de Software',
         status: 'Em andamento',
+        institution: 'Universidade Federal do Pampa (UNIPAMPA)',
+        period: 'janeiro de 2026 – dezembro de 2027 (previsão)',
         description:
-          'Programa de Pós-Graduação em Engenharia de Software da Universidade Federal do Pampa.',
+          'Formação com aprofundamento técnico e científico, pesquisa aplicada e desenvolvimento de competências para analisar problemas complexos e avaliar soluções para desafios da indústria de software.',
       },
       {
-        title: 'Engenharia de Software',
+        title: 'Bacharelado em Engenharia de Software',
         status: 'Graduação concluída',
+        institution: 'Universidade Federal do Pampa (UNIPAMPA)',
+        period: 'março de 2022 – dezembro de 2025',
         description:
-          'Graduação em Engenharia de Software pela Universidade Federal do Pampa.',
+          'Graduação concluída com Láurea Acadêmica e média geral de 9,13/10. Participação em iniciação científica apoiada pela FAPERGS e em pesquisas que resultaram em publicações, conciliando a formação com o desenvolvimento de soluções de software para empresas.',
+      },
+      {
+        title: 'Técnico em Informática Integrado ao Ensino Médio',
+        status: 'Formação concluída',
+        institution:
+          'Instituto Federal de Educação, Ciência e Tecnologia do Amazonas (IFAM)',
+        period: 'fevereiro de 2018 – dezembro de 2021',
+        description:
+          'Fundamentos em programação, desenvolvimento web, bancos de dados, redes e sistemas operacionais. Robótica educacional com Arduino e LEGO Mindstorms EV3.',
       },
     ],
   },
@@ -186,7 +295,7 @@ const pt = {
     hint: 'Todos os campos são obrigatórios.',
     fields: {
       name: 'Nome',
-      email: 'E-mail',
+      email: 'Seu melhor e-mail',
       subject: 'Assunto',
       message: 'Mensagem',
     },
@@ -228,7 +337,7 @@ const en: typeof pt = {
   meta: {
     title: 'Ricardo Costa — Full Stack Developer',
     description:
-      'Full Stack Developer with corporate experience in React and TypeScript and independent business automation projects. Meet Ricardo Costa.',
+      'Full Stack Developer at Compass UOL, with web application experience and independent tax automation and financial management solutions. Meet Ricardo Costa.',
   },
   skip: 'Skip to content',
   home: 'Ricardo Costa — home',
@@ -255,7 +364,7 @@ const en: typeof pt = {
     eyebrow: 'PURPOSEFUL CODE. REAL IMPACT.',
     role: 'Full Stack Developer',
     statement:
-      'I develop applications and automation solutions that simplify processes and solve real business challenges.',
+      'I develop web applications and automation solutions that simplify processes, integrate systems and solve real business challenges.',
     projects: 'Explore projects',
     contact: 'Let’s talk',
     scroll: 'Explore my journey',
@@ -265,10 +374,10 @@ const en: typeof pt = {
   about: {
     eyebrow: '01 / ABOUT',
     title: 'From a real problem\nto a working solution.',
-    lead: 'I develop applications and automate processes, turning real needs into practical, efficient solutions aligned with each project’s goals.',
-    body: 'My background combines professional software development and independent projects for businesses. I work primarily with React and TypeScript, with practical experience in Java and Node.js, and develop solutions to optimize tax and financial processes.',
+    lead: 'I develop web applications with React, TypeScript, Java, Spring Boot and Node.js, focusing on reliable solutions aligned with business needs.',
+    body: 'At Compass UOL, I contribute to front-end and back-end development for applications used by thousands of users, integrating REST APIs, writing automated tests, maintaining systems and supporting releases in staging and production. In independent projects for businesses, I developed tax automation and financial management solutions: approximately 98% less time spent processing invoices and generating spreadsheets, and 80% less manual work in payables and payment slip routines.',
     closing:
-      'I hold a degree in Software Engineering from the Federal University of Pampa and am pursuing a master’s degree in the graduate program at the same university. I focus on building clear, functional applications aligned with the problems they need to solve.',
+      'I hold a Bachelor’s Degree in Software Engineering from Universidade Federal do Pampa (UNIPAMPA), awarded Láurea Acadêmica (Academic Honors) with an overall average of 9.13/10, and am pursuing a Professional Master’s Degree at the same institution. My interests include back-end development, software architecture, code quality and cloud computing.',
     note: 'Engineering at the core.\nResults in practice.',
   },
   experience: {
@@ -278,27 +387,79 @@ const en: typeof pt = {
       'Corporate work and independent deliveries, each with its own context and responsibilities.',
     items: [
       {
-        group: 'FORMAL EMPLOYMENT · CLT',
-        title: 'Full Stack Developer',
+        group: 'CORPORATE EXPERIENCE',
+        title: 'Trainee Software Developer',
+        details: 'Compass UOL · May 2025 – present · Remote',
         description:
-          'Application development and maintenance, primarily with React and TypeScript, with practical development experience in Java and Node.js. Participation in external system integrations, feature improvements and production releases.',
+          'Development and evolution of web applications used by thousands of users, covering front-end and back-end work, system integration, automated testing and release support in staging and production.',
         bullets: [
-          'Application development and maintenance.',
-          'Feature improvements and production releases.',
-          'Integration with external systems.',
-          'System maintenance and evolution.',
+          'Interfaces, components and features with React and TypeScript.',
+          'Back-end feature development and maintenance with Node.js, MongoDB and Redis.',
+          'REST API integration, validation and testing with Postman.',
+          'Unit, component and mutation tests with Jest and Stryker.',
+          'Tracking event implementation with Google Analytics 4 (GA4).',
+          'Application monitoring and Kubernetes pod validation with Argo and OpenLens.',
+          'Bug fixes, refactoring and ongoing system improvements.',
+          'Collaboration with multidisciplinary teams using agile methodologies.',
+        ],
+        technologies: [
+          'React',
+          'TypeScript',
+          'JavaScript',
+          'Node.js',
+          'MongoDB',
+          'Redis',
+          'Postman',
+          'Jest',
+          'Stryker',
+          'GA4',
+          'Git',
+          'Kubernetes',
+          'Argo',
+          'OpenLens',
+        ],
+        additionalRoles: [
+          {
+            title: 'Full Stack Developer — Internship',
+            details: 'Compass UOL · July 2024 – December 2024 · Remote',
+            description:
+              'Participation in a scholarship program developing a Full Stack web application, implementing features, integrating front-end and back-end and deploying to the cloud.',
+            bullets: [
+              'React interfaces and APIs with Node.js and Express.',
+              'MongoDB persistence, registration features and image uploads.',
+              'AWS deployment with EC2 and S3.',
+              'Teamwork with Scrum and version control with Git.',
+            ],
+            technologies: [
+              'React',
+              'JavaScript',
+              'Node.js',
+              'Express.js',
+              'MongoDB',
+              'AWS EC2',
+              'AWS S3',
+              'Git',
+              'Scrum',
+            ],
+          },
         ],
       },
       {
         group: 'INDEPENDENT PROJECTS',
         title: 'Solutions for businesses',
+        details: '',
         description:
-          'Software development services for other businesses, with tools addressing real operational needs.',
+          'Independent software development for businesses, covering tax process automation, application integration and financial management. Work spans requirements discovery, implementation and ongoing improvements, with measurable reductions in manual activities.',
         bullets: [
-          'Automation of tax and financial processes.',
-          'Invoice information processing and spreadsheet generation.',
-          'Organization of information, payables and payments.',
+          'Automated invoice processing and spreadsheet generation.',
+          'SEFAZ integration to retrieve tax information and REST API communication between applications.',
+          'Development and evolution of a financial management system for documents, payables and payment slips.',
+          'Dashboards and management indicators.',
+          'Batch information processing and updates.',
+          'Reduced manual effort in operational activities.',
         ],
+        technologies: [],
+        additionalRoles: [],
       },
     ],
   },
@@ -311,35 +472,53 @@ const en: typeof pt = {
     solution: 'THE SOLUTION',
     outcome: 'THE RESULT',
     continuity:
-      'One solution, continuous improvement — independent projects developed during my undergraduate degree.',
+      'One solution, continuous evolution — from tax automation to financial management, through independent projects addressing real business needs.',
     items: [
       {
         number: '01',
         category: 'TAX AUTOMATION',
         title: 'From invoice\nto spreadsheet.',
         context:
-          'Developed to optimize a real business process by automating activities that previously required manual work.',
+          'Automation of a real business process for invoice processing and spreadsheet generation.',
         problem:
-          'Organizing invoice information and generating documents required time-consuming manual work.',
+          'Invoice processing and spreadsheet generation required repetitive, time-consuming manual activities.',
         solution:
-          'A system developed to automate spreadsheet generation from invoice information, reducing the need for manual intervention and making the existing process faster, simpler and more efficient.',
-        metric: '98%',
-        result: 'reduction in spreadsheet generation time',
+          'An application that automates Brazilian Electronic Invoice (NF-e) processing and spreadsheet generation. It integrates with SEFAZ to retrieve tax information associated with invoices and uses REST APIs to communicate with another application, reducing manual checks and improving operational efficiency.',
+        metric: '≈98%',
+        result:
+          'reduction in the time required for invoice processing and spreadsheet generation',
+        technologies: [
+          'Java',
+          'JavaFX',
+          'HTML',
+          'CSS',
+          'REST APIs',
+          'SEFAZ integration',
+        ],
       },
       {
         number: '02',
         category: 'FINANCIAL MANAGEMENT',
         title: 'From document\nto payment.',
         context:
-          'An evolution of the previous solution to address new needs for financial control, payment tracking and management information.',
+          'An evolution of tax automation to support financial control, payment tracking and management information.',
         problem:
-          'Tracking payables and payments associated with incoming invoices required recurring manual work.',
+          'Managing invoices, payables, payment slips and payments required manual tracking and made financial information harder to organize.',
         solution:
-          'An evolution of the previous solution, integrating features to organize payables, payment slips and payments, while also providing new indicators, reports and management views that were previously unavailable.',
+          'An evolution of the earlier solution into a web-based financial management system for invoices, payables and payment slips. It combines a dashboard of payments, outstanding items and due dates, search and filters, payment and receipt tracking, and batch updates. Smart payment features support selecting and updating multiple payables. Interactive charts, reports, management indicators and supplier rankings improve visibility into financial information.',
         metric: '≈80%',
-        result: 'reduction in the manual work previously required',
+        result:
+          'reduction in manual work for payables and payment slip management routines',
+        technologies: [
+          'Java',
+          'Spring Boot',
+          'Thymeleaf',
+          'JavaScript',
+          'PostgreSQL',
+        ],
       },
     ],
+    technologies: 'TECHNOLOGIES AND INTEGRATIONS',
   },
   technologies: {
     eyebrow: '04 / TECHNOLOGIES',
@@ -347,9 +526,29 @@ const en: typeof pt = {
     intro:
       'From front-end and back-end to data, cloud, continuous delivery and software quality.',
     groups: [
-      { title: 'Front-end', items: ['React', 'TypeScript', 'HTML', 'CSS'] },
-      { title: 'Back-end', items: ['Java', 'Spring Boot', 'Node.js'] },
-      { title: 'Databases', items: ['PostgreSQL', 'MongoDB', 'MySQL'] },
+      {
+        title: 'Front-end',
+        items: [
+          'React',
+          'TypeScript',
+          'JavaScript',
+          'HTML',
+          'CSS',
+          'Thymeleaf',
+        ],
+      },
+      {
+        title: 'Back-end and APIs',
+        items: ['Java', 'Spring Boot', 'Node.js', 'Express.js', 'REST APIs'],
+      },
+      {
+        title: 'Desktop development',
+        items: ['JavaFX'],
+      },
+      {
+        title: 'Databases and cache',
+        items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'],
+      },
       {
         title: 'Version control and CI/CD',
         items: [
@@ -366,33 +565,53 @@ const en: typeof pt = {
         items: ['Amazon Web Services (AWS)', 'Microsoft Azure'],
       },
       {
-        title: 'Testing and quality',
+        title: 'Software testing and quality',
         items: [
           'Unit testing',
           'Component testing',
-          'Mutation testing',
           'Integration testing',
+          'Mutation testing',
           'End-to-end (E2E) testing',
+          'Jest',
+          'Stryker',
+          'Postman',
         ],
+      },
+      {
+        title: 'Analytics and application infrastructure',
+        items: ['Google Analytics 4 (GA4)', 'Kubernetes', 'Argo', 'OpenLens'],
       },
     ],
   },
   education: {
     eyebrow: '05 / EDUCATION',
     title: 'Where practice\nmeets engineering.',
-    university: 'Federal University of Pampa — Unipampa',
     items: [
       {
-        title: 'Master’s in Software Engineering',
+        title: 'Professional Master’s Degree in Software Engineering',
         status: 'In progress',
+        institution: 'Universidade Federal do Pampa (UNIPAMPA)',
+        period: 'January 2026 – December 2027 (expected)',
         description:
-          'Graduate Program in Software Engineering at the Federal University of Pampa.',
+          'Advanced technical and scientific study with applied research, developing skills to analyze complex problems and evaluate solutions to software industry challenges.',
       },
       {
-        title: 'Software Engineering',
-        status: 'Undergraduate degree completed',
+        title: 'Bachelor’s Degree in Software Engineering',
+        status: 'Degree completed',
+        institution: 'Universidade Federal do Pampa (UNIPAMPA)',
+        period: 'March 2022 – December 2025',
         description:
-          'Undergraduate degree in Software Engineering from the Federal University of Pampa.',
+          'Graduated with Láurea Acadêmica (Academic Honors) and an overall average of 9.13/10. Participated in undergraduate research supported by FAPERGS and research leading to scientific publications, alongside developing software solutions for businesses.',
+      },
+      {
+        title:
+          'Technical Diploma in Informatics Integrated with Secondary Education',
+        status: 'Qualification completed',
+        institution:
+          'Instituto Federal de Educação, Ciência e Tecnologia do Amazonas (IFAM)',
+        period: 'February 2018 – December 2021',
+        description:
+          'Foundations in programming, web development, databases, networks and operating systems. Educational robotics with Arduino and LEGO Mindstorms EV3.',
       },
     ],
   },
@@ -412,7 +631,7 @@ const en: typeof pt = {
     hint: 'All fields are required.',
     fields: {
       name: 'Name',
-      email: 'Email',
+      email: 'Best email to reach you',
       subject: 'Subject',
       message: 'Message',
     },

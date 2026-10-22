@@ -88,11 +88,11 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         ).toHaveAttribute('href', certificationUrl);
         await expect(
           page.locator('#technologies .technology-group'),
-        ).toHaveCount(6);
+        ).toHaveCount(8);
         await expect(page.locator('#experience h3').first()).toHaveText(
           language === 'en'
-            ? 'Full Stack Developer'
-            : 'Desenvolvedor Full Stack',
+            ? 'Trainee Software Developer'
+            : 'Desenvolvedor Trainee',
         );
         await expect(page.locator('body')).not.toContainText(
           language === 'en' ? '1 year and 6 months' : '1 ano e 6 meses',
@@ -106,7 +106,7 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
             }),
           );
         if (width >= 768) {
-          for (const row of [0, 2, 4]) {
+          for (const row of [0, 2, 4, 6]) {
             expect(technologyLayout[row]!.x).toBe(technologyLayout[0]!.x);
             expect(technologyLayout[row + 1]!.x).toBe(technologyLayout[1]!.x);
             expect(technologyLayout[row]!.y).toBe(technologyLayout[row + 1]!.y);
@@ -276,7 +276,7 @@ test('mobile navigation, preferences, Formspree submission and secondary email c
     .getByRole('textbox', { name: 'Name', exact: true })
     .fill('Browser Test');
   await page
-    .getByRole('textbox', { name: 'Email', exact: true })
+    .getByRole('textbox', { name: 'Best email to reach you', exact: true })
     .fill('invalid');
   await page
     .getByRole('textbox', { name: 'Subject', exact: true })
@@ -286,13 +286,13 @@ test('mobile navigation, preferences, Formspree submission and secondary email c
     .fill('A real business process to improve.');
   await page.getByRole('button', { name: 'Send message' }).click();
   await expect(
-    page.getByRole('textbox', { name: 'Email', exact: true }),
+    page.getByRole('textbox', { name: 'Best email to reach you', exact: true }),
   ).toBeFocused();
   await expect(
     page.getByText('Enter a valid email address.', { exact: true }),
   ).toBeVisible();
   await page
-    .getByRole('textbox', { name: 'Email', exact: true })
+    .getByRole('textbox', { name: 'Best email to reach you', exact: true })
     .fill('visitor@example.com');
   let acknowledge!: () => void;
   const confirmation = new Promise<void>((resolve) => {
@@ -438,7 +438,7 @@ for (const failure of ['rejected', 'rateLimited', 'invalid', 'network']) {
     await page.goto('/');
     for (const [label, value] of [
       ['Nome', 'Ana Silva'],
-      ['E-mail', 'visitor@example.com'],
+      ['Seu melhor e-mail', 'visitor@example.com'],
       ['Assunto', 'Projeto & integração'],
       ['Mensagem', 'Um processo empresarial para melhorar.'],
     ])
