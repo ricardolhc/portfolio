@@ -2,6 +2,8 @@ Amazon Web Services logo
 Author: Amazon.com, Inc.
 Source: https://commons.wikimedia.org/wiki/File:Amazon_Web_Services_Logo.svg
 Original: https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg
-Downloaded without modifications on 2026-10-22.
+Base SVG downloaded on 2026-10-22.
+Presentation adapted on 2026-10-22: white monochrome fills for a dark background.
+Original vector paths and aspect ratio remain unchanged.
 The source lists Apache License 2.0; see aws-logo-Apache-2.0.txt.
 Amazon Web Services and the AWS logo are trademarks of Amazon.com, Inc. or its affiliates.

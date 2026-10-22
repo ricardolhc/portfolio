@@ -77,6 +77,9 @@ describe.each(['pt-BR', 'en'] as const)(
         }),
       ).toBeInTheDocument();
       expect(screen.getByText('Foundational')).toBeInTheDocument();
+      expect(
+        screen.getByText('Amazon Web Services', { exact: true }),
+      ).toBeInTheDocument();
       const link = screen.getByRole('link', {
         name: language === 'en' ? /View Credential/ : /Ver certificação/,
       });

@@ -1,6 +1,6 @@
 # Verificação da entrega
 
-Última verificação em 22 de outubro de 2026, após o refinamento visual de Projetos, Tecnologias e Certificação. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [editorial-2026-10-22.md](editorial-2026-10-22.md).
+Última verificação em 22 de outubro de 2026, após o refinamento de Projetos e Certificação com resultado aberto e logo transparente. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [open-impact-2026-10-22.md](open-impact-2026-10-22.md).
 
 ## Resultados executados
 
@@ -28,7 +28,7 @@ As medições anteriores de Lighthouse foram feitas no preview do build, em `htt
 
 Playwright executou o aplicativo real no Chrome instalado, com movimento reduzido, nas larguras 320, 375, 430, 768, 1024 e 1440px. Cada largura foi verificada em PT/EN e claro/escuro. As 24 combinações não apresentaram overflow horizontal nem violações nas regras axe WCAG 2 A/AA, 2.1 AA e 2.2 AA executadas.
 
-As posições reais dos oito grupos confirmaram duas colunas de alturas adaptativas a partir de 768px, com leitura de cima para baixo em cada coluna, e uma coluna abaixo disso. As tecnologias usam tags com borda de 1px; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 36,6s.
+As posições reais dos oito grupos confirmaram duas colunas de alturas adaptativas a partir de 768px, com leitura de cima para baixo em cada coluna, e uma coluna abaixo disso. As tecnologias usam tags com borda de 1px; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 38,0s.
 
 O fluxo mobile também verificou abertura do menu, fechamento com Escape e foco no botão, navegação por âncoras de projetos/certificação/contato, alternância de tema/idioma e persistência após recarga. O formulário foi preenchido e validado, com payload e cabeçalhos conferidos, estado pendente, prevenção de envio duplicado, confirmação simulada e limpeza. Cenários adicionais simularam HTTP 422/429, JSON inválido e falha de rede, preservando o conteúdo e permitindo recuperação em inglês. Todas as requisições Formspree foram interceptadas; nenhuma chegou ao serviço real.
 
@@ -40,7 +40,13 @@ Testes automatizados não equivalem a certificação WCAG completa. Não foram r
 
 ## Mutação e fortalecimento dos testes
 
-### Refinamento visual das três seções
+### Resultado aberto e certificação compacta
+
+A alteração atual mantém o escopo e thresholds do Stryker, sem alterações nos arquivos de regras mutados. Stryker e Lighthouse não foram reexecutados. Os 118 testes Vitest passaram; cobertura permanece em 216/216 linhas, 86/86 funções, 240/240 statements e 137/139 branches. Os 13 E2E finais passaram em 38,0s, verificando a ausência de moldura no impacto, tags uniformes dentro do conteúdo, logo transparente de 52px e cabeçalho alinhado a partir de 375px. Em 320px o badge pode empilhar. As 24 combinações não tiveram overflow ou violações axe nas regras executadas. Capturas em reports/open-impact/ foram inspecionadas.
+
+A conferência de escopo confirmou que as funções de outras seções, inclusive Technologies e TechnologyTags, permanecem idênticas ao commit ba3a51d. Somente certifications ganhou um identificador de organização nos dados PT/EN; textos de projetos e métricas não foram alterados. Revisão independente sem achados materiais.
+
+### Histórico: refinamento visual das três seções
 
 O escopo e thresholds do Stryker foram preservados; nenhum arquivo do escopo de mutação foi alterado. Stryker não foi reexecutado nesta alteração de apresentação. O score de 88,54% descrito no histórico não é uma medição nova. Foram executados testes de componentes, integração, cobertura e E2E para as alterações visuais e a preservação dos fluxos. Seis novos casos PT/EN verificam os cases, listas de tags e logotipo local/ação da credencial.
 

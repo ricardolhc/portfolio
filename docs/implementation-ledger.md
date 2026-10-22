@@ -98,3 +98,11 @@
 - Primeira rodada dos testes alterados observou seis falhas contra a implementação anterior. Seis casos novos de componentes PT/EN e E2E ajustados para cases, tags, colunas e carregamento real do SVG. Teste de asset reconhece o data URI legítimo produzido pelo Vite, sem forçar carregamento externo.
 - 118 testes Vitest passaram; cobertura 100% linhas/funções/statements e 98,56% branches. Lint, typecheck, formatação e build passaram. E2E: 13 passaram em 36,6s, 24 combinações sem overflow ou violações axe nas regras executadas. Capturas das três seções em reports/editorial/ inspecionadas; revisão independente sem achados materiais.
 - Stryker e Lighthouse não reexecutados nesta alteração visual; escopo/thresholds de mutação e arquivos de produção mutados permanecem inalterados. Score 88,54% permanece histórico. Nenhum envio real ou publicação remota. Detalhes em editorial-2026-10-22.md.
+
+## Resultado aberto e card AWS compacto — 22 de outubro de 2026
+
+- Solicitação aplicada sobre `ba3a51d`, somente em Projetos e Certificação. Textos técnicos, métricas, destinos, animações e seção Tecnologias preservados. Sem novas dependências.
+- Resultado sem moldura fechada: divisória vertical desktop e horizontal mobile. Tags dentro do conteúdo, com padding menor e altura uniforme, por regras locais que não afetam Tecnologias.
+- SVG AWS branco transparente de 52px, com caminhos/proporções preservados e atribuição atualizada. Cabeçalho integra logo, organização e Foundational; título, emissor e link mais próximos. Cor branca corresponde à apresentação ilustrada no guia AWS para fundos escuros.
+- Duas falhas de componente observadas antes da implementação. Teste de cabeçalho revelou quebra do badge em 375px, corrigida com gap/padding locais; 320px mantém empilhamento natural. 118 testes Vitest passaram com cobertura 100% linhas/funções/statements e 98,56% branches. Lint, TypeScript e build passaram; testes E2E e capturas em open-impact-2026-10-22.md.
+- Revisão independente sem achados materiais. Conferência automatizada confirmou dados alterados somente em certifications e código idêntico das outras seções, inclusive Technologies/TechnologyTags. Sem envio real, publicação remota ou nova execução de Stryker/Lighthouse.

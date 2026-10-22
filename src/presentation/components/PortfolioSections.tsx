@@ -204,18 +204,18 @@ export function Projects() {
                       <p>{project.solution}</p>
                     </div>
                   </div>
+                  <div className="project-technologies">
+                    <h4 className="eyebrow">{t.projects.technologies}</h4>
+                    <TechnologyTags
+                      items={project.technologies}
+                      label={t.projects.technologies}
+                    />
+                  </div>
                 </div>
                 <div className="project-result">
                   <span className="eyebrow">{t.projects.outcome}</span>
                   <strong>{project.metric}</strong>
                   <p>{project.result}</p>
-                </div>
-                <div className="project-technologies">
-                  <h4 className="eyebrow">{t.projects.technologies}</h4>
-                  <TechnologyTags
-                    items={project.technologies}
-                    label={t.projects.technologies}
-                  />
                 </div>
               </article>
             ))}
@@ -310,16 +310,21 @@ export function Certifications() {
         <SectionHeading id="certifications" {...t.certifications} />
         <article className="certification-card">
           <div className="certification-top">
-            <span className="aws-mark">
-              <img
-                src={awsLogo}
-                alt={t.certifications.logoAlt}
-                width="304"
-                height="182"
-                loading="lazy"
-                decoding="async"
-              />
-            </span>
+            <div className="certification-brand">
+              <span className="aws-mark">
+                <img
+                  src={awsLogo}
+                  alt={t.certifications.logoAlt}
+                  width="304"
+                  height="182"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </span>
+              <span className="certification-organization">
+                {t.certifications.organization}
+              </span>
+            </div>
             <span className="status-tag">{t.certifications.category}</span>
           </div>
           <h3>

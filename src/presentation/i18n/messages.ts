@@ -285,6 +285,7 @@ const pt = {
     category: 'Foundational',
     reference: 'Ver certificação',
     logoAlt: 'Amazon Web Services (AWS)',
+    organization: 'Amazon Web Services',
   },
   contact: {
     eyebrow: '07 / CONTATO',
@@ -622,6 +623,7 @@ const en: typeof pt = {
     category: 'Foundational',
     reference: 'View Credential',
     logoAlt: 'Amazon Web Services (AWS)',
+    organization: 'Amazon Web Services',
   },
   contact: {
     eyebrow: '07 / CONTACT',

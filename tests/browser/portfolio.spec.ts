@@ -149,8 +149,36 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
           const tags = await project
             .locator('.project-technologies')
             .boundingBox();
-          expect(tags!.y).toBeGreaterThanOrEqual(result!.y + result!.height);
+          const details = await project
+            .locator('.project-details')
+            .boundingBox();
+          expect(tags!.y).toBeGreaterThanOrEqual(details!.y + details!.height);
           expect(tags!.x).toBe(content!.x);
+          expect(tags!.y + tags!.height).toBeLessThanOrEqual(
+            content!.y + content!.height + 1,
+          );
+          const borders = await project
+            .locator('.project-result')
+            .evaluate((node) => {
+              const style = getComputedStyle(node);
+              return {
+                top: style.borderTopWidth,
+                right: style.borderRightWidth,
+                bottom: style.borderBottomWidth,
+                left: style.borderLeftWidth,
+              };
+            });
+          expect(borders.right).toBe('0px');
+          expect(borders.bottom).toBe('0px');
+          expect(width >= 768 ? borders.top : borders.left).toBe('0px');
+          const tagHeights = await project
+            .locator('.technology-tags li')
+            .evaluateAll((nodes) =>
+              nodes.map((node) =>
+                Math.round(node.getBoundingClientRect().height),
+              ),
+            );
+          expect(new Set(tagHeights).size).toBe(1);
           if (width >= 768) expect(result!.x).toBeGreaterThan(content!.x);
           else {
             expect(result!.x).toBe(content!.x);
@@ -162,6 +190,24 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         });
         await logo.scrollIntoViewIfNeeded();
         await expect(logo).toBeVisible();
+        const logoStyle = await page.locator('.aws-mark').evaluate((node) => ({
+          background: getComputedStyle(node).backgroundColor,
+          width: node.getBoundingClientRect().width,
+        }));
+        expect(logoStyle.background).toBe('rgba(0, 0, 0, 0)');
+        expect(logoStyle.width).toBeLessThanOrEqual(56);
+        const brand = await page.locator('.certification-brand').boundingBox();
+        const level = await page
+          .locator('.certification-card .status-tag')
+          .boundingBox();
+        if (width >= 375)
+          expect(level!.y).toBeLessThan(brand!.y + brand!.height);
+        const credentialTitle = await page
+          .locator('.certification-card h3')
+          .boundingBox();
+        expect(credentialTitle!.y).toBeGreaterThanOrEqual(
+          brand!.y + brand!.height,
+        );
         expect(
           await logo.evaluate(
             (image: HTMLImageElement) =>

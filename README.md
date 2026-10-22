@@ -12,7 +12,7 @@ A identidade visual é editorial e monocromática, com fonte Geist hospedada no 
 - Navegação por âncoras, menu mobile com Escape, foco visível e link para pular navegação.
 - Transições discretas com Motion e respeito a `prefers-reduced-motion`.
 - Formulário de contato integrado ao Formspree, validação PT/EN, estados acessíveis e cópia alternativa do e-mail.
-- Projetos em cases com duas áreas de conteúdo/resultado e tecnologias em tags discretas.
+- Projetos em cases com duas áreas: conteúdo com tags discretas e resultado tipográfico aberto, sem caixa ao redor das métricas.
 - Oito categorias de tecnologias e práticas, com ícones monocromáticos, cards de altura natural e tags neutras, em duas colunas no desktop e uma no mobile.
 - Acesso direto à certificação AWS pelo link fornecido pelo proprietário.
 - Registry tipado, singleton/factory, detecção de ciclos, Context e serviços substituíveis nos testes.
@@ -154,7 +154,7 @@ Edite `src/presentation/i18n/messages.ts`. A versão inglesa é verificada contr
 - A composição usa oito grupos: front-end, back-end/APIs, desktop, dados/cache, versionamento/CI/CD, cloud, qualidade e analytics/infraestrutura de aplicações. A partir de 768px são duas colunas CSS, com leitura de cima para baixo em cada coluna; abaixo disso, uma. Os cards têm altura natural, sem esticar categorias pequenas. `TechnologyTags` reutiliza a apresentação de tags nos projetos e nas categorias.
 - A experiência mantém dois cards. O primeiro distingue os vínculos da Compass UOL por meio de `additionalRoles`; cada vínculo tem título, detalhes, responsabilidades e tecnologias próprios. O segundo não recebe datas. A formação possui instituição e período por item, incluindo previsão explícita no mestrado.
 - O link direto da certificação fica em `AWS_CERTIFICATION_URL`, em `PortfolioSections.tsx`; utilize somente o endereço real informado pelo proprietário.
-- O logotipo AWS está em `src/assets/aws-logo.svg`, importado localmente pelo Vite, sem dependência de servidor externo. Fonte e atribuição estão em `src/assets/README.md`; licença e aviso são copiados para `dist/licenses/`. A imagem mantém as cores originais sobre uma pequena base branca no card escuro.
+- O logotipo AWS está em `src/assets/aws-logo.svg`, importado localmente pelo Vite, sem dependência de servidor externo. Fonte e atribuição estão em `src/assets/README.md`; licença e aviso são copiados para `dist/licenses/`. A apresentação é monocromática branca, com transparência e geometria original preservada, integrada ao cabeçalho compacto do card escuro.
 - Links profissionais estão em `SOCIAL`; o e-mail está em `src/domain/contact.ts`. Mantenha os dados estruturados de `index.html` em sincronia ao alterá-los.
 
 Idioma inicial: preferência válida em `portfolio.language` → idioma primário do navegador (PT/EN) → português. Idiomas não suportados usam PT. Tema inicial: `portfolio.theme` válido → `prefers-color-scheme`. Alterações manuais persistem. Se o acesso ao `localStorage` falhar, a interface continua funcionando em memória. O tema e a meta `theme-color` são aplicados no HTML antes do React para reduzir flash visual; as trocas manuais mantêm essa meta sincronizada.

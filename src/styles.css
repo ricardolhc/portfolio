@@ -528,8 +528,8 @@ p {
   font-size: var(--text-body);
 }
 .project-result {
-  border: 1px solid var(--line);
-  padding: 24px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -540,7 +540,7 @@ p {
   color: var(--muted);
 }
 .project-result strong {
-  font-size: clamp(64px, 7vw, 84px);
+  font-size: clamp(60px, 6vw, 80px);
   font-weight: 400;
   line-height: 1.25;
   letter-spacing: -0.07em;
@@ -553,7 +553,14 @@ p {
 .project-technologies {
   border-top: 1px solid var(--line);
   padding-top: 20px;
+  margin-top: 24px;
   min-width: 0;
+}
+.project-technologies .technology-tags li {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 4px 9px;
 }
 .project-technologies h4 {
   color: var(--muted);
@@ -665,7 +672,7 @@ p {
   --line: #484844;
   color: var(--fg);
   border: 1px solid var(--line);
-  padding: 26px;
+  padding: 24px;
   background: #191919;
   transition: border-color 180ms ease;
 }
@@ -674,26 +681,38 @@ p {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 12px;
+}
+.certification-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.certification-organization {
+  max-width: 14ch;
+  font-size: var(--text-caption);
+  line-height: 1.5;
+  color: var(--muted);
 }
 .aws-mark {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  padding: 14px;
 }
 .aws-mark img {
   display: block;
-  width: 80px;
+  width: 52px;
   height: auto;
 }
 .certification-card .status-tag {
   border-color: var(--line);
   color: var(--muted);
+  padding: 4px 8px;
 }
 .certification-card .text-link {
   text-underline-offset: 6px;
+  margin-top: 16px;
 }
 @media (hover: hover) {
   .certification-card:hover {
@@ -708,7 +727,7 @@ p {
   letter-spacing: -0.04em;
   font-weight: 500;
   line-height: 1.2;
-  margin-block: 32px 20px;
+  margin-block: 24px 12px;
 }
 .certification-card > p {
   font-size: var(--text-small);
@@ -963,8 +982,11 @@ p {
     grid-template-columns: minmax(0, 1fr) minmax(200px, 0.42fr);
     gap: 28px 40px;
   }
-  .project-technologies {
-    grid-column: 1 / -1;
+  .project-result {
+    border-top: 0;
+    border-left: 1px solid var(--line);
+    padding-top: 0;
+    padding-left: 24px;
   }
 }
 @media (min-width: 1024px) {
@@ -1017,7 +1039,7 @@ p {
     column-gap: 24px;
   }
   .certification-card {
-    padding: 36px;
+    padding: 32px;
   }
   .contact-grid {
     gap: 80px;
