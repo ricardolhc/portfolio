@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "vitest",
+  "vitest": { "configFile": "vitest.config.ts" },
+  "mutate": [
+    "src/core/**/*.{ts,tsx}",
+    "src/application/**/*.ts",
+    "src/domain/contact.ts",
+    "src/infrastructure/**/*.ts",
+    "src/presentation/preferences/**/*.tsx",
+    "src/presentation/components/Controls.tsx",
+    "src/presentation/components/ContactForm.tsx",
+    "src/presentation/components/Header.tsx"
+  ],
+  "reporters": ["clear-text", "progress", "html", "json"],
+  "thresholds": { "high": 85, "low": 70, "break": 75 },
+  "concurrency": 4,
+  "timeoutMS": 10000,
+  "cleanTempDir": true
+}

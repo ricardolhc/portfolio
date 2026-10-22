@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f7f7f4" />
+    <title>Ricardo Costa — Desenvolvedor Full Stack</title>
+    <meta
+      name="description"
+      content="Desenvolvedor Full Stack com experiência corporativa em React e TypeScript e projetos independentes de automação empresarial. Conheça Ricardo Costa."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Ricardo Costa — Desenvolvedor Full Stack"
+    />
+    <meta
+      property="og:description"
+      content="Desenvolvedor Full Stack com experiência corporativa em React e TypeScript e projetos independentes de automação empresarial. Conheça Ricardo Costa."
+    />
+    <meta property="og:locale" content="pt_BR" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link
+      rel="preload"
+      href="/node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script>
+      try {
+        var savedTheme = localStorage.getItem('portfolio.theme');
+        document.documentElement.dataset.theme =
+          savedTheme === 'light' || savedTheme === 'dark'
+            ? savedTheme
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+      } catch {
+        document.documentElement.dataset.theme = matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches
+          ? 'dark'
+          : 'light';
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ricardo Costa",
+        "jobTitle": "Desenvolvedor Full Stack",
+        "email": "contato.ricardolhc@gmail.com",
+        "sameAs": [
+          "https://github.com/ricardolhc",
+          "https://www.linkedin.com/in/ricardo-costa-7a97a3254/"
+        ],
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Universidade Federal do Pampa"
+        },
+        "knowsAbout": [
+          "React",
+          "TypeScript",
+          "Java",
+          "Spring Boot",
+          "Node.js",
+          "PostgreSQL",
+          "Software Engineering"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript
+      >Este portfólio precisa de JavaScript. / This portfolio requires
+      JavaScript. Contato / Contact: contato.ricardolhc@gmail.com</noscript
+    >
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

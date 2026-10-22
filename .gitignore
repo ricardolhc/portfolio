@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+reports/
+.stryker-tmp/
+*.tsbuildinfo
+.env.local
+.DS_Store
+*-run.log
+test-results/
+playwright-report/
