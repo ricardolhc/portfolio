@@ -240,13 +240,3 @@ Remove-Item Env:VITE_BASE_PATH
 Em Bash: `VITE_BASE_PATH=/nome-real-do-repositorio/ npm run build`. A pasta `dist` deve ser servida sob o mesmo caminho usado no build.
 
 Referências: [deploy estático do Vite](https://vite.dev/guide/static-deploy.html), [workflows do GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), [runner Vitest do Stryker](https://stryker-mutator.io/docs/stryker-js/vitest-runner/).
-
-## Limitações e informações pendentes
-
-- Não há remote Git configurado neste checkout nem URL pública definida. Os workflows são entregues; execução no GitHub e publicação dependem do repositório remoto e da ativação do Pages.
-- Duração dos serviços independentes, nomes de clientes e detalhes dos contratos não foram fornecidos e foram omitidos.
-- Projetos privados não possuem links ou screenshots presumidos; tecnologias descritas são as confirmadas pelo proprietário.
-- Não foi fornecido link público de comprovação da Láurea Acadêmica; nenhum endereço foi inventado.
-- A certificação utiliza o link direto informado pelo proprietário, sem inventar emissão, validade ou identificadores adicionais.
-- Não existe arquivo PDF de currículo; nenhum botão de download foi criado.
-- O envio depende da disponibilidade e configuração do Formspree. Não foi realizado envio real nem confirmada entrega ao destinatário; as respostas foram simuladas nos testes. Filtros antispam e restrições da conta não foram alterados.
