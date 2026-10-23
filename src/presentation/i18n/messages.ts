@@ -42,7 +42,7 @@ const pt = {
     lead: 'Desenvolvo aplicações web com React, TypeScript, Java, Spring Boot e Node.js, com foco em soluções confiáveis e alinhadas às necessidades do negócio.',
     body: 'Na Compass UOL, participo do desenvolvimento Front-end e Back-end de aplicações utilizadas por milhares de usuários, com integração de APIs REST, testes automatizados, manutenção e acompanhamento de entregas em homologação e produção. Em projetos independentes para empresas, desenvolvi soluções de automação fiscal e gestão financeira: aproximadamente 98% de redução no tempo de processamento e geração de planilhas e 80% no trabalho manual das rotinas de duplicatas e boletos.',
     closing:
-      'Sou bacharel em Engenharia de Software pela Universidade Federal do Pampa (UNIPAMPA), com Láurea Acadêmica e média geral de 9,13/10, e curso o Mestrado Profissional na mesma instituição. Tenho interesse especial em desenvolvimento Back-end, arquitetura de software, qualidade de código e computação em nuvem.',
+      'Sou bacharel em Engenharia de Software pela Universidade Federal do Pampa (UNIPAMPA), com Láurea Acadêmica, e curso o Mestrado Profissional na mesma instituição. Tenho interesse especial em desenvolvimento Back-end, arquitetura de software, qualidade de código e computação em nuvem.',
     note: 'Engenharia na base.\nResultados na prática.',
   },
   experience: {
@@ -436,7 +436,7 @@ const en: typeof pt = {
     lead: 'I develop web applications with React, TypeScript, Java, Spring Boot and Node.js, focusing on reliable solutions aligned with business needs.',
     body: 'At Compass UOL, I contribute to front-end and back-end development for applications used by thousands of users, integrating REST APIs, writing automated tests, maintaining systems and supporting releases in staging and production. In independent projects for businesses, I developed tax automation and financial management solutions: approximately 98% less time spent processing invoices and generating spreadsheets, and 80% less manual work in payables and payment slip routines.',
     closing:
-      'I hold a Bachelor’s Degree in Software Engineering from Universidade Federal do Pampa (UNIPAMPA), awarded Láurea Acadêmica (Academic Honors) with an overall average of 9.13/10, and am pursuing a Professional Master’s Degree at the same institution. My interests include back-end development, software architecture, code quality and cloud computing.',
+      'I hold a Bachelor’s Degree in Software Engineering from Universidade Federal do Pampa (UNIPAMPA), awarded Láurea Acadêmica (Academic Honors), and am pursuing a Professional Master’s Degree at the same institution. My interests include back-end development, software architecture, code quality and cloud computing.',
     note: 'Engineering at the core.\nResults in practice.',
   },
   experience: {
