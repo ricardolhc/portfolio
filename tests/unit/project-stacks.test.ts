@@ -6,7 +6,7 @@ describe.each(['pt-BR', 'en'] as const)(
   (language) => {
     const c = messages[language];
     const english = language === 'en';
-    it('replaces only fiscal HTML with FXML and groups the confirmed tools separately from practices', () => {
+    it('replaces only fiscal HTML with FXML and groups the confirmed tools', () => {
       const project = c.projects.items[0]!;
       expect(project.technologyGroups.map((group) => group.items)).toEqual([
         ['Java', 'JavaFX', 'FXML', 'CSS'],
@@ -18,12 +18,8 @@ describe.each(['pt-BR', 'en'] as const)(
         ],
         ['Maven', 'JUnit', 'PowerShell'],
       ]);
-      expect(project.practices).toEqual([
-        english ? 'Concurrent Programming' : 'Programação concorrente',
-      ]);
       const tools = project.technologyGroups.flatMap((group) => group.items);
       expect(tools).not.toContain('HTML');
-      expect(tools).not.toContain(project.practices[0]);
       for (const text of [
         'Java',
         'JavaFX',
@@ -50,7 +46,6 @@ describe.each(['pt-BR', 'en'] as const)(
         ['JUnit', 'Mockito'],
         ['Maven'],
       ]);
-      expect(project.practices).toEqual([]);
       for (const text of [
         'Java',
         'Spring Boot',
@@ -93,20 +88,13 @@ describe.each(['pt-BR', 'en'] as const)(
       );
       expect(c.technologies.groups[0]!.items).toContain('HTML');
     });
-    it('keeps project tools consistent with the general categories, with concurrency identified as a practice', () => {
+    it('keeps project tools consistent with the general categories', () => {
       const tools = c.technologies.groups.flatMap((group) => group.items);
       for (const project of c.projects.items) {
         for (const tool of project.technologyGroups.flatMap(
           (group) => group.items,
         )) {
           if (!tool.includes('SEFAZ')) expect(tools).toContain(tool);
-        }
-        for (const practice of project.practices) {
-          const desktop = c.technologies.groups[2]!;
-          expect('practices' in desktop && desktop.practices).toContain(
-            practice,
-          );
-          expect(tools).not.toContain(practice);
         }
       }
     });

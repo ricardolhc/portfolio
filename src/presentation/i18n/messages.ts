@@ -169,9 +169,9 @@ const pt = {
             items: ['Maven', 'JUnit', 'PowerShell'],
           },
         ],
-        practices: ['Programação concorrente'],
+
         implementation:
-          'Java e JavaFX, com interfaces estruturadas em FXML e CSS. Apache POI é utilizado na manipulação de planilhas e Jackson no processamento de dados. O projeto também utiliza SOAP, Maven para gerenciamento de dependências, JUnit para testes, PowerShell e programação concorrente.',
+          'Java e JavaFX, com interfaces estruturadas em FXML e CSS. Apache POI é utilizado na manipulação de planilhas e Jackson no processamento de dados. O projeto também utiliza SOAP, Maven para gerenciamento de dependências, JUnit para testes e PowerShell.',
       },
       {
         number: '02',
@@ -214,7 +214,7 @@ const pt = {
             items: ['Maven'],
           },
         ],
-        practices: [],
+
         implementation:
           'Java e Spring Boot, com Spring MVC, Spring Data JPA e Hibernate. A interface utiliza Thymeleaf, JavaScript e Bootstrap, com PostgreSQL na persistência. Maven gerencia as dependências; JUnit e Mockito são utilizados nos testes.',
       },
@@ -257,7 +257,6 @@ const pt = {
       {
         title: 'Desenvolvimento Desktop e Automação',
         items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
-        practices: ['Programação concorrente'],
       },
       {
         title: 'Bancos de dados e cache',
@@ -305,7 +304,6 @@ const pt = {
           'Ferramentas de apoio às atividades de desenvolvimento de software.',
       },
     ],
-    practicesTitle: 'Conceitos e práticas',
   },
   education: {
     eyebrow: '05 / FORMAÇÃO',
@@ -566,9 +564,9 @@ const en: typeof pt = {
             items: ['Maven', 'JUnit', 'PowerShell'],
           },
         ],
-        practices: ['Concurrent Programming'],
+
         implementation:
-          'Java and JavaFX, with interfaces structured in FXML and CSS. Apache POI handles spreadsheets and Jackson supports data processing. The project also uses SOAP, Maven for dependency management, JUnit for testing, PowerShell and concurrent programming.',
+          'Java and JavaFX, with interfaces structured in FXML and CSS. Apache POI handles spreadsheets and Jackson supports data processing. The project also uses SOAP, Maven for dependency management, JUnit for testing and PowerShell.',
       },
       {
         number: '02',
@@ -611,7 +609,7 @@ const en: typeof pt = {
             items: ['Maven'],
           },
         ],
-        practices: [],
+
         implementation:
           'Java and Spring Boot, with Spring MVC, Spring Data JPA and Hibernate. The interface uses Thymeleaf, JavaScript and Bootstrap, with PostgreSQL for persistence. Maven manages dependencies; JUnit and Mockito are used for testing.',
       },
@@ -654,7 +652,6 @@ const en: typeof pt = {
       {
         title: 'Desktop Development & Automation',
         items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
-        practices: ['Concurrent Programming'],
       },
       {
         title: 'Databases and cache',
@@ -701,7 +698,6 @@ const en: typeof pt = {
         description: 'Tools that support software development activities.',
       },
     ],
-    practicesTitle: 'Concepts & Practices',
   },
   education: {
     eyebrow: '05 / EDUCATION',

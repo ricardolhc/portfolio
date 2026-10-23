@@ -229,12 +229,6 @@ export function Projects() {
                           </dd>
                         </div>
                       ))}
-                      {project.practices.length > 0 && (
-                        <div className="project-stack-group project-practices">
-                          <dt>{t.technologies.practicesTitle}</dt>
-                          <dd>{project.practices.join(' · ')}</dd>
-                        </div>
-                      )}
                     </dl>
                   </div>
                 </div>
@@ -295,12 +289,6 @@ export function Technologies() {
                 <p className="technology-description">{group.description}</p>
               )}
               <TechnologyTags items={group.items} label={group.title} />
-              {group.practices && (
-                <div className="technology-practices">
-                  <h4 className="eyebrow">{t.technologies.practicesTitle}</h4>
-                  <p>{group.practices.join(' · ')}</p>
-                </div>
-              )}
             </div>
           ))}
         </div>

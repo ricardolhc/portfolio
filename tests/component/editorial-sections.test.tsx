@@ -37,10 +37,8 @@ describe.each(['pt-BR', 'en'] as const)(
       expect(tax).not.toHaveTextContent('HTML');
       expect(within(tax!).getAllByRole('list')).toHaveLength(4);
       expect(within(finance!).getAllByRole('list')).toHaveLength(5);
-      expect(tax).toHaveTextContent(
-        language === 'en'
-          ? 'Concurrent Programming'
-          : 'Programação concorrente',
+      expect(tax).not.toHaveTextContent(
+        /programação concorrente|concurrent programming/i,
       );
       expect(finance).toHaveTextContent('Spring Boot');
       expect(
@@ -50,40 +48,17 @@ describe.each(['pt-BR', 'en'] as const)(
       ).toBeInTheDocument();
       expect(screen.queryByRole('button')).not.toBeInTheDocument();
     });
-    it('integrates concurrency with its project stack and desktop category as a practice', () => {
-      const practice =
-        language === 'en'
-          ? 'Concurrent Programming'
-          : 'Programação concorrente';
-      const practiceTitle =
-        language === 'en' ? 'Concepts & Practices' : 'Conceitos e práticas';
-      const { unmount } = renderWithProviders(
-        <Projects />,
-        testDependencies(language).registry,
-      );
-      const stackLabel = screen.getByText(practiceTitle, { exact: true });
-      expect(stackLabel.tagName).toBe('DT');
-      expect(
-        within(stackLabel.parentElement!).getByRole('definition'),
-      ).toHaveTextContent(practice);
-      unmount();
+    it('omits the removed concepts and practices from projects and technologies', () => {
       renderWithProviders(
-        <Technologies />,
+        <>
+          <Projects />
+          <Technologies />
+        </>,
         testDependencies(language).registry,
       );
-      const desktop = screen.getByRole('heading', {
-        name:
-          language === 'en'
-            ? 'Desktop Development & Automation'
-            : 'Desenvolvimento Desktop e Automação',
-      }).parentElement!;
-      expect(
-        within(desktop).getByText(practice, { exact: true }),
-      ).toBeInTheDocument();
-      expect(
-        within(desktop).getByRole('heading', { name: practiceTitle }),
-      ).toBeInTheDocument();
-      expect(within(desktop).getByRole('list')).not.toHaveTextContent(practice);
+      expect(document.body).not.toHaveTextContent(
+        /programação concorrente|concurrent programming|conceitos e práticas|concepts & practices/i,
+      );
     });
     it('keeps all nine category headings and their technology lists', () => {
       renderWithProviders(

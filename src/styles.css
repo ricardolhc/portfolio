@@ -589,10 +589,6 @@ p {
   margin: 0;
   min-width: 0;
 }
-.project-practices {
-  font-size: var(--text-small);
-  color: var(--muted);
-}
 .project-list {
   border-bottom: 1px solid var(--line);
 }
@@ -643,18 +639,6 @@ p {
   margin-bottom: 16px;
   font-size: var(--text-small);
   color: var(--muted);
-}
-.technology-practices {
-  display: grid;
-  gap: 8px;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  font-size: var(--text-small);
-  color: var(--muted);
-}
-.technology-practices h4 {
-  margin: 0;
 }
 .technology-tags {
   list-style: none;
