@@ -15,6 +15,7 @@ import { Icon } from './components/Icon';
 
 export function App() {
   const { t } = usePreferences();
+
   return (
     <MotionConfig reducedMotion="user">
       <LazyMotion features={domAnimation}>

@@ -7,9 +7,12 @@ import { Icon } from './Icon';
 
 export function ContactActions() {
   const clipboard = useInject(TOKENS.clipboard);
+
   const { t } = usePreferences();
   const c = t.contact;
+
   const [feedback, setFeedback] = useState<'copied' | 'copyError' | null>(null);
+
   const copy = async () => {
     try {
       await clipboard.write(CONTACT_EMAIL);

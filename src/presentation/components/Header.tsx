@@ -7,6 +7,7 @@ export function Header() {
   const { t } = usePreferences();
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && open) {
@@ -14,9 +15,12 @@ export function Header() {
         menuButton.current?.focus();
       }
     };
+
     document.addEventListener('keydown', onKey);
+
     return () => document.removeEventListener('keydown', onKey);
   }, [open]);
+
   return (
     <header className="site-header">
       <div className="container header-inner">

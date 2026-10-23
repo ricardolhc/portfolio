@@ -21,8 +21,10 @@ type Status =
 
 export function ContactForm() {
   const gateway = useInject(TOKENS.contactGateway);
+
   const { t } = usePreferences();
   const c = t.contact;
+
   const [data, setData] = useState<ContactMessage>(empty);
   const [errors, setErrors] = useState<ContactErrors>({});
   const [status, setStatus] = useState<Status>('idle');
@@ -35,12 +37,17 @@ export function ContactForm() {
     setErrors((current) => ({ ...current, [field]: undefined }));
     setStatus('idle');
   };
+
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
     if (inFlight.current) return;
+
     const next = validateContact(data);
     setErrors(next);
+
     const first = CONTACT_FIELDS.find((field) => next[field]);
+
     if (first) {
       setStatus('invalid');
       form.current
@@ -48,12 +55,15 @@ export function ContactForm() {
         ?.focus();
       return;
     }
+
     if (new FormData(event.currentTarget).get('_gotcha')) {
       setStatus('error');
       return;
     }
+
     inFlight.current = true;
     setStatus('sending');
+
     try {
       await gateway.send(normalizeContact(data));
       setData(empty);

@@ -27,23 +27,29 @@ export class Registry {
   ): this {
     if (this.entries.has(token.key))
       throw new Error(`Dependency already registered: ${token.name}`);
+
     this.entries.set(token.key, { factory, lifetime, initialized: false });
     return this;
   }
 
   resolve<T>(token: Token<T>): T {
     const entry = this.entries.get(token.key);
+
     if (!entry) throw new Error(`Dependency not registered: ${token.name}`);
     if (entry.initialized) return entry.instance as T;
     if (this.resolving.has(token.key))
       throw new Error(`Circular dependency: ${token.name}`);
+
     this.resolving.add(token.key);
+
     try {
       const instance = entry.factory(this);
+
       if (entry.lifetime === 'singleton') {
         entry.instance = instance;
         entry.initialized = true;
       }
+
       return instance as T;
     } finally {
       this.resolving.delete(token.key);

@@ -3,6 +3,7 @@ import { Icon } from './Icon';
 
 export function ThemeToggle() {
   const { theme, toggleTheme, t } = usePreferences();
+
   return (
     <button
       className="icon-button"
@@ -16,6 +17,7 @@ export function ThemeToggle() {
 
 export function LanguageSwitcher() {
   const { language, setLanguage, t } = usePreferences();
+
   return (
     <button
       className="language-button"

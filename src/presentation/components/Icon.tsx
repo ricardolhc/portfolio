@@ -17,6 +17,7 @@ type IconName =
   | 'check'
   | 'activity'
   | 'code';
+
 const paths: Record<IconName, string> = {
   arrow: 'M5 19 19 5M5 5h14v14',
   down: 'M12 4v16m-6-6 6 6 6-6',
@@ -41,6 +42,7 @@ const paths: Record<IconName, string> = {
   check: 'M12 2 3 6v6c0 5 9 10 9 10s9-5 9-10V6ZM8 12l3 3 5-6',
   activity: 'M3 3v18h18M6 14l4-5 4 3 5-7',
 };
+
 export function Icon({
   name,
   className = '',

@@ -24,8 +24,10 @@ export function normalizeContact(message: ContactMessage): ContactMessage {
 
 export function validateContact(message: ContactMessage): ContactErrors {
   const errors: ContactErrors = {};
+
   for (const field of CONTACT_FIELDS) {
     const value = message[field].trim();
+
     if (!value) errors[field] = 'required';
     else if (value.length > CONTACT_LIMITS[field]) errors[field] = 'tooLong';
     else if (field === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value))
@@ -33,6 +35,7 @@ export function validateContact(message: ContactMessage): ContactErrors {
     else if ((field === 'name' || field === 'subject') && /[\r\n]/.test(value))
       errors[field] = 'singleLine';
   }
+
   return errors;
 }
 

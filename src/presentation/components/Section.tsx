@@ -9,6 +9,7 @@ export function Reveal({
   className?: string;
 }) {
   const reduced = useReducedMotion();
+
   return (
     <m.div
       className={className}

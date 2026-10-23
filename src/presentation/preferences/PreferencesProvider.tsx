@@ -24,6 +24,7 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
   const [preferences, setPreferences] = useState(() => service.load());
   const { language, theme } = preferences;
   const t = messages[language];
+
   useEffect(() => {
     document.documentElement.lang = language;
     document.title = t.meta.title;
@@ -40,21 +41,25 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
       .querySelector('meta[property="og:locale"]')
       ?.setAttribute('content', language === 'en' ? 'en_US' : 'pt_BR');
   }, [language, t]);
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document
       .querySelector('meta[name="theme-color"]')
       ?.setAttribute('content', theme === 'dark' ? '#141414' : '#f7f7f4');
   }, [theme]);
+
   const setLanguage = (next: Language) => {
     service.saveLanguage(next);
     setPreferences((current) => ({ ...current, language: next }));
   };
+
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
     service.saveTheme(next);
     setPreferences((current) => ({ ...current, theme: next }));
   };
+
   return (
     <PreferencesContext.Provider
       value={{ language, theme, t, setLanguage, toggleTheme }}
@@ -66,6 +71,8 @@ export function PreferencesProvider({ children }: { children: ReactNode }) {
 
 export function usePreferences(): Preferences {
   const context = useContext(PreferencesContext);
+
   if (!context) throw new Error('usePreferences requires PreferencesProvider');
+
   return context;
 }

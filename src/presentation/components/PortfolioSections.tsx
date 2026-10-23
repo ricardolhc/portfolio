@@ -14,6 +14,7 @@ const AWS_CERTIFICATION_URL =
 
 export function Hero() {
   const { t } = usePreferences();
+
   return (
     <section id="home" className="hero container" aria-labelledby="hero-title">
       <div className="hero-overline">
@@ -72,6 +73,7 @@ export function Hero() {
 
 export function About() {
   const { t } = usePreferences();
+
   return (
     <section
       id="about"
@@ -128,6 +130,7 @@ function ExperienceRole({ role }: { role: ExperienceRoleContent }) {
 
 export function Experience() {
   const { t } = usePreferences();
+
   return (
     <section
       id="experience"
@@ -171,6 +174,7 @@ function TechnologyTags({ items, label }: { items: string[]; label: string }) {
 
 export function Projects() {
   const { t } = usePreferences();
+
   return (
     <section
       id="projects"
@@ -254,6 +258,7 @@ export function Projects() {
 
 export function Technologies() {
   const { t } = usePreferences();
+
   return (
     <section
       id="technologies"
@@ -306,6 +311,7 @@ export function Technologies() {
 
 export function Education() {
   const { t } = usePreferences();
+
   return (
     <section
       id="education"
@@ -332,6 +338,7 @@ export function Education() {
 
 export function Certifications() {
   const { t } = usePreferences();
+
   return (
     <section
       id="certifications"
@@ -382,6 +389,7 @@ export function Certifications() {
 
 export function Contact() {
   const { t } = usePreferences();
+
   return (
     <section
       id="contact"

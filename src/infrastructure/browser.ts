@@ -9,6 +9,7 @@ export class BrowserPreferences implements PreferenceStore {
   constructor(
     private readonly storage: () => StoragePort = () => window.localStorage,
   ) {}
+
   get(key: string): string | null {
     try {
       return this.storage().getItem(key);
@@ -16,12 +17,11 @@ export class BrowserPreferences implements PreferenceStore {
       return null;
     }
   }
+
   set(key: string, value: string): void {
     try {
       this.storage().setItem(key, value);
-    } catch {
-      /* Preferences still work in memory when persistence is blocked. */
-    }
+    } catch {}
   }
 }
 
@@ -37,9 +37,12 @@ export class BrowserClipboard implements ClipboardPort {
     private readonly clipboard: () =>
       Pick<Clipboard, 'writeText'> | undefined = () => navigator.clipboard,
   ) {}
+
   async write(text: string): Promise<void> {
     const clipboard = this.clipboard();
+
     if (!clipboard) throw new Error('Clipboard unavailable');
+
     await clipboard.writeText(text);
   }
 }
