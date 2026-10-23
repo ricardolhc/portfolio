@@ -52,6 +52,18 @@ Abra a URL local impressa pelo Vite, normalmente `http://127.0.0.1:5173/`.
 
 Testes no navegador usam o build: execute `npm run build` primeiro. Localmente, o Playwright usa o Chrome instalado. Em CI (`CI=true`), usa Chromium; instale-o com `npx playwright install --with-deps chromium`. O servidor de preview é iniciado pelo Playwright quando necessário.
 
+### Logs locais
+
+Guarde saídas de comandos em `reports/logs/`, mantendo a raiz livre de arquivos de execução. A pasta de relatórios e arquivos `*.log` são ignorados pelo Git. Os logs históricos da raiz foram movidos para essa pasta, preservando os nomes e conteúdos.
+
+No PowerShell, redirecione novas execuções assim:
+
+```powershell
+New-Item -ItemType Directory -Path reports/logs -Force | Out-Null
+npm run build *> reports/logs/build.log
+npm run test:coverage *> reports/logs/coverage.log
+```
+
 ## Organização e arquitetura
 
 ```text
@@ -151,7 +163,7 @@ Edite `src/presentation/i18n/messages.ts`. A versão inglesa é verificada contr
 - Para adicionar um projeto, acrescente um objeto em `projects.items` **nos dois idiomas**: número, categoria, título, contexto, problema, solução, métrica, resultado e descrição técnica (`implementation`). Organize a stack por finalidade em `technologyGroups` (título e itens); práticas técnicas ficam em `practices`, separadas das ferramentas. Não informe tecnologias ou links sem confirmação.
 - A certificação atual é apresentada em `Certifications`, em `PortfolioSections.tsx`. Para uma certificação adicional, acrescente conteúdo PT/EN e um novo artigo semântico, mantendo emissor e categoria reais. Não crie credenciais ou verificações presumidas.
 - Categorias e tecnologias ficam em `technologies.groups` nas duas traduções, sem classificações de proficiência. GitHub Pages é hospedagem/deploy; GitHub Actions e Azure Pipelines são automação de CI/CD.
-- A composição usa nove grupos: front-end, back-end/APIs, desktop/automação, dados/cache, versionamento/build/CI/CD, cloud, qualidade, analytics/infraestrutura de aplicações e desenvolvimento assistido por IA. A partir de 768px são duas colunas CSS, com leitura de cima para baixo em cada coluna; abaixo disso, uma. Os cards têm altura natural, sem esticar categorias pequenas. `TechnologyTags` reutiliza a apresentação de tags nos projetos e nas categorias; as stacks dos projetos usam agrupamentos compactos. Claude (Anthropic), OpenAI Codex e GitHub Copilot são ferramentas de apoio ao desenvolvimento, sem afirmações sobre treinamento de modelos ou ganhos de produtividade. `technologies.practices` mantém conceitos separados das ferramentas.
+- A composição usa nove grupos: front-end, back-end/APIs, desktop/automação, dados/cache, versionamento/build/CI/CD, cloud, qualidade, analytics/infraestrutura de aplicações e desenvolvimento assistido por IA. A partir de 768px são duas colunas CSS, com leitura de cima para baixo em cada coluna; abaixo disso, uma. Os cards têm altura natural, sem esticar categorias pequenas. `TechnologyTags` reutiliza a apresentação de tags nos projetos e nas categorias; as stacks dos projetos usam agrupamentos compactos. Claude (Anthropic), OpenAI Codex e GitHub Copilot são ferramentas de apoio ao desenvolvimento, sem afirmações sobre treinamento de modelos ou ganhos de produtividade. A propriedade `practices` do grupo desktop/automação mantém conceitos separados das ferramentas, dentro do próprio card.
 - A experiência mantém dois cards. O primeiro distingue os vínculos da Compass UOL por meio de `additionalRoles`; cada vínculo tem título, detalhes, responsabilidades e tecnologias próprios. O segundo não recebe datas. A formação possui instituição e período por item, incluindo previsão explícita no mestrado.
 - O link direto da certificação fica em `AWS_CERTIFICATION_URL`, em `PortfolioSections.tsx`; utilize somente o endereço real informado pelo proprietário.
 - O logotipo AWS está em `src/assets/aws-logo.svg`, importado localmente pelo Vite, sem dependência de servidor externo. Fonte e atribuição estão em `src/assets/README.md`; licença e aviso são copiados para `dist/licenses/`. A apresentação é monocromática branca, com transparência e geometria original preservada, integrada ao cabeçalho compacto do card escuro.

@@ -590,12 +590,8 @@ p {
   min-width: 0;
 }
 .project-practices {
-  margin-top: 16px;
   font-size: var(--text-small);
   color: var(--muted);
-}
-.project-practices span {
-  font-size: var(--text-caption);
 }
 .project-list {
   border-bottom: 1px solid var(--line);
@@ -649,14 +645,16 @@ p {
   color: var(--muted);
 }
 .technology-practices {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 16px;
-  padding-top: 20px;
+  display: grid;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 16px;
   border-top: 1px solid var(--line);
   font-size: var(--text-small);
   color: var(--muted);
+}
+.technology-practices h4 {
+  margin: 0;
 }
 .technology-tags {
   list-style: none;

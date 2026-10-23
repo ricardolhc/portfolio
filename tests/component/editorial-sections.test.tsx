@@ -50,6 +50,41 @@ describe.each(['pt-BR', 'en'] as const)(
       ).toBeInTheDocument();
       expect(screen.queryByRole('button')).not.toBeInTheDocument();
     });
+    it('integrates concurrency with its project stack and desktop category as a practice', () => {
+      const practice =
+        language === 'en'
+          ? 'Concurrent Programming'
+          : 'Programação concorrente';
+      const practiceTitle =
+        language === 'en' ? 'Concepts & Practices' : 'Conceitos e práticas';
+      const { unmount } = renderWithProviders(
+        <Projects />,
+        testDependencies(language).registry,
+      );
+      const stackLabel = screen.getByText(practiceTitle, { exact: true });
+      expect(stackLabel.tagName).toBe('DT');
+      expect(
+        within(stackLabel.parentElement!).getByRole('definition'),
+      ).toHaveTextContent(practice);
+      unmount();
+      renderWithProviders(
+        <Technologies />,
+        testDependencies(language).registry,
+      );
+      const desktop = screen.getByRole('heading', {
+        name:
+          language === 'en'
+            ? 'Desktop Development & Automation'
+            : 'Desenvolvimento Desktop e Automação',
+      }).parentElement!;
+      expect(
+        within(desktop).getByText(practice, { exact: true }),
+      ).toBeInTheDocument();
+      expect(
+        within(desktop).getByRole('heading', { name: practiceTitle }),
+      ).toBeInTheDocument();
+      expect(within(desktop).getByRole('list')).not.toHaveTextContent(practice);
+    });
     it('keeps all nine category headings and their technology lists', () => {
       renderWithProviders(
         <Technologies />,

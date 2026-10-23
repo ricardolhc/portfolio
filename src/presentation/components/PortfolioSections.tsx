@@ -225,13 +225,13 @@ export function Projects() {
                           </dd>
                         </div>
                       ))}
+                      {project.practices.length > 0 && (
+                        <div className="project-stack-group project-practices">
+                          <dt>{t.technologies.practicesTitle}</dt>
+                          <dd>{project.practices.join(' · ')}</dd>
+                        </div>
+                      )}
                     </dl>
-                    {project.practices.length > 0 && (
-                      <p className="project-practices">
-                        <span>{t.technologies.practicesTitle}:</span>{' '}
-                        {project.practices.join(' · ')}
-                      </p>
-                    )}
                   </div>
                 </div>
                 <div className="project-result">
@@ -290,13 +290,15 @@ export function Technologies() {
                 <p className="technology-description">{group.description}</p>
               )}
               <TechnologyTags items={group.items} label={group.title} />
+              {group.practices && (
+                <div className="technology-practices">
+                  <h4 className="eyebrow">{t.technologies.practicesTitle}</h4>
+                  <p>{group.practices.join(' · ')}</p>
+                </div>
+              )}
             </div>
           ))}
         </div>
-        <p className="technology-practices">
-          <span className="eyebrow">{t.technologies.practicesTitle}</span>
-          <span>{t.technologies.practices.join(' · ')}</span>
-        </p>
       </Reveal>
     </section>
   );

@@ -6,6 +6,6 @@ reports/
 *.tsbuildinfo
 .env.local
 .DS_Store
-*-run.log
+*.log
 test-results/
 playwright-report/

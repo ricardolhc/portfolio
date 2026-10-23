@@ -98,7 +98,7 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         ])
           await expect(ai.getByText(tool, { exact: true })).toBeVisible();
         const fiscalCase = page.locator('.project-card').first();
-        await expect(fiscalCase.locator('.project-stack-group')).toHaveCount(4);
+        await expect(fiscalCase.locator('.project-stack-group')).toHaveCount(5);
         await expect(
           page.locator('.project-card').nth(1).locator('.project-stack-group'),
         ).toHaveCount(5);
@@ -112,6 +112,16 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
           page.locator('#technologies').getByText('HTML', { exact: true }),
         ).toBeVisible();
         await expect(fiscalCase.locator('.project-practices')).toContainText(
+          language === 'en'
+            ? 'Concurrent Programming'
+            : 'Programação concorrente',
+        );
+        await expect(
+          page
+            .locator('#technologies .technology-group')
+            .nth(2)
+            .locator('.technology-practices'),
+        ).toContainText(
           language === 'en'
             ? 'Concurrent Programming'
             : 'Programação concorrente',

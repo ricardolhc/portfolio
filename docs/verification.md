@@ -1,6 +1,6 @@
 # Verificação da entrega
 
-Última verificação em 22 de outubro de 2026, após a atualização das stacks de Projetos e das nove categorias de Tecnologias. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [technical-stacks-2026-10-22.md](technical-stacks-2026-10-22.md).
+Última verificação em 22 de outubro de 2026, após a organização dos logs e integração visual das práticas técnicas. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [technical-stacks-2026-10-22.md](technical-stacks-2026-10-22.md).
 
 ## Resultados executados
 
@@ -10,10 +10,10 @@
 | `npm run typecheck`            | Passou                                                                    |
 | `npm run format:check`         | Passou                                                                    |
 | `npm run test:unit`            | 90 testes passaram em 6 arquivos                                          |
-| `npm run test:component`       | 27 testes passaram em 5 arquivos                                          |
+| `npm run test:component`       | 29 testes passaram em 5 arquivos                                          |
 | `npm run test:integration`     | 9 testes passaram em 1 arquivo, grafo/gateway reais com HTTP simulado     |
-| Suíte Vitest pela cobertura    | 126 testes passaram em 12 arquivos                                        |
-| `npm run test:coverage`        | 100% linhas, 98,60% branches, 100% funções, 100% statements               |
+| Suíte Vitest pela cobertura    | 128 testes passaram em 12 arquivos                                        |
+| `npm run test:coverage`        | 100% linhas, 98,62% branches, 100% funções, 100% statements               |
 | `npm run build`                | Passou                                                                    |
 | Mutação (anterior)             | 88,54% na etapa anterior; não reexecutada nesta atualização de conteúdo   |
 | `npm run test:e2e`             | 13 testes passaram; 24 combinações e fluxos de formulário/mobile/animação |
@@ -28,7 +28,7 @@ As medições anteriores de Lighthouse foram feitas no preview do build, em `htt
 
 Playwright executou o aplicativo real no Chrome instalado, com movimento reduzido, nas larguras 320, 375, 430, 768, 1024 e 1440px. Cada largura foi verificada em PT/EN e claro/escuro. As 24 combinações não apresentaram overflow horizontal nem violações nas regras axe WCAG 2 A/AA, 2.1 AA e 2.2 AA executadas.
 
-As posições reais dos nove grupos confirmaram duas colunas de alturas adaptativas a partir de 768px, com leitura de cima para baixo em cada coluna, e uma coluna abaixo disso. As tecnologias usam tags com borda de 1px; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 53,4s. Capturas adicionais das stacks agrupadas e da categoria de IA, em 375/1440px, PT/EN e ambos os temas, foram geradas em `reports/technical-stacks/`; versões desktop e mobile foram inspecionadas.
+As posições reais dos nove grupos confirmaram duas colunas de alturas adaptativas a partir de 768px, com leitura de cima para baixo em cada coluna, e uma coluna abaixo disso. As tecnologias usam tags com borda de 1px; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 1,1m. Capturas adicionais das stacks agrupadas e da categoria de IA, em 375/1440px, PT/EN e ambos os temas, foram geradas em `reports/technical-stacks/`; versões desktop e mobile foram inspecionadas.
 
 O fluxo mobile também verificou abertura do menu, fechamento com Escape e foco no botão, navegação por âncoras de projetos/certificação/contato, alternância de tema/idioma e persistência após recarga. O formulário foi preenchido e validado, com payload e cabeçalhos conferidos, estado pendente, prevenção de envio duplicado, confirmação simulada e limpeza. Cenários adicionais simularam HTTP 422/429, JSON inválido e falha de rede, preservando o conteúdo e permitindo recuperação em inglês. Todas as requisições Formspree foram interceptadas; nenhuma chegou ao serviço real.
 
@@ -40,7 +40,13 @@ Testes automatizados não equivalem a certificação WCAG completa. Não foram r
 
 ## Mutação e fortalecimento dos testes
 
-### Stacks e desenvolvimento assistido por IA
+### Organização dos logs e práticas integradas
+
+52 logs históricos movidos da raiz para reports/logs/, preservando nomes e conteúdos. Nenhum .log permanece na raiz. README documenta redirecionamento no PowerShell e .gitignore ignora *.log. No projeto fiscal, a prática técnica usa o mesmo alinhamento das linhas da stack, sem dois-pontos; em Tecnologias, ela fica no card Desktop e Automação, separada das ferramentas por um título discreto. PT/EN preservados, sem mudar métricas ou outras seções.
+
+Dois novos testes de componente falharam antes do ajuste e passaram depois. Verificação final: 128 testes Vitest (90 unitários, 29 componentes e 9 integração), cobertura 100% linhas/funções/statements e 143/145 branches (98,62%). Lint, typecheck, formatação e build passaram. E2E: 13 testes em 1,1m, incluindo 24 combinações de seis larguras, ambos os idiomas e temas. Capturas de desktop/mobile inspecionadas em reports/practice-refinement/. Logs novos em reports/logs/practice-refinement-*.log. Sem nova execução de Stryker ou Lighthouse.
+
+### Histórico: stacks e desenvolvimento assistido por IA
 
 126 testes passaram, incluindo oito casos novos PT/EN. Cobertura: **217/217 linhas**, **87/87 funções**, **241/241 statements** e **141/143 branches**. Lint, typecheck, formatação e build passaram. E2E final: **13 testes em 53,4s**, com 24 combinações sem overflow ou violações axe nas regras executadas. Revisão independente sem achados materiais. Conferência de escopo confirmou dados alterados somente em projects/technologies e funções de outras seções idênticas ao commit dd6f8a1. Sem alteração nos arquivos de produção do escopo Stryker; mutação e Lighthouse não reexecutados.
 

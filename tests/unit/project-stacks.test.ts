@@ -102,7 +102,10 @@ describe.each(['pt-BR', 'en'] as const)(
           if (!tool.includes('SEFAZ')) expect(tools).toContain(tool);
         }
         for (const practice of project.practices) {
-          expect(c.technologies.practices).toContain(practice);
+          const desktop = c.technologies.groups[2]!;
+          expect('practices' in desktop && desktop.practices).toContain(
+            practice,
+          );
           expect(tools).not.toContain(practice);
         }
       }

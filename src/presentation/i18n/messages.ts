@@ -257,6 +257,7 @@ const pt = {
       {
         title: 'Desenvolvimento Desktop e Automação',
         items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
+        practices: ['Programação concorrente'],
       },
       {
         title: 'Bancos de dados e cache',
@@ -305,7 +306,6 @@ const pt = {
       },
     ],
     practicesTitle: 'Conceitos e práticas',
-    practices: ['Programação concorrente'],
   },
   education: {
     eyebrow: '05 / FORMAÇÃO',
@@ -654,6 +654,7 @@ const en: typeof pt = {
       {
         title: 'Desktop Development & Automation',
         items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
+        practices: ['Concurrent Programming'],
       },
       {
         title: 'Databases and cache',
@@ -701,7 +702,6 @@ const en: typeof pt = {
       },
     ],
     practicesTitle: 'Concepts & Practices',
-    practices: ['Concurrent Programming'],
   },
   education: {
     eyebrow: '05 / EDUCATION',
