@@ -78,31 +78,42 @@ describe.each(['pt-BR', 'en'] as const)(
       expect(tax!.solution).toContain(
         language === 'en' ? 'REST APIs' : 'APIs REST',
       );
-      expect(tax!.technologies).toEqual(
-        language === 'en'
-          ? ['Java', 'JavaFX', 'HTML', 'CSS', 'REST APIs', 'SEFAZ integration']
-          : [
-              'Java',
-              'JavaFX',
-              'HTML',
-              'CSS',
-              'APIs REST',
-              'Integração com SEFAZ',
-            ],
-      );
+      expect(tax!.technologyGroups.flatMap((group) => group.items)).toEqual([
+        'Java',
+        'JavaFX',
+        'FXML',
+        'CSS',
+        'Apache POI',
+        'Jackson',
+        language === 'en' ? 'REST APIs' : 'APIs REST',
+        'SOAP',
+        language === 'en' ? 'SEFAZ Integration' : 'Integração com SEFAZ',
+        'Maven',
+        'JUnit',
+        'PowerShell',
+      ]);
       expect(tax!.metric).toBe('≈98%');
       expect(tax!.result).toMatch(
         language === 'en'
           ? /processing.*spreadsheet/
           : /processamento.*planilhas/,
       );
-      expect(finance!.technologies).toEqual([
-        'Java',
-        'Spring Boot',
-        'Thymeleaf',
-        'JavaScript',
-        'PostgreSQL',
-      ]);
+      expect(finance!.technologyGroups.flatMap((group) => group.items)).toEqual(
+        [
+          'Java',
+          'Spring Boot',
+          'Spring MVC',
+          'Spring Data JPA',
+          'Hibernate',
+          'Thymeleaf',
+          'JavaScript',
+          'Bootstrap',
+          'PostgreSQL',
+          'JUnit',
+          'Mockito',
+          'Maven',
+        ],
+      );
       expect(finance!.metric).toBe('≈80%');
       expect(finance!.result).toMatch(
         language === 'en' ? /payables.*payment slip/ : /duplicatas.*boletos/,
@@ -126,29 +137,31 @@ describe.each(['pt-BR', 'en'] as const)(
         /\bPOST\b|\bGET\b|github\.com/,
       );
     });
-    it('keeps eight clear technology groups without duplicate items or proficiency claims', () => {
+    it('keeps nine clear technology groups without duplicate items or proficiency claims', () => {
       const groups = c.technologies.groups;
       expect(groups.map((group) => group.title)).toEqual(
         language === 'en'
           ? [
               'Front-end',
               'Back-end and APIs',
-              'Desktop development',
+              'Desktop Development & Automation',
               'Databases and cache',
-              'Version control and CI/CD',
+              'Version Control, Build & CI/CD',
               'Cloud',
-              'Software testing and quality',
+              'Software Testing & Quality',
               'Analytics and application infrastructure',
+              'AI-Assisted Development',
             ]
           : [
               'Front-end',
               'Back-end e APIs',
-              'Desenvolvimento Desktop',
+              'Desenvolvimento Desktop e Automação',
               'Bancos de dados e cache',
-              'Versionamento e CI/CD',
+              'Versionamento, build e CI/CD',
               'Cloud',
               'Testes e qualidade de software',
               'Analytics e infraestrutura de aplicações',
+              'IA aplicada ao desenvolvimento',
             ],
       );
       const all = groups.flatMap((group) => group.items);

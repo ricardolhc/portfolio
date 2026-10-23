@@ -33,7 +33,7 @@ describe('real composition root, providers and browser adapters', () => {
     ).toHaveTextContent('Desenvolvedor Trainee');
     expect(
       screen.getByRole('region', { name: 'Tecnologias e práticas.' }),
-    ).toHaveTextContent('Versionamento e CI/CD');
+    ).toHaveTextContent('Versionamento, build e CI/CD');
     await user.click(
       screen.getByRole('button', { name: 'Ativar tema escuro' }),
     );
@@ -51,7 +51,7 @@ describe('real composition root, providers and browser adapters', () => {
     );
     expect(
       screen.getByRole('region', { name: 'Technologies and practices.' }),
-    ).toHaveTextContent('Version control and CI/CD');
+    ).toHaveTextContent('Version Control, Build & CI/CD');
     expect(
       screen.queryByText(/1 ano e 6 meses|1 year and 6 months/i),
     ).not.toBeInTheDocument();

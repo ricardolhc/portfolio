@@ -79,7 +79,7 @@ describe('professional portfolio', () => {
       });
       expect(
         within(technologies).getAllByRole('heading', { level: 3 }),
-      ).toHaveLength(8);
+      ).toHaveLength(9);
       for (const tech of [
         'React',
         'TypeScript',

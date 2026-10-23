@@ -527,6 +527,10 @@ p {
   color: var(--muted);
   font-size: var(--text-body);
 }
+.project-details .project-implementation {
+  margin-top: 12px;
+  font-size: var(--text-small);
+}
 .project-result {
   border-top: 1px solid var(--line);
   padding-top: 20px;
@@ -565,6 +569,33 @@ p {
 .project-technologies h4 {
   color: var(--muted);
   margin-bottom: 14px;
+}
+.project-stack {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+.project-stack-group {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.project-stack dt {
+  font-size: var(--text-caption);
+  color: var(--muted);
+  line-height: 1.6;
+}
+.project-stack dd {
+  margin: 0;
+  min-width: 0;
+}
+.project-practices {
+  margin-top: 16px;
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+.project-practices span {
+  font-size: var(--text-caption);
 }
 .project-list {
   border-bottom: 1px solid var(--line);
@@ -611,6 +642,21 @@ p {
   letter-spacing: -0.025em;
   line-height: 1.4;
   margin-block: 18px 16px;
+}
+.technology-description {
+  margin-bottom: 16px;
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+.technology-practices {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: var(--text-small);
+  color: var(--muted);
 }
 .technology-tags {
   list-style: none;
@@ -1034,6 +1080,11 @@ p {
 
   .project-identity h3 {
     font-size: 36px;
+  }
+  .project-stack-group {
+    grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
+    align-items: baseline;
+    gap: 12px;
   }
   .technology-grid {
     column-gap: 24px;

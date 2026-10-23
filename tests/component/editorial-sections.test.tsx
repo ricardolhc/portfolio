@@ -22,17 +22,26 @@ describe.each(['pt-BR', 'en'] as const)(
       expect(finance).toHaveTextContent('≈80%');
       for (const item of cases)
         expect(
-          within(item).getByRole('list', {
+          within(item).getByRole('group', {
             name:
               language === 'en'
                 ? 'Technologies & Integrations'
                 : 'Tecnologias e integrações',
           }),
         ).toBeInTheDocument();
-      expect(within(tax!).getAllByRole('listitem')).toHaveLength(6);
-      expect(within(finance!).getAllByRole('listitem')).toHaveLength(5);
+      expect(within(tax!).getAllByRole('listitem')).toHaveLength(12);
+      expect(within(finance!).getAllByRole('listitem')).toHaveLength(12);
       expect(tax).toHaveTextContent('SEFAZ');
       expect(tax).toHaveTextContent('JavaFX');
+      expect(tax).toHaveTextContent('FXML');
+      expect(tax).not.toHaveTextContent('HTML');
+      expect(within(tax!).getAllByRole('list')).toHaveLength(4);
+      expect(within(finance!).getAllByRole('list')).toHaveLength(5);
+      expect(tax).toHaveTextContent(
+        language === 'en'
+          ? 'Concurrent Programming'
+          : 'Programação concorrente',
+      );
       expect(finance).toHaveTextContent('Spring Boot');
       expect(
         screen.getByText(
@@ -41,13 +50,13 @@ describe.each(['pt-BR', 'en'] as const)(
       ).toBeInTheDocument();
       expect(screen.queryByRole('button')).not.toBeInTheDocument();
     });
-    it('keeps all eight category headings and their technology lists', () => {
+    it('keeps all nine category headings and their technology lists', () => {
       renderWithProviders(
         <Technologies />,
         testDependencies(language).registry,
       );
-      expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(8);
-      expect(screen.getAllByRole('list')).toHaveLength(8);
+      expect(screen.getAllByRole('heading', { level: 3 })).toHaveLength(9);
+      expect(screen.getAllByRole('list')).toHaveLength(9);
       for (const technology of [
         'JavaFX',
         'React',
@@ -56,6 +65,9 @@ describe.each(['pt-BR', 'en'] as const)(
         'Amazon Web Services (AWS)',
         'Jest',
         'OpenLens',
+        'Claude (Anthropic)',
+        'OpenAI Codex',
+        'GitHub Copilot',
       ])
         expect(screen.getByText(technology)).toBeInTheDocument();
     });

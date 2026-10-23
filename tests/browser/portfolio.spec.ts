@@ -88,7 +88,34 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         ).toHaveAttribute('href', certificationUrl);
         await expect(
           page.locator('#technologies .technology-group'),
-        ).toHaveCount(8);
+        ).toHaveCount(9);
+        const ai = page.locator('#technologies .technology-group').last();
+        await expect(ai).toContainText('09');
+        for (const tool of [
+          'Claude (Anthropic)',
+          'OpenAI Codex',
+          'GitHub Copilot',
+        ])
+          await expect(ai.getByText(tool, { exact: true })).toBeVisible();
+        const fiscalCase = page.locator('.project-card').first();
+        await expect(fiscalCase.locator('.project-stack-group')).toHaveCount(4);
+        await expect(
+          page.locator('.project-card').nth(1).locator('.project-stack-group'),
+        ).toHaveCount(5);
+        await expect(
+          fiscalCase.getByText('FXML', { exact: true }),
+        ).toBeVisible();
+        await expect(fiscalCase.getByText('HTML', { exact: true })).toHaveCount(
+          0,
+        );
+        await expect(
+          page.locator('#technologies').getByText('HTML', { exact: true }),
+        ).toBeVisible();
+        await expect(fiscalCase.locator('.project-practices')).toContainText(
+          language === 'en'
+            ? 'Concurrent Programming'
+            : 'Programação concorrente',
+        );
         await expect(page.locator('#experience h3').first()).toHaveText(
           language === 'en'
             ? 'Trainee Software Developer'

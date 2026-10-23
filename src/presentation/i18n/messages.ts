@@ -151,14 +151,27 @@ const pt = {
           'Desenvolvimento de uma aplicação com integração à SEFAZ para consulta de informações tributárias, geração automatizada de planilhas e comunicação com outro sistema por meio de APIs REST.',
         metric: '≈98%',
         result: 'de redução no tempo de processamento e geração de planilhas.',
-        technologies: [
-          'Java',
-          'JavaFX',
-          'HTML',
-          'CSS',
-          'APIs REST',
-          'Integração com SEFAZ',
+        technologyGroups: [
+          {
+            title: 'Linguagem e interface',
+            items: ['Java', 'JavaFX', 'FXML', 'CSS'],
+          },
+          {
+            title: 'Bibliotecas e processamento',
+            items: ['Apache POI', 'Jackson'],
+          },
+          {
+            title: 'Integrações',
+            items: ['APIs REST', 'SOAP', 'Integração com SEFAZ'],
+          },
+          {
+            title: 'Build, testes e ferramentas',
+            items: ['Maven', 'JUnit', 'PowerShell'],
+          },
         ],
+        practices: ['Programação concorrente'],
+        implementation:
+          'Java e JavaFX, com interfaces estruturadas em FXML e CSS. Apache POI é utilizado na manipulação de planilhas e Jackson no processamento de dados. O projeto também utiliza SOAP, Maven para gerenciamento de dependências, JUnit para testes, PowerShell e programação concorrente.',
       },
       {
         number: '02',
@@ -169,17 +182,41 @@ const pt = {
         problem:
           'O acompanhamento de documentos e pagamentos exigia atividades manuais recorrentes, dificultando a organização das rotinas financeiras.',
         solution:
-          'Desenvolvimento de funcionalidades para gestão financeira, incluindo dashboards, indicadores gerenciais, pesquisas avançadas, atualizações em lote e pagamento inteligente de duplicatas.',
+          'Desenvolvimento de funcionalidades para gestão financeira, incluindo dashboards, indicadores gerenciais, pesquisas avançadas e filtros, atualizações em lote e pagamento inteligente de duplicatas.',
         metric: '≈80%',
         result:
           'de redução do trabalho manual nas rotinas de gestão de duplicatas e boletos.',
-        technologies: [
-          'Java',
-          'Spring Boot',
-          'Thymeleaf',
-          'JavaScript',
-          'PostgreSQL',
+        technologyGroups: [
+          {
+            title: 'Linguagem e ecossistema Spring',
+            items: [
+              'Java',
+              'Spring Boot',
+              'Spring MVC',
+              'Spring Data JPA',
+              'Hibernate',
+            ],
+          },
+          {
+            title: 'Interface web',
+            items: ['Thymeleaf', 'JavaScript', 'Bootstrap'],
+          },
+          {
+            title: 'Banco de dados',
+            items: ['PostgreSQL'],
+          },
+          {
+            title: 'Testes',
+            items: ['JUnit', 'Mockito'],
+          },
+          {
+            title: 'Build e dependências',
+            items: ['Maven'],
+          },
         ],
+        practices: [],
+        implementation:
+          'Java e Spring Boot, com Spring MVC, Spring Data JPA e Hibernate. A interface utiliza Thymeleaf, JavaScript e Bootstrap, com PostgreSQL na persistência. Maven gerencia as dependências; JUnit e Mockito são utilizados nos testes.',
       },
     ],
     technologies: 'Tecnologias e integrações',
@@ -199,22 +236,34 @@ const pt = {
           'HTML',
           'CSS',
           'Thymeleaf',
+          'Bootstrap',
         ],
       },
       {
         title: 'Back-end e APIs',
-        items: ['Java', 'Spring Boot', 'Node.js', 'Express.js', 'APIs REST'],
+        items: [
+          'Java',
+          'Spring Boot',
+          'Spring MVC',
+          'Spring Data JPA',
+          'Hibernate',
+          'Node.js',
+          'Express.js',
+          'APIs REST',
+          'SOAP',
+          'Jackson',
+        ],
       },
       {
-        title: 'Desenvolvimento Desktop',
-        items: ['JavaFX'],
+        title: 'Desenvolvimento Desktop e Automação',
+        items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
       },
       {
         title: 'Bancos de dados e cache',
         items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'],
       },
       {
-        title: 'Versionamento e CI/CD',
+        title: 'Versionamento, build e CI/CD',
         items: [
           'Git',
           'GitHub',
@@ -222,6 +271,7 @@ const pt = {
           'GitHub Actions',
           'Azure Pipelines',
           'GitHub Pages',
+          'Maven',
         ],
       },
       {
@@ -238,6 +288,8 @@ const pt = {
           'Testes end-to-end (E2E)',
           'Jest',
           'Stryker',
+          'JUnit',
+          'Mockito',
           'Postman',
         ],
       },
@@ -245,7 +297,15 @@ const pt = {
         title: 'Analytics e infraestrutura de aplicações',
         items: ['Google Analytics 4 (GA4)', 'Kubernetes', 'Argo', 'OpenLens'],
       },
+      {
+        title: 'IA aplicada ao desenvolvimento',
+        items: ['Claude (Anthropic)', 'OpenAI Codex', 'GitHub Copilot'],
+        description:
+          'Ferramentas de apoio às atividades de desenvolvimento de software.',
+      },
     ],
+    practicesTitle: 'Conceitos e práticas',
+    practices: ['Programação concorrente'],
   },
   education: {
     eyebrow: '05 / FORMAÇÃO',
@@ -488,14 +548,27 @@ const en: typeof pt = {
         metric: '≈98%',
         result:
           'reduction in invoice processing and spreadsheet generation time.',
-        technologies: [
-          'Java',
-          'JavaFX',
-          'HTML',
-          'CSS',
-          'REST APIs',
-          'SEFAZ integration',
+        technologyGroups: [
+          {
+            title: 'Language & UI',
+            items: ['Java', 'JavaFX', 'FXML', 'CSS'],
+          },
+          {
+            title: 'Libraries & Processing',
+            items: ['Apache POI', 'Jackson'],
+          },
+          {
+            title: 'Integrations',
+            items: ['REST APIs', 'SOAP', 'SEFAZ Integration'],
+          },
+          {
+            title: 'Build, Testing & Tools',
+            items: ['Maven', 'JUnit', 'PowerShell'],
+          },
         ],
+        practices: ['Concurrent Programming'],
+        implementation:
+          'Java and JavaFX, with interfaces structured in FXML and CSS. Apache POI handles spreadsheets and Jackson supports data processing. The project also uses SOAP, Maven for dependency management, JUnit for testing, PowerShell and concurrent programming.',
       },
       {
         number: '02',
@@ -506,17 +579,41 @@ const en: typeof pt = {
         problem:
           'Tracking documents and payments required recurring manual work, making financial routines harder to organize.',
         solution:
-          'Development of financial management features, including dashboards, management indicators, advanced searches, batch updates and smart payment of payables.',
+          'Development of financial management features, including dashboards, management indicators, advanced searches and filters, batch updates and smart payment of payables.',
         metric: '≈80%',
         result:
           'reduction in manual work for payables and payment slip management routines.',
-        technologies: [
-          'Java',
-          'Spring Boot',
-          'Thymeleaf',
-          'JavaScript',
-          'PostgreSQL',
+        technologyGroups: [
+          {
+            title: 'Language & Spring Ecosystem',
+            items: [
+              'Java',
+              'Spring Boot',
+              'Spring MVC',
+              'Spring Data JPA',
+              'Hibernate',
+            ],
+          },
+          {
+            title: 'Web UI',
+            items: ['Thymeleaf', 'JavaScript', 'Bootstrap'],
+          },
+          {
+            title: 'Database',
+            items: ['PostgreSQL'],
+          },
+          {
+            title: 'Testing',
+            items: ['JUnit', 'Mockito'],
+          },
+          {
+            title: 'Build & Dependencies',
+            items: ['Maven'],
+          },
         ],
+        practices: [],
+        implementation:
+          'Java and Spring Boot, with Spring MVC, Spring Data JPA and Hibernate. The interface uses Thymeleaf, JavaScript and Bootstrap, with PostgreSQL for persistence. Maven manages dependencies; JUnit and Mockito are used for testing.',
       },
     ],
     technologies: 'Technologies & Integrations',
@@ -536,22 +633,34 @@ const en: typeof pt = {
           'HTML',
           'CSS',
           'Thymeleaf',
+          'Bootstrap',
         ],
       },
       {
         title: 'Back-end and APIs',
-        items: ['Java', 'Spring Boot', 'Node.js', 'Express.js', 'REST APIs'],
+        items: [
+          'Java',
+          'Spring Boot',
+          'Spring MVC',
+          'Spring Data JPA',
+          'Hibernate',
+          'Node.js',
+          'Express.js',
+          'REST APIs',
+          'SOAP',
+          'Jackson',
+        ],
       },
       {
-        title: 'Desktop development',
-        items: ['JavaFX'],
+        title: 'Desktop Development & Automation',
+        items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
       },
       {
         title: 'Databases and cache',
         items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'],
       },
       {
-        title: 'Version control and CI/CD',
+        title: 'Version Control, Build & CI/CD',
         items: [
           'Git',
           'GitHub',
@@ -559,6 +668,7 @@ const en: typeof pt = {
           'GitHub Actions',
           'Azure Pipelines',
           'GitHub Pages',
+          'Maven',
         ],
       },
       {
@@ -566,7 +676,7 @@ const en: typeof pt = {
         items: ['Amazon Web Services (AWS)', 'Microsoft Azure'],
       },
       {
-        title: 'Software testing and quality',
+        title: 'Software Testing & Quality',
         items: [
           'Unit testing',
           'Component testing',
@@ -575,6 +685,8 @@ const en: typeof pt = {
           'End-to-end (E2E) testing',
           'Jest',
           'Stryker',
+          'JUnit',
+          'Mockito',
           'Postman',
         ],
       },
@@ -582,7 +694,14 @@ const en: typeof pt = {
         title: 'Analytics and application infrastructure',
         items: ['Google Analytics 4 (GA4)', 'Kubernetes', 'Argo', 'OpenLens'],
       },
+      {
+        title: 'AI-Assisted Development',
+        items: ['Claude (Anthropic)', 'OpenAI Codex', 'GitHub Copilot'],
+        description: 'Tools that support software development activities.',
+      },
     ],
+    practicesTitle: 'Concepts & Practices',
+    practices: ['Concurrent Programming'],
   },
   education: {
     eyebrow: '05 / EDUCATION',

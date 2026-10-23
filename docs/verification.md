@@ -1,6 +1,6 @@
 # Verificação da entrega
 
-Última verificação em 22 de outubro de 2026, após o refinamento de Projetos e Certificação com resultado aberto e logo transparente. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [open-impact-2026-10-22.md](open-impact-2026-10-22.md).
+Última verificação em 22 de outubro de 2026, após a atualização das stacks de Projetos e das nove categorias de Tecnologias. Windows, Node 24.20.0 e npm 11.19.1. Branch `feat/portfolio`. O histórico também registra as execuções anteriores. Nenhum aplicativo real de e-mail foi aberto e nenhuma mensagem foi enviada. Alterações e arquivos atuais estão em [technical-stacks-2026-10-22.md](technical-stacks-2026-10-22.md).
 
 ## Resultados executados
 
@@ -9,13 +9,13 @@
 | `npm run lint`                 | Passou, sem warnings                                                      |
 | `npm run typecheck`            | Passou                                                                    |
 | `npm run format:check`         | Passou                                                                    |
-| `npm run test:unit`            | 82 testes passaram em 5 arquivos                                          |
+| `npm run test:unit`            | 90 testes passaram em 6 arquivos                                          |
 | `npm run test:component`       | 27 testes passaram em 5 arquivos                                          |
 | `npm run test:integration`     | 9 testes passaram em 1 arquivo, grafo/gateway reais com HTTP simulado     |
-| Suíte Vitest pela cobertura    | 118 testes passaram em 11 arquivos                                        |
-| `npm run test:coverage`        | 100% linhas, 98,56% branches, 100% funções, 100% statements               |
+| Suíte Vitest pela cobertura    | 126 testes passaram em 12 arquivos                                        |
+| `npm run test:coverage`        | 100% linhas, 98,60% branches, 100% funções, 100% statements               |
 | `npm run build`                | Passou                                                                    |
-| Mutação (anterior)             | 88,54% na etapa anterior; não reexecutada neste refinamento visual        |
+| Mutação (anterior)             | 88,54% na etapa anterior; não reexecutada nesta atualização de conteúdo   |
 | `npm run test:e2e`             | 13 testes passaram; 24 combinações e fluxos de formulário/mobile/animação |
 | Lighthouse (anterior)          | 99/100/100/100 no refinamento; não reexecutado após o formulário          |
 | Layout shift (anterior)        | CLS 0; LCP 1,8s no refinamento, sem nova medição nesta alteração          |
@@ -28,7 +28,7 @@ As medições anteriores de Lighthouse foram feitas no preview do build, em `htt
 
 Playwright executou o aplicativo real no Chrome instalado, com movimento reduzido, nas larguras 320, 375, 430, 768, 1024 e 1440px. Cada largura foi verificada em PT/EN e claro/escuro. As 24 combinações não apresentaram overflow horizontal nem violações nas regras axe WCAG 2 A/AA, 2.1 AA e 2.2 AA executadas.
 
-As posições reais dos oito grupos confirmaram duas colunas de alturas adaptativas a partir de 768px, com leitura de cima para baixo em cada coluna, e uma coluna abaixo disso. As tecnologias usam tags com borda de 1px; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 38,0s.
+As posições reais dos nove grupos confirmaram duas colunas de alturas adaptativas a partir de 768px, com leitura de cima para baixo em cada coluna, e uma coluna abaixo disso. As tecnologias usam tags com borda de 1px; números/rótulos e demais textos complementares verificados têm fonte mínima de 12px. O fluxo mobile confirma que o título de tecnologias fica abaixo do header fixo. O teste de movimento normal aguarda a aparição efetiva do conteúdo de projetos, tecnologias e formação. Os 13 E2E da rodada final passaram em 53,4s. Capturas adicionais das stacks agrupadas e da categoria de IA, em 375/1440px, PT/EN e ambos os temas, foram geradas em `reports/technical-stacks/`; versões desktop e mobile foram inspecionadas.
 
 O fluxo mobile também verificou abertura do menu, fechamento com Escape e foco no botão, navegação por âncoras de projetos/certificação/contato, alternância de tema/idioma e persistência após recarga. O formulário foi preenchido e validado, com payload e cabeçalhos conferidos, estado pendente, prevenção de envio duplicado, confirmação simulada e limpeza. Cenários adicionais simularam HTTP 422/429, JSON inválido e falha de rede, preservando o conteúdo e permitindo recuperação em inglês. Todas as requisições Formspree foram interceptadas; nenhuma chegou ao serviço real.
 
@@ -40,7 +40,11 @@ Testes automatizados não equivalem a certificação WCAG completa. Não foram r
 
 ## Mutação e fortalecimento dos testes
 
-### Resultado aberto e certificação compacta
+### Stacks e desenvolvimento assistido por IA
+
+126 testes passaram, incluindo oito casos novos PT/EN. Cobertura: **217/217 linhas**, **87/87 funções**, **241/241 statements** e **141/143 branches**. Lint, typecheck, formatação e build passaram. E2E final: **13 testes em 53,4s**, com 24 combinações sem overflow ou violações axe nas regras executadas. Revisão independente sem achados materiais. Conferência de escopo confirmou dados alterados somente em projects/technologies e funções de outras seções idênticas ao commit dd6f8a1. Sem alteração nos arquivos de produção do escopo Stryker; mutação e Lighthouse não reexecutados.
+
+### Histórico: resultado aberto e certificação compacta
 
 A alteração atual mantém o escopo e thresholds do Stryker, sem alterações nos arquivos de regras mutados. Stryker e Lighthouse não foram reexecutados. Os 118 testes Vitest passaram; cobertura permanece em 216/216 linhas, 86/86 funções, 240/240 statements e 137/139 branches. Os 13 E2E finais passaram em 38,0s, verificando a ausência de moldura no impacto, tags uniformes dentro do conteúdo, logo transparente de 52px e cabeçalho alinhado a partir de 375px. Em 320px o badge pode empilhar. As 24 combinações não tiveram overflow ou violações axe nas regras executadas. Capturas em reports/open-impact/ foram inspecionadas.
 

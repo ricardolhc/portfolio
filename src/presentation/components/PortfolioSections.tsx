@@ -202,14 +202,36 @@ export function Projects() {
                     <div>
                       <h4 className="eyebrow">{t.projects.solution}</h4>
                       <p>{project.solution}</p>
+                      <p className="project-implementation">
+                        {project.implementation}
+                      </p>
                     </div>
                   </div>
-                  <div className="project-technologies">
+                  <div
+                    className="project-technologies"
+                    role="group"
+                    aria-label={t.projects.technologies}
+                  >
                     <h4 className="eyebrow">{t.projects.technologies}</h4>
-                    <TechnologyTags
-                      items={project.technologies}
-                      label={t.projects.technologies}
-                    />
+                    <dl className="project-stack">
+                      {project.technologyGroups.map((group) => (
+                        <div className="project-stack-group" key={group.title}>
+                          <dt>{group.title}</dt>
+                          <dd>
+                            <TechnologyTags
+                              items={group.items}
+                              label={group.title}
+                            />
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                    {project.practices.length > 0 && (
+                      <p className="project-practices">
+                        <span>{t.technologies.practicesTitle}:</span>{' '}
+                        {project.practices.join(' · ')}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div className="project-result">
@@ -257,16 +279,24 @@ export function Technologies() {
                         'cloud',
                         'check',
                         'activity',
+                        'code',
                       ] as const
                     )[index] ?? 'code'
                   }
                 />
               </div>
               <h3>{group.title}</h3>
+              {'description' in group && (
+                <p className="technology-description">{group.description}</p>
+              )}
               <TechnologyTags items={group.items} label={group.title} />
             </div>
           ))}
         </div>
+        <p className="technology-practices">
+          <span className="eyebrow">{t.technologies.practicesTitle}</span>
+          <span>{t.technologies.practices.join(' · ')}</span>
+        </p>
       </Reveal>
     </section>
   );
