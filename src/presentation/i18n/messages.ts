@@ -131,24 +131,15 @@ const pt = {
   projects: {
     eyebrow: '03 / PROJETOS',
     title: 'Menos trabalho manual.\nMais resultado.',
-    intro:
-      'Soluções independentes para processos empresariais reais. Empresas preservadas por privacidade.',
-    problem: 'Contexto',
-    solution: 'Solução',
+    intro: 'Soluções para empresas e aplicações públicas para explorar.',
     outcome: 'Resultado',
     continuity:
-      'Uma solução, evolução contínua — da automação fiscal à gestão financeira, em projetos independentes para necessidades reais de empresas.',
+      'O sistema financeiro representa uma evolução contínua da solução fiscal. Projetos privados com capturas das interfaces.',
     items: [
       {
         number: '01',
         category: 'Automação fiscal',
-        title: 'Da nota fiscal\nà planilha.',
-        context:
-          'Automação do processamento de notas fiscais eletrônicas e geração de planilhas para otimizar rotinas empresariais.',
-        problem:
-          'O processamento de notas fiscais e a geração de planilhas exigiam atividades manuais repetitivas e demoradas.',
-        solution:
-          'Desenvolvimento de uma aplicação com integração à SEFAZ para consulta de informações tributárias, geração automatizada de planilhas e comunicação com outro sistema por meio de APIs REST.',
+        title: 'Da nota fiscal à planilha.',
         metric: '≈98%',
         result: 'de redução no tempo de processamento e geração de planilhas.',
         technologyGroups: [
@@ -166,23 +157,25 @@ const pt = {
           },
           {
             title: 'Build, testes e ferramentas',
-            items: ['Maven', 'JUnit', 'PowerShell'],
+            items: ['Maven', 'JUnit', 'PowerShell', 'Programação concorrente'],
           },
         ],
-
-        implementation:
-          'Java e JavaFX, com interfaces estruturadas em FXML e CSS. Apache POI é utilizado na manipulação de planilhas e Jackson no processamento de dados. O projeto também utiliza SOAP, Maven para gerenciamento de dependências, JUnit para testes e PowerShell.',
+        description:
+          'Aplicação desktop desenvolvida para automatizar o processamento de notas fiscais eletrônicas, a consulta de informações tributárias junto à SEFAZ e a geração de planilhas, com integração a outro sistema por meio de APIs REST.',
+        primaryTechnologies: [
+          'Java',
+          'JavaFX',
+          'Apache POI',
+          'APIs REST',
+          'SEFAZ',
+        ],
+        group: 'business',
+        highlights: [],
       },
       {
         number: '02',
         category: 'Gestão financeira',
-        title: 'Do documento\nao pagamento.',
-        context:
-          'Evolução da solução fiscal para um sistema web de gestão de notas fiscais, duplicatas, boletos e pagamentos.',
-        problem:
-          'O acompanhamento de documentos e pagamentos exigia atividades manuais recorrentes, dificultando a organização das rotinas financeiras.',
-        solution:
-          'Desenvolvimento de funcionalidades para gestão financeira, incluindo dashboards, indicadores gerenciais, pesquisas avançadas e filtros, atualizações em lote e pagamento inteligente de duplicatas.',
+        title: 'Do documento ao pagamento.',
         metric: '≈80%',
         result:
           'de redução do trabalho manual nas rotinas de gestão de duplicatas e boletos.',
@@ -214,12 +207,112 @@ const pt = {
             items: ['Maven'],
           },
         ],
-
-        implementation:
-          'Java e Spring Boot, com Spring MVC, Spring Data JPA e Hibernate. A interface utiliza Thymeleaf, JavaScript e Bootstrap, com PostgreSQL na persistência. Maven gerencia as dependências; JUnit e Mockito são utilizados nos testes.',
+        description:
+          'Sistema web de gestão financeira desenvolvido como evolução da solução fiscal, permitindo controlar notas fiscais, duplicatas, boletos e pagamentos, com dashboards, pesquisas avançadas, atualizações em lote e funcionalidades de pagamento inteligente.',
+        primaryTechnologies: [
+          'Java',
+          'Spring Boot',
+          'Spring Data JPA',
+          'Hibernate',
+          'PostgreSQL',
+        ],
+        group: 'business',
+        highlights: [],
+      },
+      {
+        number: '03',
+        category: 'Jogo web / Open-source',
+        title: 'ValorantGuess',
+        description:
+          'Jogo interativo de reconhecimento de habilidades de Valorant, no qual o jogador identifica habilidades pelos ícones e suas teclas padrão (Q, E, C ou X), enfrentando rodadas de 10 segundos e buscando superar seu próprio recorde.',
+        group: 'public',
+        metric: '',
+        result:
+          'Integração com API REST, gerenciamento de estado e testes automatizados.',
+        primaryTechnologies: [
+          'React',
+          'TypeScript',
+          'TanStack React Query',
+          'Vitest',
+        ],
+        highlights: [
+          'Habilidades embaralhadas, pontuação por acertos consecutivos e recorde local.',
+          'Respostas por teclado ou botões; integração com a Valorant API, cache das consultas e tratamento de falhas no carregamento.',
+        ],
+        technologyGroups: [
+          {
+            title: 'Front-end',
+            items: [
+              'React',
+              'TypeScript',
+              'Vite',
+              'CSS',
+              'Axios',
+              'TanStack React Query',
+              'localStorage',
+            ],
+          },
+          {
+            title: 'Testes e qualidade',
+            items: ['Vitest', 'React Testing Library', 'ESLint'],
+          },
+          {
+            title: 'Entrega',
+            items: ['GitHub Actions', 'GitHub Pages'],
+          },
+        ],
+      },
+      {
+        number: '04',
+        category: 'Ferramenta web / Multiplayer',
+        title: 'Rumble Challenge',
+        description:
+          'Aplicação web para sorteio de personagens e formação de equipes, com regras personalizáveis, banimentos, modo desafio e sincronização multiplayer em tempo real entre navegadores.',
+        group: 'public',
+        metric: '',
+        result:
+          'WebRTC, internacionalização e algoritmos de seleção com restrições.',
+        primaryTechnologies: ['React', 'TypeScript', 'WebRTC', 'i18next'],
+        highlights: [
+          'Equipes de até três personagens, banimentos globais ou por posição e modo desafio que restringe repetições nos sorteios seguintes.',
+          'Seis idiomas, histórico de sorteios, perfis de banimentos e importação/exportação de configurações em JSON.',
+        ],
+        technologyGroups: [
+          {
+            title: 'Front-end',
+            items: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+          },
+          {
+            title: 'Comunicação e recursos web',
+            items: ['WebRTC', 'Fetch API', 'localStorage'],
+          },
+          {
+            title: 'Internacionalização',
+            items: ['i18next', 'react-i18next'],
+          },
+          {
+            title: 'Qualidade',
+            items: ['ESLint'],
+          },
+        ],
       },
     ],
-    technologies: 'Tecnologias e integrações',
+    technologies: 'Tecnologias',
+    business: 'Soluções para empresas',
+    public: 'Projetos públicos',
+    privateLabel: 'Projeto empresarial privado',
+    publicLabel: 'Projeto público',
+    details: 'Ver detalhes',
+    highlights: 'Destaques técnicos',
+    play: 'Jogar',
+    tryIt: 'Experimentar',
+    source: 'Código-fonte',
+    enlarge: 'Ampliar imagem',
+    closeImage: 'Fechar imagem',
+    previous: 'Imagem anterior',
+    next: 'Próxima imagem',
+    gallery: 'Imagens do projeto',
+    imageUnavailable: 'Imagem temporariamente indisponível.',
   },
   technologies: {
     eyebrow: '04 / TECNOLOGIAS',
@@ -237,6 +330,12 @@ const pt = {
           'CSS',
           'Thymeleaf',
           'Bootstrap',
+          'Vite',
+          'Tailwind CSS',
+          'Axios',
+          'TanStack React Query',
+          'i18next',
+          'react-i18next',
         ],
       },
       {
@@ -252,15 +351,23 @@ const pt = {
           'APIs REST',
           'SOAP',
           'Jackson',
+          'WebRTC',
+          'Fetch API',
         ],
       },
       {
         title: 'Desenvolvimento Desktop e Automação',
-        items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
+        items: [
+          'JavaFX',
+          'FXML',
+          'Apache POI',
+          'PowerShell',
+          'Programação concorrente',
+        ],
       },
       {
         title: 'Bancos de dados e cache',
-        items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'],
+        items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'localStorage'],
       },
       {
         title: 'Versionamento, build e CI/CD',
@@ -291,6 +398,9 @@ const pt = {
           'JUnit',
           'Mockito',
           'Postman',
+          'Vitest',
+          'React Testing Library',
+          'ESLint',
         ],
       },
       {
@@ -323,7 +433,7 @@ const pt = {
         institution: 'Universidade Federal do Pampa (UNIPAMPA)',
         period: 'março de 2022 – dezembro de 2025',
         description:
-          'Graduação concluída com Láurea Acadêmica e média geral de 9,13/10. Participação em iniciação científica apoiada pela FAPERGS e em pesquisas que resultaram em publicações, conciliando a formação com o desenvolvimento de soluções de software para empresas.',
+          'Láurea Acadêmica — reconhecimento pelo desempenho acadêmico excepcional durante a graduação. Participação em iniciação científica apoiada pela FAPERGS e em pesquisas que resultaram em publicações, conciliando a formação com o desenvolvimento de soluções de software para empresas.',
       },
       {
         title: 'Técnico em Informática Integrado ao Ensino Médio',
@@ -525,24 +635,15 @@ const en: typeof pt = {
   projects: {
     eyebrow: '03 / PROJECTS',
     title: 'Less manual work.\nMore results.',
-    intro:
-      'Independent solutions for real business processes. Company identities kept private.',
-    problem: 'Context',
-    solution: 'Solution',
+    intro: 'Business solutions and public applications to explore.',
     outcome: 'Result',
     continuity:
-      'One solution, continuous evolution — from tax automation to financial management, through independent projects addressing real business needs.',
+      'The financial system is a continuous evolution of the invoice automation solution. Private projects with interface screenshots.',
     items: [
       {
         number: '01',
         category: 'Invoice Processing Automation',
-        title: 'From invoice\nto spreadsheet.',
-        context:
-          'Automated Brazilian Electronic Invoice (NF-e) processing and spreadsheet generation to streamline business routines.',
-        problem:
-          'Invoice processing and spreadsheet generation required repetitive, time-consuming manual activities.',
-        solution:
-          'Development of an application integrating with SEFAZ to retrieve tax information, generate spreadsheets automatically and communicate with another system through REST APIs.',
+        title: 'From invoice to spreadsheet.',
         metric: '≈98%',
         result:
           'reduction in invoice processing and spreadsheet generation time.',
@@ -561,23 +662,25 @@ const en: typeof pt = {
           },
           {
             title: 'Build, Testing & Tools',
-            items: ['Maven', 'JUnit', 'PowerShell'],
+            items: ['Maven', 'JUnit', 'PowerShell', 'Concurrent Programming'],
           },
         ],
-
-        implementation:
-          'Java and JavaFX, with interfaces structured in FXML and CSS. Apache POI handles spreadsheets and Jackson supports data processing. The project also uses SOAP, Maven for dependency management, JUnit for testing and PowerShell.',
+        description:
+          'Desktop application that automates electronic invoice processing, queries tax information from SEFAZ (Brazilian state tax authorities) and generates spreadsheets, integrating with another system through REST APIs.',
+        primaryTechnologies: [
+          'Java',
+          'JavaFX',
+          'Apache POI',
+          'REST APIs',
+          'SEFAZ',
+        ],
+        group: 'business',
+        highlights: [],
       },
       {
         number: '02',
         category: 'Financial Management',
-        title: 'From document\nto payment.',
-        context:
-          'An evolution of the tax automation solution into a web system for managing invoices, payables, payment slips and payments.',
-        problem:
-          'Tracking documents and payments required recurring manual work, making financial routines harder to organize.',
-        solution:
-          'Development of financial management features, including dashboards, management indicators, advanced searches and filters, batch updates and smart payment of payables.',
+        title: 'From document to payment.',
         metric: '≈80%',
         result:
           'reduction in manual work for payables and payment slip management routines.',
@@ -609,12 +712,111 @@ const en: typeof pt = {
             items: ['Maven'],
           },
         ],
-
-        implementation:
-          'Java and Spring Boot, with Spring MVC, Spring Data JPA and Hibernate. The interface uses Thymeleaf, JavaScript and Bootstrap, with PostgreSQL for persistence. Maven manages dependencies; JUnit and Mockito are used for testing.',
+        description:
+          'Web-based financial management system evolved from the invoice automation solution, managing invoices, receivables, Brazilian payment slips (boletos) and payments with dashboards, advanced search, bulk updates and smart payment features.',
+        primaryTechnologies: [
+          'Java',
+          'Spring Boot',
+          'Spring Data JPA',
+          'Hibernate',
+          'PostgreSQL',
+        ],
+        group: 'business',
+        highlights: [],
+      },
+      {
+        number: '03',
+        category: 'Web Game / Open-source',
+        title: 'ValorantGuess',
+        description:
+          'Interactive Valorant ability recognition game: identify abilities by their icons and default keys (Q, E, C or X), with 10 seconds per round to beat your own high score.',
+        group: 'public',
+        metric: '',
+        result: 'REST API integration, state management and automated tests.',
+        primaryTechnologies: [
+          'React',
+          'TypeScript',
+          'TanStack React Query',
+          'Vitest',
+        ],
+        highlights: [
+          'Shuffled abilities, consecutive-hit scoring and a local high score.',
+          'Keyboard or button controls; Valorant API integration, query caching and loading error handling.',
+        ],
+        technologyGroups: [
+          {
+            title: 'Front-end',
+            items: [
+              'React',
+              'TypeScript',
+              'Vite',
+              'CSS',
+              'Axios',
+              'TanStack React Query',
+              'localStorage',
+            ],
+          },
+          {
+            title: 'Testing & Quality',
+            items: ['Vitest', 'React Testing Library', 'ESLint'],
+          },
+          {
+            title: 'Delivery',
+            items: ['GitHub Actions', 'GitHub Pages'],
+          },
+        ],
+      },
+      {
+        number: '04',
+        category: 'Web Tool / Multiplayer',
+        title: 'Rumble Challenge',
+        description:
+          'Web application for random character selection and team formation, with customizable rules, bans, a challenge mode and real-time multiplayer synchronization between browsers.',
+        group: 'public',
+        metric: '',
+        result:
+          'WebRTC, internationalization and selection algorithms with constraints.',
+        primaryTechnologies: ['React', 'TypeScript', 'WebRTC', 'i18next'],
+        highlights: [
+          'Teams of up to three characters, global or per-position bans and a challenge mode that limits repeats in subsequent draws.',
+          'Six languages, draw history, ban profiles and JSON configuration import/export.',
+        ],
+        technologyGroups: [
+          {
+            title: 'Front-end',
+            items: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+          },
+          {
+            title: 'Communication & Web',
+            items: ['WebRTC', 'Fetch API', 'localStorage'],
+          },
+          {
+            title: 'Internationalization',
+            items: ['i18next', 'react-i18next'],
+          },
+          {
+            title: 'Quality',
+            items: ['ESLint'],
+          },
+        ],
       },
     ],
-    technologies: 'Technologies & Integrations',
+    technologies: 'Technologies',
+    business: 'Business Solutions',
+    public: 'Public Projects',
+    privateLabel: 'Private business project',
+    publicLabel: 'Public project',
+    details: 'View Details',
+    highlights: 'Technical Highlights',
+    play: 'Play',
+    tryIt: 'Try It',
+    source: 'Source Code',
+    enlarge: 'Enlarge image',
+    closeImage: 'Close image',
+    previous: 'Previous image',
+    next: 'Next image',
+    gallery: 'Project images',
+    imageUnavailable: 'Image temporarily unavailable.',
   },
   technologies: {
     eyebrow: '04 / TECHNOLOGIES',
@@ -632,6 +834,12 @@ const en: typeof pt = {
           'CSS',
           'Thymeleaf',
           'Bootstrap',
+          'Vite',
+          'Tailwind CSS',
+          'Axios',
+          'TanStack React Query',
+          'i18next',
+          'react-i18next',
         ],
       },
       {
@@ -647,15 +855,23 @@ const en: typeof pt = {
           'REST APIs',
           'SOAP',
           'Jackson',
+          'WebRTC',
+          'Fetch API',
         ],
       },
       {
         title: 'Desktop Development & Automation',
-        items: ['JavaFX', 'FXML', 'Apache POI', 'PowerShell'],
+        items: [
+          'JavaFX',
+          'FXML',
+          'Apache POI',
+          'PowerShell',
+          'Concurrent Programming',
+        ],
       },
       {
         title: 'Databases and cache',
-        items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis'],
+        items: ['PostgreSQL', 'MongoDB', 'MySQL', 'Redis', 'localStorage'],
       },
       {
         title: 'Version Control, Build & CI/CD',
@@ -686,6 +902,9 @@ const en: typeof pt = {
           'JUnit',
           'Mockito',
           'Postman',
+          'Vitest',
+          'React Testing Library',
+          'ESLint',
         ],
       },
       {
@@ -717,7 +936,7 @@ const en: typeof pt = {
         institution: 'Universidade Federal do Pampa (UNIPAMPA)',
         period: 'March 2022 – December 2025',
         description:
-          'Graduated with Láurea Acadêmica (Academic Honors) and an overall average of 9.13/10. Participated in undergraduate research supported by FAPERGS and research leading to scientific publications, alongside developing software solutions for businesses.',
+          'Academic Honors (Láurea Acadêmica) — recognition for outstanding academic performance. Participated in undergraduate research supported by FAPERGS and research leading to scientific publications, alongside developing software solutions for businesses.',
       },
       {
         title:

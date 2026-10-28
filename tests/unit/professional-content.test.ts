@@ -37,9 +37,7 @@ describe.each(['pt-BR', 'en'] as const)(
       expect(c.experience.items).toHaveLength(2);
       const [corporate, independent] = c.experience.items;
       expect(corporate!.title).toBe(
-        language === 'en'
-          ? 'Software Developer'
-          : 'Desenvolvedor',
+        language === 'en' ? 'Software Developer' : 'Desenvolvedor',
       );
       expect(corporate!.details).toContain('Compass UOL');
       expect(corporate!.details).toContain('2025');
@@ -74,8 +72,8 @@ describe.each(['pt-BR', 'en'] as const)(
     });
     it('associates the confirmed technologies and metrics with the correct business process', () => {
       const [tax, finance] = c.projects.items;
-      expect(tax!.solution).toContain('SEFAZ');
-      expect(tax!.solution).toContain(
+      expect(tax!.description).toContain('SEFAZ');
+      expect(tax!.description).toContain(
         language === 'en' ? 'REST APIs' : 'APIs REST',
       );
       expect(tax!.technologyGroups.flatMap((group) => group.items)).toEqual([
@@ -91,6 +89,9 @@ describe.each(['pt-BR', 'en'] as const)(
         'Maven',
         'JUnit',
         'PowerShell',
+        language === 'en'
+          ? 'Concurrent Programming'
+          : 'Programação concorrente',
       ]);
       expect(tax!.metric).toBe('≈98%');
       expect(tax!.result).toMatch(
@@ -118,10 +119,10 @@ describe.each(['pt-BR', 'en'] as const)(
       expect(finance!.result).toMatch(
         language === 'en' ? /payables.*payment slip/ : /duplicatas.*boletos/,
       );
-      expect(finance!.solution).toMatch(
+      expect(finance!.description).toMatch(
         language === 'en' ? /batch|bulk/ : /lote/,
       );
-      expect(finance!.solution).toMatch(
+      expect(finance!.description).toMatch(
         language === 'en' ? /smart.*payment/i : /pagamento inteligente/,
       );
       expect(c.projects.eyebrow).toBe(
@@ -199,8 +200,8 @@ describe.each(['pt-BR', 'en'] as const)(
       );
       expect(bachelor!.period).toMatch(/2022.*2025/);
       expect(bachelor!.description).toContain('Láurea Acadêmica');
-      expect(bachelor!.description).toContain(
-        language === 'en' ? '9.13/10' : '9,13/10',
+      expect(bachelor!.description).not.toMatch(
+        /9[,.]13|GPA|overall average|média geral/i,
       );
       expect(bachelor!.description).toContain('FAPERGS');
       expect(technical!.institution).toBe(

@@ -16,7 +16,12 @@ describe.each(['pt-BR', 'en'] as const)(
           'SOAP',
           english ? 'SEFAZ Integration' : 'Integração com SEFAZ',
         ],
-        ['Maven', 'JUnit', 'PowerShell'],
+        [
+          'Maven',
+          'JUnit',
+          'PowerShell',
+          english ? 'Concurrent Programming' : 'Programação concorrente',
+        ],
       ]);
       const tools = project.technologyGroups.flatMap((group) => group.items);
       expect(tools).not.toContain('HTML');
@@ -32,9 +37,13 @@ describe.each(['pt-BR', 'en'] as const)(
         'JUnit',
         'PowerShell',
       ])
-        expect(project.implementation).toContain(text);
-      expect(project.solution).toContain('SEFAZ');
-      expect(project.solution).toContain(english ? 'REST APIs' : 'APIs REST');
+        expect(
+          project.technologyGroups.flatMap((group) => group.items),
+        ).toContain(text);
+      expect(project.description).toContain('SEFAZ');
+      expect(project.description).toContain(
+        english ? 'REST APIs' : 'APIs REST',
+      );
       expect(project.metric).toBe('≈98%');
     });
     it('preserves the financial stack and adds the confirmed Spring, web, test and build tools', () => {
@@ -60,12 +69,16 @@ describe.each(['pt-BR', 'en'] as const)(
         'JUnit',
         'Mockito',
       ])
-        expect(project.implementation).toContain(text);
+        expect(
+          project.technologyGroups.flatMap((group) => group.items),
+        ).toContain(text);
       expect(project.metric).toBe('≈80%');
-      expect(project.solution).toMatch(
+      expect(project.description).toMatch(
         english ? /smart.*payment/ : /pagamento inteligente/,
       );
-      expect(project.solution).toMatch(english ? /filters/ : /filtros/);
+      expect(project.description).toMatch(
+        english ? /advanced search/ : /pesquisas avançadas/,
+      );
     });
     it('adds development assistance as the ninth category, without unverified AI claims', () => {
       expect(c.technologies.groups).toHaveLength(9);

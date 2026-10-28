@@ -118,9 +118,11 @@ describe('professional portfolio', () => {
       });
       expect(within(education).getAllByRole('article')).toHaveLength(3);
       expect(education).toHaveTextContent(
-        en ? 'Láurea Acadêmica (Academic Honors)' : 'Láurea Acadêmica',
+        en ? 'Academic Honors (Láurea Acadêmica)' : 'Láurea Acadêmica',
       );
-      expect(education).toHaveTextContent(en ? '9.13/10' : '9,13/10');
+      expect(education).not.toHaveTextContent(
+        /9[,.]13|GPA|média geral|overall average/i,
+      );
       expect(education).toHaveTextContent('FAPERGS');
       expect(education).toHaveTextContent('IFAM');
       expect(education).toHaveTextContent(

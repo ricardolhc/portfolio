@@ -10,55 +10,25 @@ import { renderWithProviders, testDependencies } from '../renderWithProviders';
 describe.each(['pt-BR', 'en'] as const)(
   'editorial sections in %s',
   (language) => {
-    it('presents two related cases with named technology lists and accurate results', () => {
+    it('presents four projects with named stacks, compact details and accurate business results', () => {
       renderWithProviders(<Projects />, testDependencies(language).registry);
-      expect(
-        screen.getByText(language === 'en' ? '03 / PROJECTS' : '03 / PROJETOS'),
-      ).toBeInTheDocument();
       const cases = screen.getAllByRole('article');
-      expect(cases).toHaveLength(2);
-      const [tax, finance] = cases;
-      expect(tax).toHaveTextContent('≈98%');
-      expect(finance).toHaveTextContent('≈80%');
+      expect(cases).toHaveLength(4);
+      expect(cases[0]).toHaveTextContent('≈98%');
+      expect(cases[1]).toHaveTextContent('≈80%');
+      expect(cases[0]).toHaveTextContent('FXML');
+      expect(cases[0]).not.toHaveTextContent('HTML');
       for (const item of cases)
         expect(
           within(item).getByRole('group', {
-            name:
-              language === 'en'
-                ? 'Technologies & Integrations'
-                : 'Tecnologias e integrações',
+            name: language === 'en' ? 'Technologies' : 'Tecnologias',
           }),
         ).toBeInTheDocument();
-      expect(within(tax!).getAllByRole('listitem')).toHaveLength(12);
-      expect(within(finance!).getAllByRole('listitem')).toHaveLength(12);
-      expect(tax).toHaveTextContent('SEFAZ');
-      expect(tax).toHaveTextContent('JavaFX');
-      expect(tax).toHaveTextContent('FXML');
-      expect(tax).not.toHaveTextContent('HTML');
-      expect(within(tax!).getAllByRole('list')).toHaveLength(4);
-      expect(within(finance!).getAllByRole('list')).toHaveLength(5);
-      expect(tax).not.toHaveTextContent(
-        /programação concorrente|concurrent programming/i,
-      );
-      expect(finance).toHaveTextContent('Spring Boot');
       expect(
         screen.getByText(
           language === 'en' ? /continuous evolution/ : /evolução contínua/,
         ),
       ).toBeInTheDocument();
-      expect(screen.queryByRole('button')).not.toBeInTheDocument();
-    });
-    it('omits the removed concepts and practices from projects and technologies', () => {
-      renderWithProviders(
-        <>
-          <Projects />
-          <Technologies />
-        </>,
-        testDependencies(language).registry,
-      );
-      expect(document.body).not.toHaveTextContent(
-        /programação concorrente|concurrent programming|conceitos e práticas|concepts & practices/i,
-      );
     });
     it('keeps all nine category headings and their technology lists', () => {
       renderWithProviders(

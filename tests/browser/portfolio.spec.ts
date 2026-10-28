@@ -102,6 +102,7 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         await expect(
           page.locator('.project-card').nth(1).locator('.project-stack-group'),
         ).toHaveCount(5);
+        await fiscalCase.locator('summary').click();
         await expect(
           fiscalCase.getByText('FXML', { exact: true }),
         ).toBeVisible();
@@ -112,12 +113,10 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
           page.locator('#technologies').getByText('HTML', { exact: true }),
         ).toBeVisible();
         await expect(page.locator('body')).not.toContainText(
-          /programação concorrente|concurrent programming|conceitos e práticas|concepts & practices/i,
+          /conceitos e práticas|concepts & practices/i,
         );
         await expect(page.locator('#experience h3').first()).toHaveText(
-          language === 'en'
-            ? 'Software Developer'
-            : 'Desenvolvedor',
+          language === 'en' ? 'Software Developer' : 'Desenvolvedor',
         );
         await expect(page.locator('body')).not.toContainText(
           language === 'en' ? '1 year and 6 months' : '1 ano e 6 meses',
@@ -166,49 +165,32 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         expect(technologyBorders.every((border) => border === '1px')).toBe(
           true,
         );
+        await expect(page.locator('.project-card')).toHaveCount(4);
         for (const project of await page.locator('.project-card').all()) {
+          await expect(project.locator('.project-description')).toBeVisible();
+          await expect(project.locator('.project-result')).toBeVisible();
+          await expect(project.locator('.project-technologies')).toBeVisible();
+        }
+        for (const project of await page
+          .locator('.project-card-with-media')
+          .all()) {
+          const image = project.locator('.project-image-button img');
+          await image.scrollIntoViewIfNeeded();
+          await expect(image).toBeVisible();
+          expect(
+            await image.evaluate(
+              (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
+            ),
+          ).toBe(true);
           const content = await project
             .locator('.project-content')
             .boundingBox();
-          const result = await project.locator('.project-result').boundingBox();
-          const tags = await project
-            .locator('.project-technologies')
-            .boundingBox();
-          const details = await project
-            .locator('.project-details')
-            .boundingBox();
-          expect(tags!.y).toBeGreaterThanOrEqual(details!.y + details!.height);
-          expect(tags!.x).toBe(content!.x);
-          expect(tags!.y + tags!.height).toBeLessThanOrEqual(
-            content!.y + content!.height + 1,
-          );
-          const borders = await project
-            .locator('.project-result')
-            .evaluate((node) => {
-              const style = getComputedStyle(node);
-              return {
-                top: style.borderTopWidth,
-                right: style.borderRightWidth,
-                bottom: style.borderBottomWidth,
-                left: style.borderLeftWidth,
-              };
-            });
-          expect(borders.right).toBe('0px');
-          expect(borders.bottom).toBe('0px');
-          expect(width >= 768 ? borders.top : borders.left).toBe('0px');
-          const tagHeights = await project
-            .locator('.technology-tags li')
-            .evaluateAll((nodes) =>
-              nodes.map((node) =>
-                Math.round(node.getBoundingClientRect().height),
-              ),
+          const media = await project.locator('.project-media').boundingBox();
+          if (width < 900)
+            expect(media!.y).toBeGreaterThanOrEqual(
+              content!.y + content!.height,
             );
-          expect(new Set(tagHeights).size).toBe(1);
-          if (width >= 768) expect(result!.x).toBeGreaterThan(content!.x);
-          else {
-            expect(result!.x).toBe(content!.x);
-            expect(result!.y).toBeGreaterThan(content!.y + content!.height);
-          }
+          else expect(Math.abs(media!.x - content!.x)).toBeGreaterThan(100);
         }
         const logo = page.getByRole('img', {
           name: 'Amazon Web Services (AWS)',
@@ -582,3 +564,79 @@ for (const failure of ['rejected', 'rateLimited', 'invalid', 'network']) {
     ).toHaveValue('');
   });
 }
+
+test('project image enlargement closes with Escape and restores keyboard focus', async ({
+  page,
+}) => {
+  await page.addInitScript(() =>
+    localStorage.setItem('portfolio.language', 'pt-BR'),
+  );
+  await page.goto('/');
+  const trigger = page.locator('.project-image-button').first();
+  await trigger.click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('img')).toBeVisible();
+  await expect(
+    dialog.getByRole('button', { name: 'Fechar imagem ×' }),
+  ).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(dialog).not.toBeVisible();
+  await expect(trigger).toBeFocused();
+});
+
+for (const width of [375, 1440]) {
+  for (const language of ['pt-BR', 'en']) {
+    test(`private project images render inside the lightbox at ${width}px in ${language}`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.addInitScript(
+        (language) => localStorage.setItem('portfolio.language', language),
+        language,
+      );
+      await page.goto('/');
+      for (const project of [0, 1]) {
+        const trigger = page.locator('.project-image-button').nth(project);
+        for (let opening = 0; opening < 2; opening++) {
+          await trigger.click();
+          const dialog = page.getByRole('dialog');
+          const image = dialog.getByRole('img');
+          await expect(image).toBeVisible();
+          await expect
+            .poll(() =>
+              image.evaluate((image) => {
+                const element = image as HTMLImageElement;
+                return element.complete && element.naturalWidth > 0;
+              }),
+            )
+            .toBe(true);
+          const bounds = await image.boundingBox();
+          expect(bounds!.width).toBeGreaterThan(
+            width < 900 ? width * 0.8 : 900,
+          );
+          expect(bounds!.height).toBeGreaterThan(100);
+          await expect(image).toBeInViewport();
+          await page.keyboard.press('Escape');
+          await expect(dialog).not.toBeVisible();
+          await expect(trigger).toBeFocused();
+        }
+      }
+    });
+  }
+}
+test('project details support keyboard expansion without hiding the summary', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const project = page.locator('.project-card').first();
+  const summary = project.locator('summary');
+  await summary.focus();
+  await page.keyboard.press('Enter');
+  await expect(project.locator('details')).toHaveAttribute('open', '');
+  await expect(project.getByText('FXML', { exact: true })).toBeVisible();
+  await expect(project.locator('.project-description')).toBeVisible();
+  await page.keyboard.press('Space');
+  await expect(project.locator('details')).not.toHaveAttribute('open');
+  await expect(project.locator('.project-result')).toBeVisible();
+});

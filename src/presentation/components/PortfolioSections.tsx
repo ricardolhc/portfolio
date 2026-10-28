@@ -1,3 +1,5 @@
+import { ProjectMedia } from './ProjectMedia';
+import { projectAssets } from '../projects/catalog';
 import { usePreferences } from '../preferences/PreferencesProvider';
 import { ContactForm } from './ContactForm';
 import { Icon } from './Icon';
@@ -184,66 +186,135 @@ export function Projects() {
       <div className="container section">
         <Reveal>
           <SectionHeading id="projects" {...t.projects} />
-          <div className="project-list">
-            {t.projects.items.map((project) => (
-              <article key={project.number} className="project-card">
-                <div className="project-content">
-                  <div className="project-identity">
-                    <div className="project-meta">
-                      <span className="project-number mono">
-                        /{project.number}
-                      </span>
-                      <p className="eyebrow">{project.category}</p>
-                    </div>
-                    <h3 className="whitespace-pre-line">{project.title}</h3>
-                    <p className="project-context">{project.context}</p>
-                  </div>
-                  <div className="project-details">
-                    <div>
-                      <h4 className="eyebrow">{t.projects.problem}</h4>
-                      <p>{project.problem}</p>
-                    </div>
-                    <div>
-                      <h4 className="eyebrow">{t.projects.solution}</h4>
-                      <p>{project.solution}</p>
-                      <p className="project-implementation">
-                        {project.implementation}
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="project-technologies"
-                    role="group"
-                    aria-label={t.projects.technologies}
-                  >
-                    <h4 className="eyebrow">{t.projects.technologies}</h4>
-                    <dl className="project-stack">
-                      {project.technologyGroups.map((group) => (
-                        <div className="project-stack-group" key={group.title}>
-                          <dt>{group.title}</dt>
-                          <dd>
+          {(['business', 'public'] as const).map((group) => (
+            <div className="project-group" key={group}>
+              <h3 className="project-group-title">{t.projects[group]}</h3>
+              {group === 'business' && (
+                <p className="project-continuity">{t.projects.continuity}</p>
+              )}
+              <div className="project-list">
+                {t.projects.items
+                  .filter((project) => project.group === group)
+                  .map((project) => {
+                    const assets = projectAssets[project.number];
+                    return (
+                      <article
+                        key={project.number}
+                        className={`project-card${assets?.images.length ? ' project-card-with-media' : ''}`}
+                        aria-labelledby={`project-${project.number}`}
+                      >
+                        <div className="project-content">
+                          <div className="project-meta">
+                            <span className="project-number mono">
+                              /{project.number}
+                            </span>
+                            <p className="eyebrow">{project.category}</p>
+                          </div>
+                          <p className="project-kind">
+                            {group === 'business'
+                              ? t.projects.privateLabel
+                              : t.projects.publicLabel}
+                          </p>
+                          <div className="project-identity">
+                            <h4 id={`project-${project.number}`}>
+                              {project.title}
+                            </h4>
+                          </div>
+                          <p className="project-description">
+                            {project.description}
+                          </p>
+                          <p className="project-result">
+                            {project.metric && (
+                              <strong>{project.metric} </strong>
+                            )}
+                            {project.result}
+                          </p>
+                          <div
+                            className="project-technologies"
+                            role="group"
+                            aria-label={t.projects.technologies}
+                          >
                             <TechnologyTags
-                              items={group.items}
-                              label={group.title}
+                              items={project.primaryTechnologies}
+                              label={t.projects.technologies}
                             />
-                          </dd>
+                          </div>
+                          <details className="project-disclosure">
+                            <summary>{t.projects.details}</summary>
+                            {project.highlights.length > 0 && (
+                              <ul
+                                className="project-highlights"
+                                aria-label={t.projects.highlights}
+                              >
+                                {project.highlights.map((highlight) => (
+                                  <li key={highlight}>{highlight}</li>
+                                ))}
+                              </ul>
+                            )}
+                            <dl className="project-stack">
+                              {project.technologyGroups.map((stack) => (
+                                <div
+                                  className="project-stack-group"
+                                  key={stack.title}
+                                >
+                                  <dt>{stack.title}</dt>
+                                  <dd>
+                                    <TechnologyTags
+                                      items={stack.items}
+                                      label={stack.title}
+                                    />
+                                  </dd>
+                                </div>
+                              ))}
+                            </dl>
+                          </details>
+                          {assets?.demo && (
+                            <div className="project-actions">
+                              <a
+                                className="text-link"
+                                href={assets.demo}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {project.number === '03'
+                                  ? t.projects.play
+                                  : t.projects.tryIt}
+                                <Icon name="arrow" />
+                                <span className="sr-only">
+                                  {' '}
+                                  ({t.controls.external})
+                                </span>
+                              </a>
+                              {assets.source && (
+                                <a
+                                  className="text-link"
+                                  href={assets.source}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {t.projects.source}
+                                  <Icon name="arrow" />
+                                  <span className="sr-only">
+                                    {' '}
+                                    ({t.controls.external})
+                                  </span>
+                                </a>
+                              )}
+                            </div>
+                          )}
                         </div>
-                      ))}
-                    </dl>
-                  </div>
-                </div>
-                <div className="project-result">
-                  <span className="eyebrow">{t.projects.outcome}</span>
-                  <strong>{project.metric}</strong>
-                  <p>{project.result}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <p className="project-continuity">
-            <span aria-hidden="true">↳</span>
-            {t.projects.continuity}
-          </p>
+                        {assets && (
+                          <ProjectMedia
+                            images={assets.images}
+                            title={project.title}
+                          />
+                        )}
+                      </article>
+                    );
+                  })}
+              </div>
+            </div>
+          ))}
         </Reveal>
       </div>
     </section>

@@ -477,12 +477,23 @@ p {
 :root[data-theme='dark'] .projects-section {
   --bg: #1e1e1c;
 }
+.project-group {
+  margin-top: 40px;
+}
+.project-group-title {
+  font-size: 20px;
+  font-weight: 500;
+}
 .project-card {
   border-top: 1px solid var(--line);
   padding-block: var(--space-project);
   display: grid;
   gap: 28px;
   min-width: 0;
+  transition: border-color 160ms ease;
+}
+.project-card:hover {
+  border-color: var(--muted);
 }
 .project-content {
   min-width: 0;
@@ -492,14 +503,19 @@ p {
   align-items: center;
   flex-wrap: wrap;
   gap: 12px 20px;
-  margin-bottom: 18px;
+  margin-bottom: 8px;
   color: var(--muted);
 }
-.project-number {
+.project-number,
+.project-kind {
   font-size: var(--text-caption);
+  color: var(--muted);
 }
-.project-identity h3 {
-  font-size: clamp(30px, 3.5vw, 38px);
+.project-kind {
+  margin-bottom: 16px;
+}
+.project-identity h4 {
+  font-size: clamp(28px, 3vw, 36px);
   line-height: 1.15;
   letter-spacing: -0.04em;
   font-weight: 500;
@@ -510,70 +526,84 @@ p {
   font-size: var(--text-small);
   max-width: 300px;
 }
-.project-identity .project-context {
-  max-width: 60ch;
-  font-size: var(--text-body);
-}
-.project-details {
-  display: grid;
-  gap: 20px;
-  margin-top: 28px;
-  max-width: 65ch;
-}
-.project-details h4 {
-  margin-bottom: 8px;
-}
-.project-details p {
+.project-description {
+  max-width: 72ch;
   color: var(--muted);
   font-size: var(--text-body);
-}
-.project-details .project-implementation {
-  margin-top: 12px;
-  font-size: var(--text-small);
 }
 .project-result {
-  border-top: 1px solid var(--line);
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  align-self: center;
-}
-.project-result .eyebrow {
-  color: var(--muted);
+  margin-top: 20px;
+  font-size: var(--text-small);
+  max-width: 65ch;
 }
 .project-result strong {
-  font-size: clamp(60px, 6vw, 80px);
-  font-weight: 400;
-  line-height: 1.25;
-  letter-spacing: -0.07em;
-  margin-block: 10px;
-}
-.project-result p {
-  font-size: var(--text-small);
-  max-width: 26ch;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  margin-right: 6px;
 }
 .project-technologies {
-  border-top: 1px solid var(--line);
-  padding-top: 20px;
-  margin-top: 24px;
+  margin-top: 20px;
   min-width: 0;
 }
-.project-technologies .technology-tags li {
+.project-card .technology-tags li {
   display: flex;
   align-items: center;
   min-height: 30px;
   padding: 4px 9px;
 }
-.project-technologies h4 {
+.project-disclosure {
+  margin-top: 16px;
+  font-size: var(--text-small);
+}
+.project-disclosure summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  list-style: none;
+  cursor: pointer;
   color: var(--muted);
-  margin-bottom: 14px;
+  padding-block: 12px;
+  width: fit-content;
+  transition: color 180ms ease;
+}
+.project-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+.project-disclosure summary::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.project-disclosure[open] summary::before {
+  transform: rotate(45deg);
+}
+.project-disclosure summary:is(:hover, :focus-visible) {
+  color: var(--fg);
+}
+.project-disclosure::details-content {
+  interpolate-size: allow-keywords;
+  block-size: 0;
+  overflow: clip;
+  opacity: 0;
+  transition:
+    block-size 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease,
+    content-visibility 320ms allow-discrete;
+}
+.project-disclosure[open]::details-content {
+  block-size: auto;
+  opacity: 1;
 }
 .project-stack {
   display: grid;
   gap: 12px;
-  margin: 0;
+  margin: 12px 0 0;
 }
 .project-stack-group {
   display: grid;
@@ -589,15 +619,126 @@ p {
   margin: 0;
   min-width: 0;
 }
+.project-highlights {
+  margin: 12px 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+.project-highlights li + li {
+  margin-top: 8px;
+}
 .project-list {
   border-bottom: 1px solid var(--line);
+  margin-top: 20px;
 }
 .project-continuity {
   color: var(--muted);
-  display: flex;
-  gap: 14px;
   font-size: var(--text-small);
-  margin-top: 24px;
+  margin-top: 12px;
+  max-width: 80ch;
+}
+.project-actions {
+  display: flex;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.project-actions a {
+  min-height: 44px;
+}
+.project-media {
+  margin: 0;
+  min-width: 0;
+  align-self: center;
+}
+.project-image-button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  cursor: zoom-in;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.project-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.project-enlarge {
+  display: block;
+  padding: 10px 14px;
+  color: var(--muted);
+  font-size: var(--text-caption);
+}
+.project-gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+.project-gallery-controls button,
+.project-lightbox button {
+  cursor: pointer;
+  padding: 12px;
+  min-height: 44px;
+  font-size: var(--text-small);
+}
+.project-media-error {
+  padding: 16px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+.project-lightbox {
+  width: min(1440px, 96vw);
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--fg);
+  max-width: min(1440px, 96vw);
+  max-height: 94dvh;
+  margin: auto;
+}
+.project-lightbox::backdrop {
+  background: rgb(0 0 0 / 85%);
+}
+.project-lightbox img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 80dvh;
+  object-fit: contain;
+  margin-inline: auto;
+}
+.project-lightbox > button {
+  display: block;
+  margin-left: auto;
+}
+.project-card :is(a, button, summary):focus-visible {
+  outline: 2px solid var(--fg);
+  outline-offset: 4px;
+}
+@media (min-width: 900px) {
+  .project-card-with-media {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 40px;
+  }
+  .project-card-with-media:nth-child(even) .project-media {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .project-card-with-media:nth-child(even) .project-content {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card {
+    transition: none;
+  }
 }
 .technology-grid {
   column-count: 1;
@@ -1006,16 +1147,6 @@ p {
   .technology-grid {
     column-count: 2;
   }
-  .project-card {
-    grid-template-columns: minmax(0, 1fr) minmax(200px, 0.42fr);
-    gap: 28px 40px;
-  }
-  .project-result {
-    border-top: 0;
-    border-left: 1px solid var(--line);
-    padding-top: 0;
-    padding-left: 24px;
-  }
 }
 @media (min-width: 1024px) {
   :root {
@@ -1060,9 +1191,6 @@ p {
     gap: 24px;
   }
 
-  .project-identity h3 {
-    font-size: 36px;
-  }
   .project-stack-group {
     grid-template-columns: minmax(0, 150px) minmax(0, 1fr);
     align-items: baseline;
