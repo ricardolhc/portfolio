@@ -40,7 +40,7 @@ describe('professional portfolio', () => {
       const [corporate, independent] = cards;
       expect(
         within(corporate!).getByRole('heading', {
-          name: en ? 'Trainee Software Developer' : 'Desenvolvedor Trainee',
+          name: en ? 'Software Developer' : 'Desenvolvedor',
         }),
       ).toBeInTheDocument();
       expect(

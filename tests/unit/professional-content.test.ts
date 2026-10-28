@@ -33,13 +33,13 @@ describe.each(['pt-BR', 'en'] as const)(
   'professional content in %s',
   (language) => {
     const c = messages[language];
-    it('separates current trainee employment, the internship and independent services', () => {
+    it('separates current employment, the internship and independent services', () => {
       expect(c.experience.items).toHaveLength(2);
       const [corporate, independent] = c.experience.items;
       expect(corporate!.title).toBe(
         language === 'en'
-          ? 'Trainee Software Developer'
-          : 'Desenvolvedor Trainee',
+          ? 'Software Developer'
+          : 'Desenvolvedor',
       );
       expect(corporate!.details).toContain('Compass UOL');
       expect(corporate!.details).toContain('2025');

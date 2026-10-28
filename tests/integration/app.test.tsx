@@ -30,7 +30,7 @@ describe('real composition root, providers and browser adapters', () => {
     renderWithProviders(<App />, createRegistry());
     expect(
       screen.getByRole('region', { name: /Duas frentes/ }),
-    ).toHaveTextContent('Desenvolvedor Trainee');
+    ).toHaveTextContent('Desenvolvedor');
     expect(
       screen.getByRole('region', { name: 'Tecnologias e práticas.' }),
     ).toHaveTextContent('Versionamento, build e CI/CD');
@@ -47,7 +47,7 @@ describe('real composition root, providers and browser adapters', () => {
     expect(document.documentElement).toHaveAttribute('lang', 'en');
     expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
     expect(screen.getByRole('region', { name: /Two paths/ })).toHaveTextContent(
-      'Trainee Software Developer',
+      'Software Developer',
     );
     expect(
       screen.getByRole('region', { name: 'Technologies and practices.' }),

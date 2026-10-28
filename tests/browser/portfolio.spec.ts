@@ -116,8 +116,8 @@ for (const width of [320, 375, 430, 768, 1024, 1440]) {
         );
         await expect(page.locator('#experience h3').first()).toHaveText(
           language === 'en'
-            ? 'Trainee Software Developer'
-            : 'Desenvolvedor Trainee',
+            ? 'Software Developer'
+            : 'Desenvolvedor',
         );
         await expect(page.locator('body')).not.toContainText(
           language === 'en' ? '1 year and 6 months' : '1 ano e 6 meses',

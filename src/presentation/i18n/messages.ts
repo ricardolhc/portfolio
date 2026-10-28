@@ -53,7 +53,7 @@ const pt = {
     items: [
       {
         group: 'EXPERIÊNCIA CORPORATIVA',
-        title: 'Desenvolvedor Trainee',
+        title: 'Desenvolvedor',
         details: 'Compass UOL · maio de 2025 – atualmente · Remoto',
         description:
           'Desenvolvimento e evolução de aplicações web utilizadas por milhares de usuários, com atuação Front-end e Back-end, integração de sistemas, testes automatizados e acompanhamento de entregas em homologação e produção.',
@@ -447,7 +447,7 @@ const en: typeof pt = {
     items: [
       {
         group: 'CORPORATE EXPERIENCE',
-        title: 'Trainee Software Developer',
+        title: 'Software Developer',
         details: 'Compass UOL · May 2025 – present · Remote',
         description:
           'Development and evolution of web applications used by thousands of users, covering front-end and back-end work, system integration, automated testing and release support in staging and production.',

@@ -1,6 +1,6 @@
 # Ricardo Costa · Portfólio Full Stack
 
-Portfólio profissional de página única com React, Vite e TypeScript estrito. Apresenta atuação como Desenvolvedor Trainee e estágio Full Stack na Compass UOL, desenvolvimento independente de soluções empresariais, formação em Engenharia de Software e certificação AWS.
+Portfólio profissional de página única com React, Vite e TypeScript estrito. Apresenta atuação como Desenvolvedor e estágio Full Stack na Compass UOL, desenvolvimento independente de soluções empresariais, formação em Engenharia de Software e certificação AWS.
 
 A identidade visual é editorial e monocromática, com fonte Geist hospedada no próprio build. Não há analytics, backend próprio, fontes remotas ou dados de clientes. O contato utiliza o Formspree somente quando o visitante envia o formulário.
 
@@ -18,7 +18,7 @@ A identidade visual é editorial e monocromática, com fonte Geist hospedada no 
 - Registry tipado, singleton/factory, detecção de ciclos, Context e serviços substituíveis nos testes.
 - CI, cobertura, testes de mutação e deploy GitHub Pages.
 
-A experiência corporativa e os projetos independentes são apresentados separadamente. Na Compass UOL, trainee desde maio de 2025 e estágio de julho a dezembro de 2024 têm responsabilidades e tecnologias próprias; Java, JavaFX e Spring Boot aparecem nos projetos independentes correspondentes. Os períodos e dados acadêmicos foram fornecidos pelo proprietário. Não foram inventados contratos, clientes, URLs de demonstração, depoimentos ou dados de credenciais. A graduação inclui Láurea Acadêmica e média 9,13/10; o mestrado profissional está em andamento e o IFAM complementa a formação técnica.
+A experiência corporativa e os projetos independentes são apresentados separadamente. Na Compass UOL, desenvolvedor desde maio de 2025 e estágio de julho a dezembro de 2024 têm responsabilidades e tecnologias próprias; Java, JavaFX e Spring Boot aparecem nos projetos independentes correspondentes. Os períodos e dados acadêmicos foram fornecidos pelo proprietário. Não foram inventados contratos, clientes, URLs de demonstração, depoimentos ou dados de credenciais. A graduação inclui Láurea Acadêmica e média 9,13/10; o mestrado profissional está em andamento e o IFAM complementa a formação técnica.
 
 ## Requisitos e instalação
 
