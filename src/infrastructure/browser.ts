@@ -21,7 +21,9 @@ export class BrowserPreferences implements PreferenceStore {
   set(key: string, value: string): void {
     try {
       this.storage().setItem(key, value);
-    } catch {}
+    } catch {
+      // Storage may be blocked or full; preferences remain usable in memory.
+    }
   }
 }
 

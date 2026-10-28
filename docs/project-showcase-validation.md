@@ -21,4 +21,4 @@ O teste de regressão falhou nos quatro casos PT/EN dos dois projetos privados a
 
 A suíte completa de Playwright, a auditoria axe em todas as resoluções e os testes de mutação não foram executados nesta validação. Os seis casos de navegador acima passaram; isso não substitui uma auditoria completa de acessibilidade e responsividade.
 
-O lint global havia apontado `no-empty` preexistente em `src/infrastructure/browser.ts:24`; esse arquivo não foi alterado. As capturas empresariais fornecidas pelo proprietário foram preservadas.
+O erro `no-empty` em `src/infrastructure/browser.ts:24` foi corrigido com documentação do tratamento intencional de falhas do armazenamento. `npm run lint` passou. As capturas empresariais fornecidas pelo proprietário foram preservadas.

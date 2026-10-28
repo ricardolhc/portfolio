@@ -14,5 +14,4 @@ Revisão: ausência de imagem nunca deve gerar espaço vazio; falha de carregame
 
 Execução: implementação e revisão realizadas nesta sessão, sem commits ou publicação. A execução dos testes permanece pendente por instrução do proprietário.
 
-
 Atualização de 27/10/2026: o proprietário autorizou a execução dos testes, a correção da ampliação e o commit/push das alterações. Resultados atuais registrados em docs/project-showcase-validation.md.
