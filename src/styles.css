@@ -467,15 +467,8 @@ p {
   color: var(--muted);
 }
 .projects-section {
-  --bg: #191919;
-  --fg: #f3f3ef;
-  --muted: #b3b3ac;
-  --line: #41413d;
   background: var(--bg);
   color: var(--fg);
-}
-:root[data-theme='dark'] .projects-section {
-  --bg: #1e1e1c;
 }
 .project-group {
   margin-top: 40px;
