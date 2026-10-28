@@ -1,11 +1,11 @@
 # Capturas de projetos
 
-As imagens públicas são capturas reais das aplicações, realizadas em 27/10/2026, em 1440 × 960:
+As imagens públicas são capturas reais das aplicações, em 1440 × 960:
 
-- `valorantguess.webp`: https://ricardolhc.github.io/ValorantGuess/ — rodada em andamento.
-- `rumble-challenge.webp`: https://ricardolhc.github.io/rumble-challenge/ — tela de seleção de personagens.
+- `valorantguess.webp`: https://ricardolhc.github.io/ValorantGuess/ — rodada em andamento, capturada em 27/10/2026.
+- `rumble-challenge.webp`: https://ricardolhc.github.io/rumble-challenge/ — tela de seleção com 65 personagens disponíveis, atualizada em 28/10/2026.
 
-As duas capturas públicas foram convertidas para WebP com qualidade 85, sem metadados, e mostram as interfaces reais das aplicações. Os dois repositórios correspondentes foram confirmados como públicos pela API do GitHub nessa data.
+As duas capturas públicas foram convertidas para WebP com qualidade 85, sem metadados, e mostram as interfaces reais das aplicações. Os dois repositórios correspondentes foram confirmados como públicos pela API do GitHub em 27/10/2026.
 
 As capturas dos projetos empresariais fornecidas pelo proprietário também estão incluídas:
 
